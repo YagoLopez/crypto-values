@@ -1,0 +1,11 @@
+import { Id } from './Id'
+
+export interface IRepository<T, Error> {
+  readonly name: string
+  readonly baseURL: string
+  getList(): Promise<T[] | Error | null>
+  getById(id: Id): Promise<T | Error | null>
+  create(model: T): Promise<T | Error | null>
+  updateById(model: T): Promise<T | Error | null>
+  deleteById(id: Id): Promise<T | Error | null>
+}

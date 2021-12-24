@@ -1,0 +1,23 @@
+{
+  "root": "libs/react-query-crud",
+  "sourceRoot": "libs/react-query-crud/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/react-query-crud/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/react-query-crud"],
+      "options": {
+        "jestConfig": "libs/react-query-crud/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "crypto-values": "apps/crypto-values",
-    "crypto-values-e2e": "apps/crypto-values-e2e"
+    "crypto-values-e2e": "apps/crypto-values-e2e",
+    "react-query-crud": "libs/react-query-crud"
   }
 }

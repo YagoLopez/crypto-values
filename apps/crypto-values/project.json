@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/next:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "root": "apps/crypto-values",
@@ -36,7 +38,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/crypto-values"],
+      "outputs": [
+        "coverage/apps/crypto-values"
+      ],
       "options": {
         "jestConfig": "apps/crypto-values/jest.config.js",
         "passWithNoTests": true
@@ -44,9 +48,13 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/crypto-values/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/crypto-values/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     }
   },
