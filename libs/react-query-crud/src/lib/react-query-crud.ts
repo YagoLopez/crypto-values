@@ -5,7 +5,7 @@
 
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-interface IRepository<T, Error> {
+export interface IRepository<T, Error> {
   readonly name: string
   readonly baseURL: string
   getList(): Promise<T[] | Error | null>
@@ -15,7 +15,7 @@ interface IRepository<T, Error> {
   deleteById(id: Id): Promise<T | Error | null>
 }
 
-type Id = string | number
+export type Id = string | number
 
 export const SINGLETON_KEY = Symbol()
 
@@ -41,7 +41,7 @@ export const Singleton = <T extends new (...args: any[]) => any>(type: T) =>
     },
   })
 
-const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
+export const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
   const queryClient = useQueryClient()
 
   const config = { staleTime: 0 }
@@ -65,4 +65,3 @@ const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
 
   return { useGetList, useGetById, useCreate, useDelete, useUpdate }
 }
-export { useRepository, IRepository, Id }
