@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "crypto-values": "apps/crypto-values",
+    "crypto-values-e2e": "apps/crypto-values-e2e"
+  }
+}

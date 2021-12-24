@@ -1,0 +1,54 @@
+{
+  "root": "apps/crypto-values",
+  "sourceRoot": "apps/crypto-values",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/crypto-values",
+        "outputPath": "dist/apps/crypto-values"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "crypto-values:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "crypto-values:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "crypto-values:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/crypto-values"],
+      "options": {
+        "jestConfig": "apps/crypto-values/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/crypto-values/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
