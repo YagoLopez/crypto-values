@@ -7,7 +7,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <Head>
-        <title>Welcome to crypto-values!</title>
+        <title>Crypto-values, by Yago López</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />

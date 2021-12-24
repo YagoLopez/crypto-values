@@ -11,10 +11,6 @@ export class CurrenciesLocalRepository
   readonly baseURL = 'http://localhost:4200/'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
-  constructor() {
-    console.log('constructor')
-  }
-
   getList = async (): Promise<ICurrency[]> => {
     const { data } = await this.axiosClient.get<ICurrency[]>(`/db.json`)
     return data
