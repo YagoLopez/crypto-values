@@ -36,7 +36,7 @@ export class CurrenciesLocalRepository
     return data
   }
 
-  deleteById = async (id: Id): Promise<ICurrency | Error | null> => {
+  deleteById = async (id: Id): Promise<ICurrency | null> => {
     if (!id) return null
     const { data } = await this.axiosClient.delete<ICurrency>(
       `${this.name}/${id}`
