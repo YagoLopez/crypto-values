@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 export interface IRepository<T, Error> {
   readonly name: string
-  readonly baseURL: string
+  readonly baseURL: any
   getList(): Promise<T[] | Error | null>
   getById(id: Id): Promise<T | Error | null>
   create(model: T): Promise<T | Error | null>
