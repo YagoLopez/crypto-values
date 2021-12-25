@@ -1,4 +1,4 @@
-export const MOCK_JSON = {
+export const MOCK_DATA = {
   data: [
     {
       p: 50986.83,

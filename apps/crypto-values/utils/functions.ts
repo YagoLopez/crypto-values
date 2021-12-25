@@ -3,8 +3,16 @@ import { ICurrency } from '../models/currency/ICurrency'
 export const round2Decimals = (num: number): number =>
   Math.round(num * 100) / 100
 
-export const extractCurrencyChanges = (currenciesData: ICurrency[]): number[] =>
-  currenciesData.map((currency: ICurrency) => currency.ch)
+export const getCurrencyChangesVector = (currencies: ICurrency[]): number[] =>
+  currencies.map((currency: ICurrency) => currency.ch)
+
+export const getCurrencyChangesVector2 = (
+  currencies: ICurrency[]
+): { name: string; change: number }[] =>
+  currencies.map((currency: ICurrency) => ({
+    name: currency.s,
+    change: currency.ch,
+  }))
 
 export const initializeMatrix = (dimension: number): number[] => {
   const matrix = []
@@ -27,4 +35,25 @@ export const createChangesRatioMatrix = (
     }
   }
   return ratiosMatrix
+}
+
+export const getCurrencyNames = (data: ICurrency[] = []): string[] =>
+  data.map?.((currency) => currency.s)
+
+interface Header {
+  Header: string
+  accessor: string // accessor is the "key" in the data json
+}
+
+export const createTableColumns = (
+  currenciesNamesVector: string[]
+): Header[] => {
+  return currenciesNamesVector.map(
+    (currencyName: string, index: number): Header => {
+      return {
+        Header: currencyName,
+        accessor: index.toString(),
+      }
+    }
+  )
 }
