@@ -8,8 +8,16 @@ export class CurrenciesLocalRepository
   implements IRepository<ICurrency, unknown>
 {
   readonly name = 'currencies'
-  readonly baseURL = `${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  readonly baseURL =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4200'
+      : `${process.env.NEXT_PUBLIC_VERCEL_URL}`
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
+
+  constructor() {
+    // console.log(process.env)
+    console.log(this.baseURL)
+  }
 
   getList = async (): Promise<ICurrency[]> => {
     const { data } = await this.axiosClient.get<ICurrency[]>(`/db.json`)

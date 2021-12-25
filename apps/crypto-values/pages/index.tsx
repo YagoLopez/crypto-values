@@ -18,3 +18,12 @@ export default function Index() {
     </div>
   )
 }
+
+// export async function getStaticProps() {
+//   console.log(process.env)
+//   return {
+//     props: {
+//       products: [],
+//     },
+//   }
+// }
