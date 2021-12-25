@@ -8,7 +8,7 @@ export class CurrenciesLocalRepository
   implements IRepository<ICurrency, unknown>
 {
   readonly name = 'currencies'
-  readonly baseURL = `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/`
+  readonly baseURL = `${process.env.NEXT_PUBLIC_VERCEL_URL}`
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
   getList = async (): Promise<ICurrency[]> => {
