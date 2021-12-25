@@ -1,11 +1,11 @@
 // todo: error control level api and component
 // todo: add tests
 
-import { CurrenciesLocalRepository } from '../models/currency/repositories/CurrenciesLocalRepository'
+import { CurrenciesMockRepository } from '../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 
 export default function Index() {
-  const currenciesRepository = new CurrenciesLocalRepository()
+  const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currencies, isLoading } = useGetList()
   return (
@@ -19,6 +19,7 @@ export default function Index() {
   )
 }
 
+// todo: remove
 // export async function getStaticProps() {
 //   console.log(process.env)
 //   return {
