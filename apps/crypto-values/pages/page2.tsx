@@ -1,5 +1,6 @@
 // todo: error control level api and component
 // todo: add tests
+// todo: remove styles
 
 import { CurrenciesMockRepository } from '../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
@@ -15,10 +16,18 @@ import { MOCK_DATA } from '../utils/mock-data'
 import { useVirtual } from 'react-virtual'
 
 function GridVirtualizerFixed() {
+  const currenciesRepository = new CurrenciesMockRepository()
+  const { useGetList } = useRepository(currenciesRepository)
+  const { data: currenciesDataList, isLoading } = useGetList()
+
+  const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)
+  const tableData = createChangesRatioMatrix(currenciesChangesVector)
+  // console.log(tableData)
+
   const parentRef = useRef()
 
   const rowVirtualizer = useVirtual({
-    size: 10000,
+    size: 3600,
     parentRef,
     estimateSize: useCallback(() => 35, []),
     overscan: 5,
@@ -26,7 +35,7 @@ function GridVirtualizerFixed() {
 
   const columnVirtualizer = useVirtual({
     horizontal: true,
-    size: 10000,
+    size: 3600,
     parentRef,
     estimateSize: useCallback(() => 100, []),
     overscan: 5,
@@ -73,7 +82,7 @@ function GridVirtualizerFixed() {
                     transform: `translateX(${virtualColumn.start}px) translateY(${virtualRow.start}px)`,
                   }}
                 >
-                  Cell {virtualRow.index}, {virtualColumn.index}
+                  {tableData?.[virtualRow.index]?.[virtualColumn.index]}
                 </div>
               ))}
             </Fragment>
@@ -84,10 +93,10 @@ function GridVirtualizerFixed() {
   )
 }
 
-export default function Index() {
-  const currenciesRepository = new CurrenciesMockRepository()
-  const { useGetList } = useRepository(currenciesRepository)
-  const { data: currenciesDataList, isLoading } = useGetList()
+export default function Page2() {
+  // const currenciesRepository = new CurrenciesMockRepository()
+  // const { useGetList } = useRepository(currenciesRepository)
+  // const { data: currenciesDataList, isLoading } = useGetList()
   // const { data: currenciesDataList } = MOCK_DATA
 
   // const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)

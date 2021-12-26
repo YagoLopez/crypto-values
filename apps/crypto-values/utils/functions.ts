@@ -4,7 +4,7 @@ export const round2Decimals = (num: number): number =>
   Math.round(num * 100) / 100
 
 export const getCurrencyChangesVector = (currencies: ICurrency[]): number[] =>
-  currencies.map((currency: ICurrency) => currency.ch)
+  currencies?.map((currency: ICurrency) => currency.ch)
 
 export const getCurrencyChangesVector2 = (
   currencies: ICurrency[]
@@ -25,7 +25,7 @@ export const initializeMatrix = (dimension: number): number[] => {
 export const createChangesRatioMatrix = (
   currenciesChangesVector: number[]
 ): number[] => {
-  const dimension = currenciesChangesVector.length
+  const dimension = currenciesChangesVector?.length
   const ratiosMatrix: number[] = initializeMatrix(dimension)
   for (let i = 0; i < dimension; i++) {
     for (let j = 0; j < dimension; j++) {
