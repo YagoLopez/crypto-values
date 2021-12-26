@@ -19,7 +19,7 @@ export class CurrenciesMockRepository
   implements IRepository<ICurrency, unknown>
 {
   readonly name = 'currencies'
-  readonly baseURL = '/api/mock-data-small'
+  readonly baseURL = '/api/mock-data'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
   getList = async (): Promise<ICurrency[]> => {

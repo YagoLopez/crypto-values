@@ -64,15 +64,6 @@ function GridVirtualizerFixed() {
               {columnVirtualizer.virtualItems.map((virtualColumn) => (
                 <div
                   key={virtualColumn.index}
-                  className={
-                    virtualColumn.index % 2
-                      ? virtualRow.index % 2 === 0
-                        ? 'ListItemOdd'
-                        : 'ListItemEven'
-                      : virtualRow.index % 2
-                      ? 'ListItemOdd'
-                      : 'ListItemEven'
-                  }
                   style={{
                     position: 'absolute',
                     top: 0,
