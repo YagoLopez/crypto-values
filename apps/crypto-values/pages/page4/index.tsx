@@ -12,10 +12,10 @@ import {
   getCurrencyChangesVector,
   getCurrencyNames,
 } from '../../utils/functions'
-import { FixedSizeGrid as Grid } from 'react-window'
-import CSS from './page3.module.css'
+import CSS from './page4.module.css'
+import GridTable from './GridTable'
 
-export default function Page3() {
+export default function Page4() {
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading } = useGetList()
@@ -24,26 +24,9 @@ export default function Page3() {
   const tableData = createChangesRatioMatrix(currenciesChangesVector)
   const currenciesNamesVector = getCurrencyNames(currenciesDataList)
 
-  const Cell = ({ columnIndex, rowIndex, style }) => (
-    <div style={style}>{tableData?.[rowIndex]?.[columnIndex]}</div>
-  )
-
   return (
-    <div className={CSS.content}>
-      {isLoading ? (
-        'Loading...'
-      ) : (
-        <Grid
-          columnCount={3497}
-          columnWidth={100}
-          height={500}
-          rowCount={3497}
-          rowHeight={35}
-          width={500}
-        >
-          {Cell}
-        </Grid>
-      )}
+    <div className={CSS.App}>
+      <GridTable />
     </div>
   )
 }

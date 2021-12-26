@@ -23,7 +23,7 @@ export class CurrenciesMockRepository
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
   getList = async (): Promise<ICurrency[]> => {
-    const { data } = await this.axiosClient.get<apiResponse>('')
+    const { data } = await this.axiosClient.get<apiResponse>(null)
     return data.data
   }
 
