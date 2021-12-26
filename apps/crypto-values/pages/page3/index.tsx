@@ -1,16 +1,17 @@
 // todo: sticky header and column for currencies names
 // todo: error control level api and component
 // todo: add tests
+// todo: make HOC Loader
+// todo: add other char type
 
-import { CurrenciesMockRepository } from '../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import React, { useCallback, useRef, Fragment } from 'react'
 import {
   createChangesRatioMatrix,
   createTableColumns,
   getCurrencyChangesVector,
   getCurrencyNames,
-} from '../utils/functions'
+} from '../../utils/functions'
 import { FixedSizeGrid as Grid } from 'react-window'
 import CSS from './page3.module.css'
 

@@ -2,7 +2,7 @@
 // todo: add tests
 // todo: remove styles
 
-import { CurrenciesMockRepository } from '../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import React, { useCallback, useRef, Fragment } from 'react'
 import {
@@ -10,9 +10,8 @@ import {
   createTableColumns,
   getCurrencyChangesVector,
   getCurrencyNames,
-} from '../utils/functions'
-import { useTable } from 'react-table'
-import { MOCK_DATA } from '../utils/mock-data'
+} from '../../utils/functions'
+import { MOCK_DATA } from '../../utils/mock-data'
 import { useVirtual } from 'react-virtual'
 
 function GridVirtualizerFixed() {
@@ -116,12 +115,3 @@ export default function Page2() {
   )
 }
 
-// todo: remove
-// export async function getStaticProps() {
-//   console.log(process.env)
-//   return {
-//     props: {
-//       products: [],
-//     },
-//   }
-// }

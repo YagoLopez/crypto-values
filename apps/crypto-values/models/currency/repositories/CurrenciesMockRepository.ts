@@ -4,13 +4,13 @@ import { Id, IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
 
 interface apiResponse {
-  max: Record<string, any>
-  min: Record<string, any>
+  max: Record<string, unknown>
+  min: Record<string, unknown>
   data: ICurrency[]
-  global: Record<string, any>
-  protocols: Record<string, any>
-  categories: Record<string, any>
-  subtypes: Record<string, any>
+  global: Record<string, unknown>
+  protocols: Record<string, unknown>
+  categories: Record<string, unknown>
+  subtypes: Record<string, unknown>
   timestamp: number
 }
 

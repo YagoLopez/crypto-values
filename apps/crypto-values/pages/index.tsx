@@ -10,7 +10,6 @@ import {
   getCurrencyChangesVector,
   getCurrencyNames,
 } from '../utils/functions'
-import { useTable } from 'react-table'
 import { MOCK_DATA } from '../utils/mock-data'
 import { useVirtual } from 'react-virtual'
 
