@@ -53,6 +53,7 @@ const isFirstColumn = (rowIndex: number, columnIndex): boolean =>
 export const generateRatiosMatrix2 = (
   currenciesDataList: ICurrency[]
 ): number[] => {
+  if (!currenciesDataList) return []
   currenciesDataList.unshift(null)
   const dimension = currenciesDataList?.length
   let ratiosMatrix = createEmptyMatrix(dimension)
@@ -67,7 +68,7 @@ export const generateRatiosMatrix2 = (
       }
       if (!isFirstCell(i, j) && !isFirstRow(i, j) && !isFirstColumn(i, j)) {
         ratiosMatrix[i][j] = round2Decimals(
-          currenciesDataList[i].ch / currenciesDataList[j].ch
+          currenciesDataList[j].ch / currenciesDataList[i].ch
         )
       }
     }

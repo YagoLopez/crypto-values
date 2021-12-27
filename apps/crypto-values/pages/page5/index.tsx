@@ -5,25 +5,18 @@
 // todo: add other char type
 // todo: try branch with nextjs/pwa
 
-import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesMockRepository } from 'apps/crypto-values/models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import {
-  generateRatiosMatrix,
-  createTableColumns,
-  getCurrencyChangesVector,
-  getCurrencyNamesVector,
-} from '../../utils/functions'
+import { generateRatiosMatrix2 } from 'apps/crypto-values/utils/functions'
 import CSS from './page4.module.css'
 import GridTable from './GridTable'
 
 export default function Page5() {
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList } = useRepository(currenciesRepository)
-  const { data: currenciesList, isLoading } = useGetList()
+  const { data: currenciesDataList, isLoading } = useGetList()
 
-  const currenciesChangesVector = getCurrencyChangesVector(currenciesList)
-  const tableData = generateRatiosMatrix(currenciesChangesVector)
-  const currenciesNamesVector = getCurrencyNamesVector(currenciesList)
+  const tableData = generateRatiosMatrix2(currenciesDataList)
 
   return (
     <div className={CSS.App}>

@@ -46,6 +46,14 @@ describe('Test utility fns', () => {
   it('Test generateRatiosMatrix2()', () => {
     const ratiosMatrix = generateRatiosMatrix2(currenciesList)
     console.log(ratiosMatrix)
+    expect(ratiosMatrix).toEqual([
+      ['-', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'],
+      ['BTC', 1, 0.7, -0.17, 0.82, 0.93],
+      ['ETH', 1.42, 1, -0.24, 1.17, 1.33],
+      ['XRP', -6.03, -4.23, 1, -4.94, -5.61],
+      ['BCH', 1.22, 0.86, -0.2, 1, 1.14],
+      ['LTC', 1.07, 0.75, -0.18, 0.88, 1],
+    ])
   })
 
   it.skip('Test extracting currency names', () => {
