@@ -1,8 +1,8 @@
 import {
-  createChangesRatioMatrix,
+  generateRatiosMatrix,
   createTableColumns,
   getCurrencyChangesVector,
-  getCurrencyNames,
+  getCurrencyNamesVector,
   createEmptyMatrix,
 } from './functions'
 import { MOCK_DATA } from './mock-data'
@@ -37,12 +37,12 @@ describe('Test utility fns', () => {
 
   it('Should create changes ratio matrix correctly', () => {
     const currenciesChangesVector = getCurrencyChangesVector(data)
-    const ratiosMatrix = createChangesRatioMatrix(currenciesChangesVector)
+    const ratiosMatrix = generateRatiosMatrix(currenciesChangesVector)
     console.log(ratiosMatrix)
   })
 
   it('Test extracting currency names', () => {
-    const res = getCurrencyNames(data)
+    const res = getCurrencyNamesVector(data)
     expect(res).toEqual([
       { Header: 'BTC', accessor: 's' },
       { Header: 'ETH', accessor: 's' },
@@ -52,7 +52,7 @@ describe('Test utility fns', () => {
     ])
   })
   it('Test createTableColumns()', () => {
-    const currencyNamesVector = getCurrencyNames(data)
+    const currencyNamesVector = getCurrencyNamesVector(data)
     const res = createTableColumns(currencyNamesVector)
     expect(res).toEqual([
       { Header: 'BTC', accessor: '0' },

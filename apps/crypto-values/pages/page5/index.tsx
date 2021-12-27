@@ -3,14 +3,15 @@
 // todo: add tests
 // todo: make HOC Loader
 // todo: add other char type
+// todo: try branch with nextjs/pwa
 
 import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import {
-  createChangesRatioMatrix,
+  generateRatiosMatrix,
   createTableColumns,
   getCurrencyChangesVector,
-  getCurrencyNames,
+  getCurrencyNamesVector,
 } from '../../utils/functions'
 import CSS from './page4.module.css'
 import GridTable from './GridTable'
@@ -21,8 +22,8 @@ export default function Page5() {
   const { data: currenciesDataList, isLoading } = useGetList()
 
   const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)
-  const tableData = createChangesRatioMatrix(currenciesChangesVector)
-  const currenciesNamesVector = getCurrencyNames(currenciesDataList)
+  const tableData = generateRatiosMatrix(currenciesChangesVector)
+  const currenciesNamesVector = getCurrencyNamesVector(currenciesDataList)
 
   return (
     <div className={CSS.App}>

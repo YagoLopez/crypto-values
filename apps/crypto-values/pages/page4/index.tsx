@@ -6,14 +6,13 @@
 
 import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import {
-  createChangesRatioMatrix,
-  createTableColumns,
-  getCurrencyChangesVector,
-  getCurrencyNames,
-} from '../../utils/functions'
-import CSS from './page4.module.css'
 import GridTable from './GridTable'
+import {
+  generateRatiosMatrix,
+  getCurrencyChangesVector,
+  getCurrencyNamesVector,
+} from '../../utils/functions'
+import styles from './page4.module.css'
 
 export default function Page4() {
   const currenciesRepository = new CurrenciesMockRepository()
@@ -21,11 +20,11 @@ export default function Page4() {
   const { data: currenciesDataList, isLoading } = useGetList()
 
   const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)
-  const tableData = createChangesRatioMatrix(currenciesChangesVector)
-  const currenciesNamesVector = getCurrencyNames(currenciesDataList)
+  const tableData = generateRatiosMatrix(currenciesChangesVector)
+  const currenciesNamesVector = getCurrencyNamesVector(currenciesDataList)
 
   return (
-    <div className={CSS.App}>
+    <div className={styles.App}>
       <GridTable />
     </div>
   )

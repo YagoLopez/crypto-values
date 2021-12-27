@@ -5,10 +5,10 @@ import { CurrenciesMockRepository } from '../models/currency/repositories/Curren
 import { useRepository } from '@crypto-values/react-query-crud'
 import React, { useCallback, useRef, Fragment } from 'react'
 import {
-  createChangesRatioMatrix,
+  generateRatiosMatrix,
   createTableColumns,
   getCurrencyChangesVector,
-  getCurrencyNames,
+  getCurrencyNamesVector,
 } from '../utils/functions'
 import { MOCK_DATA } from '../utils/mock-data'
 import { useVirtual } from 'react-virtual'

@@ -6,10 +6,10 @@ import { CurrenciesMockRepository } from '../../models/currency/repositories/Cur
 import { useRepository } from '@crypto-values/react-query-crud'
 import React, { useCallback, useRef, Fragment } from 'react'
 import {
-  createChangesRatioMatrix,
+  generateRatiosMatrix,
   createTableColumns,
   getCurrencyChangesVector,
-  getCurrencyNames,
+  getCurrencyNamesVector,
 } from '../../utils/functions'
 import { MOCK_DATA } from '../../utils/mock-data'
 import { useVirtual } from 'react-virtual'
@@ -20,7 +20,7 @@ function GridVirtualizerFixed() {
   const { data: currenciesDataList, isLoading } = useGetList()
 
   const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)
-  const tableData = createChangesRatioMatrix(currenciesChangesVector)
+  const tableData = generateRatiosMatrix(currenciesChangesVector)
   // console.log(tableData)
 
   const parentRef = useRef()
@@ -114,4 +114,3 @@ export default function Page2() {
     </div>
   )
 }
-

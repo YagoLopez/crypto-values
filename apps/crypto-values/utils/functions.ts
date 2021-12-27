@@ -15,11 +15,11 @@ export const createEmptyMatrix = (dimension: number): number[] => {
   return matrix
 }
 
-export const createChangesRatioMatrix = (
+export const generateRatiosMatrix = (
   currenciesChangesVector: number[]
 ): number[] => {
   const dimension = currenciesChangesVector?.length
-  const ratiosMatrix: number[] = createEmptyMatrix(dimension)
+  const ratiosMatrix = createEmptyMatrix(dimension)
   for (let i = 0; i < dimension; i++) {
     for (let j = 0; j < dimension; j++) {
       ratiosMatrix[i][j] = round2Decimals(
@@ -30,9 +30,10 @@ export const createChangesRatioMatrix = (
   return ratiosMatrix
 }
 
-export const getCurrencyNames = (data: ICurrency[] = []): string[] =>
+export const getCurrencyNamesVector = (data: ICurrency[] = []): string[] =>
   data.map?.((currency) => currency.s)
 
+// todo: review
 interface Header {
   Header: string
   accessor: string

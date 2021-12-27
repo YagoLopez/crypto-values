@@ -7,10 +7,10 @@
 import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import {
-  createChangesRatioMatrix,
+  generateRatiosMatrix,
   createTableColumns,
   getCurrencyChangesVector,
-  getCurrencyNames,
+  getCurrencyNamesVector,
 } from '../../utils/functions'
 import { FixedSizeGrid as Grid } from 'react-window'
 import CSS from './page3.module.css'
@@ -21,8 +21,8 @@ export default function Page3() {
   const { data: currenciesDataList, isLoading } = useGetList()
 
   const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)
-  const tableData = createChangesRatioMatrix(currenciesChangesVector)
-  const currenciesNamesVector = getCurrencyNames(currenciesDataList)
+  const tableData = generateRatiosMatrix(currenciesChangesVector)
+  const currenciesNamesVector = getCurrencyNamesVector(currenciesDataList)
 
   const Cell = ({ columnIndex, rowIndex, style }) => (
     <div style={style}>{tableData?.[rowIndex]?.[columnIndex]}</div>
