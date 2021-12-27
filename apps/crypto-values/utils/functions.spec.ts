@@ -2,9 +2,8 @@ import {
   createChangesRatioMatrix,
   createTableColumns,
   getCurrencyChangesVector,
-  getCurrencyChangesVector2,
   getCurrencyNames,
-  initializeMatrix,
+  createEmptyMatrix,
 } from './functions'
 import { MOCK_DATA } from './mock-data'
 // import MOCK_JSON from '../pages/api/mock-data/db.json'
@@ -14,19 +13,19 @@ const { data } = MOCK_DATA
 describe('Test utility fns', () => {
   describe('Test initializeMatrix()', () => {
     it('Dimension 0', () => {
-      expect(initializeMatrix(0)).toEqual([])
+      expect(createEmptyMatrix(0)).toEqual([])
     })
 
     it('Dimension 1', () => {
-      expect(initializeMatrix(1)).toEqual([[]])
+      expect(createEmptyMatrix(1)).toEqual([[]])
     })
 
     it('Dimension 2', () => {
-      expect(initializeMatrix(2)).toEqual([[], []])
+      expect(createEmptyMatrix(2)).toEqual([[], []])
     })
 
     it('Dimension -1', () => {
-      expect(initializeMatrix(-1)).toEqual([])
+      expect(createEmptyMatrix(-1)).toEqual([])
     })
   })
 
@@ -51,10 +50,6 @@ describe('Test utility fns', () => {
       { Header: 'BCH', accessor: 's' },
       { Header: 'LTC', accessor: 's' },
     ])
-  })
-  it('Test getCurrenciesChangeVector2()', () => {
-    const res = getCurrencyChangesVector2(data)
-    console.log(res)
   })
   it('Test createTableColumns()', () => {
     const currencyNamesVector = getCurrencyNames(data)
