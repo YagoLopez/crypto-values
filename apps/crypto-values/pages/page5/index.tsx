@@ -19,11 +19,11 @@ import GridTable from './GridTable'
 export default function Page5() {
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList } = useRepository(currenciesRepository)
-  const { data: currenciesDataList, isLoading } = useGetList()
+  const { data: currenciesList, isLoading } = useGetList()
 
-  const currenciesChangesVector = getCurrencyChangesVector(currenciesDataList)
+  const currenciesChangesVector = getCurrencyChangesVector(currenciesList)
   const tableData = generateRatiosMatrix(currenciesChangesVector)
-  const currenciesNamesVector = getCurrencyNamesVector(currenciesDataList)
+  const currenciesNamesVector = getCurrencyNamesVector(currenciesList)
 
   return (
     <div className={CSS.App}>
