@@ -49,12 +49,12 @@ export default ({ tableData }) => {
           {...state}
           cellRenderer={_cellRenderer}
           columnWidth={75}
-          columnCount={tableData.length}
+          columnCount={tableData?.length}
           enableFixedColumnScroll
           enableFixedRowScroll
           height={500}
           rowHeight={70}
-          rowCount={tableData.length}
+          rowCount={tableData?.length}
           // style={STYLE}
           // styleBottomLeftGrid={STYLE_BOTTOM_LEFT_GRID}
           // styleTopLeftGrid={STYLE_TOP_LEFT_GRID}
