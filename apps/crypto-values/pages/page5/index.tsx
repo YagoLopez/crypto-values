@@ -7,7 +7,7 @@
 
 import { CurrenciesMockRepository } from 'apps/crypto-values/models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import { generateRatiosMatrix2 } from 'apps/crypto-values/utils/functions'
+import { createRatiosMatrix2 } from 'apps/crypto-values/utils/functions'
 import CSS from './page4.module.css'
 import GridTable from './GridTable'
 
@@ -16,7 +16,7 @@ export default function Page5() {
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading } = useGetList()
 
-  const tableData = generateRatiosMatrix2(currenciesDataList)
+  const tableData = createRatiosMatrix2(currenciesDataList)
 
   return (
     <div className={CSS.App}>

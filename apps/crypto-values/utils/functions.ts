@@ -15,13 +15,6 @@ export const getCurrencyChangesVector = (
   currenciesList: ICurrency[]
 ): number[] => currenciesList?.map((currency: ICurrency) => currency.ch)
 
-/**
- * Given a currencies list it returns an array with currencies names
- *
- * Used to construct the ratios matrix
- * @param currenciesList ICurrency[]
- * @returns string[]
- */
 export const getCurrencyNamesVector = (
   currenciesList: ICurrency[] = []
 ): string[] => currenciesList.map?.((currency) => currency.s)
@@ -42,15 +35,16 @@ export const addCurrencyNamesToRatiosMatrix = (currenciesList: ICurrency[]) => {
   }
 }
 
-const isFirstCell = (i: number, j: number) => i === 0 && j === 0
+const isFirstCell = (i: number, j: number): boolean => i === 0 && j === 0
 
-const isFirstRow = (rowIndex: number, columnIndex): boolean =>
-  rowIndex === 0 && columnIndex > 0
+const isFirstRow = (i: number, j: number): boolean => i === 0 && j > 0
 
-const isFirstColumn = (rowIndex: number, columnIndex): boolean =>
-  rowIndex > 0 && columnIndex === 0
+const isFirstColumn = (i: number, j: number): boolean => i > 0 && j === 0
 
-export const generateRatiosMatrix2 = (
+const isSubmatrixRatios = (i: number, j): boolean =>
+  !isFirstCell(i, j) && !isFirstRow(i, j) && !isFirstColumn(i, j)
+
+export const createRatiosMatrix2 = (
   currenciesDataList: ICurrency[]
 ): number[] => {
   if (!currenciesDataList) return []
@@ -61,14 +55,20 @@ export const generateRatiosMatrix2 = (
   for (let i = 0; i < dimension; i++) {
     for (let j = 0; j < dimension; j++) {
       if (isFirstRow(i, j)) {
-        ratiosMatrix[i][j] = currenciesDataList[j].s
+        ratiosMatrix[i][j] = {
+          s: currenciesDataList[j]?.s,
+          ch: currenciesDataList[j]?.ch,
+        }
       }
       if (isFirstColumn(i, j)) {
-        ratiosMatrix[i][j] = currenciesDataList[i].s
+        ratiosMatrix[i][j] = {
+          s: currenciesDataList[i]?.s,
+          ch: currenciesDataList[i]?.ch,
+        }
       }
-      if (!isFirstCell(i, j) && !isFirstRow(i, j) && !isFirstColumn(i, j)) {
+      if (isSubmatrixRatios(i, j)) {
         ratiosMatrix[i][j] = round2Decimals(
-          currenciesDataList[j].ch / currenciesDataList[i].ch
+          currenciesDataList[j]?.ch / currenciesDataList[i]?.ch
         )
       }
     }
@@ -76,6 +76,7 @@ export const generateRatiosMatrix2 = (
   return ratiosMatrix
 }
 
+// todo: remove
 export const generateRatiosMatrix = (
   currenciesChangesVector: number[]
 ): number[] => {

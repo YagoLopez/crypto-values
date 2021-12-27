@@ -27,20 +27,52 @@ export default ({ tableData }) => {
     scrollToRow: 0,
   })
 
+  // const _cellRenderer = ({ columnIndex, key, rowIndex, style }) => {
+  //   return (
+  //     <div className={styles.cell} key={key} style={style}>
+  //       {tableData[rowIndex][columnIndex]}
+  //     </div>
+  //   )
+  // }
+
   const _cellRenderer = ({ columnIndex, key, rowIndex, style }) => {
     return (
-      <div className={styles.Cell} key={key} style={style}>
-        {rowIndex === 0 ? (
+      <div className={styles.cell} key={key} style={style}>
+        {rowIndex === 0 && (
           <div>
-            Header
-            <br /> {`${columnIndex} - ${rowIndex}`}
+            {tableData[rowIndex][columnIndex].s}
+            <br />
+            {tableData[rowIndex][columnIndex].ch}
           </div>
-        ) : (
-          <span>{tableData?.[rowIndex]?.[columnIndex]}</span>
+        )}
+        {columnIndex === 0 && (
+          <div>
+            {tableData[rowIndex][columnIndex].s}
+            <br />
+            {tableData[rowIndex][columnIndex].ch}
+          </div>
+        )}
+        {rowIndex !== 0 && columnIndex !== 0 && (
+          <span>{tableData[rowIndex][columnIndex]}</span>
         )}
       </div>
     )
   }
+  // const _cellRenderer = ({ columnIndex, key, rowIndex, style }) => {
+  //   return (
+  //     <div className={styles.cell} key={key} style={style}>
+  //       {rowIndex === 0 ? (
+  //         <div>
+  //           Header
+  //           <br />
+  //           {`${columnIndex} - ${rowIndex}`}
+  //         </div>
+  //       ) : (
+  //         <span>{tableData[rowIndex][columnIndex]}</span>
+  //       )}
+  //     </div>
+  //   )
+  // }
 
   return (
     <AutoSizer disableHeight>

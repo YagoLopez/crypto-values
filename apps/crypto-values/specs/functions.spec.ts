@@ -1,6 +1,6 @@
 import {
   generateRatiosMatrix,
-  generateRatiosMatrix2,
+  createRatiosMatrix2,
   createTableColumns,
   getCurrencyChangesVector,
   getCurrencyNamesVector,
@@ -43,16 +43,23 @@ describe('Test utility fns', () => {
     console.log(ratiosMatrix)
   })
 
-  it('Test generateRatiosMatrix2()', () => {
-    const ratiosMatrix = generateRatiosMatrix2(currenciesList)
+  it('Test createRatiosMatrix2()', () => {
+    const ratiosMatrix = createRatiosMatrix2(currenciesList)
     console.log(ratiosMatrix)
     expect(ratiosMatrix).toEqual([
-      ['-', 'BTC', 'ETH', 'XRP', 'BCH', 'LTC'],
-      ['BTC', 1, 0.7, -0.17, 0.82, 0.93],
-      ['ETH', 1.42, 1, -0.24, 1.17, 1.33],
-      ['XRP', -6.03, -4.23, 1, -4.94, -5.61],
-      ['BCH', 1.22, 0.86, -0.2, 1, 1.14],
-      ['LTC', 1.07, 0.75, -0.18, 0.88, 1],
+      [
+        '-',
+        { ch: 4.64, s: 'BTC' },
+        { ch: 3.26, s: 'ETH' },
+        { ch: -0.77, s: 'XRP' },
+        { ch: 3.8, s: 'BCH' },
+        { ch: 4.32, s: 'LTC' },
+      ],
+      [{ ch: 4.64, s: 'BTC' }, 1, 0.7, -0.17, 0.82, 0.93],
+      [{ ch: 3.26, s: 'ETH' }, 1.42, 1, -0.24, 1.17, 1.33],
+      [{ ch: -0.77, s: 'XRP' }, -6.03, -4.23, 1, -4.94, -5.61],
+      [{ ch: 3.8, s: 'BCH' }, 1.22, 0.86, -0.2, 1, 1.14],
+      [{ ch: 4.32, s: 'LTC' }, 1.07, 0.75, -0.18, 0.88, 1],
     ])
   })
 
