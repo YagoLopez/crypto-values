@@ -7,9 +7,7 @@
 
 import { CurrenciesMockRepository } from 'apps/crypto-values/models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import {
-  createRatiosMatrix3,
-} from 'apps/crypto-values/utils/functions'
+import { createRatiosMatrix3 } from 'apps/crypto-values/utils/functions'
 import CSS from './page4.module.css'
 import GridTable from './GridTable'
 
