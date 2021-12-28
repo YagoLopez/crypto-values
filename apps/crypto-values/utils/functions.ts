@@ -44,6 +44,9 @@ const isFirstColumn = (i: number, j: number): boolean => i > 0 && j === 0
 const isSubmatrixRatios = (i: number, j): boolean =>
   !isFirstCell(i, j) && !isFirstRow(i, j) && !isFirstColumn(i, j)
 
+export const filterInvalidCurrencies = (currenciesDataList: ICurrency[]) =>
+  currenciesDataList.filter((currency: ICurrency) => currency.ch !== 0)
+
 export const createRatiosMatrix2 = (
   currenciesDataList: ICurrency[]
 ): number[] => {
@@ -69,6 +72,39 @@ export const createRatiosMatrix2 = (
       if (isSubmatrixRatios(i, j)) {
         ratiosMatrix[i][j] = round2Decimals(
           currenciesDataList[j]?.ch / currenciesDataList[i]?.ch
+        )
+      }
+    }
+  }
+  return ratiosMatrix
+}
+
+export const createRatiosMatrix3 = (
+  currenciesDataList: ICurrency[]
+): number[] => {
+  if (!currenciesDataList) return []
+  const filteredCurrenciesList = filterInvalidCurrencies(currenciesDataList)
+  filteredCurrenciesList.unshift(null)
+  const dimension = filteredCurrenciesList?.length
+  let ratiosMatrix = createEmptyMatrix(dimension)
+  ratiosMatrix[0][0] = '-'
+  for (let i = 0; i < dimension; i++) {
+    for (let j = 0; j < dimension; j++) {
+      if (isFirstRow(i, j)) {
+        ratiosMatrix[i][j] = {
+          s: filteredCurrenciesList[j]?.s,
+          ch: filteredCurrenciesList[j]?.ch,
+        }
+      }
+      if (isFirstColumn(i, j)) {
+        ratiosMatrix[i][j] = {
+          s: filteredCurrenciesList[i]?.s,
+          ch: filteredCurrenciesList[i]?.ch,
+        }
+      }
+      if (isSubmatrixRatios(i, j)) {
+        ratiosMatrix[i][j] = round2Decimals(
+          filteredCurrenciesList[j]?.ch / filteredCurrenciesList[i]?.ch
         )
       }
     }
