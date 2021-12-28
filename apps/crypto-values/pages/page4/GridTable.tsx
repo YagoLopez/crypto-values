@@ -20,7 +20,7 @@ import styles from './gridtable.module.css'
 //   fontWeight: "bold"
 // };
 
-export default () => {
+export default function Page4() {
   const [state] = React.useState({
     fixedColumnCount: 1,
     fixedRowCount: 1,

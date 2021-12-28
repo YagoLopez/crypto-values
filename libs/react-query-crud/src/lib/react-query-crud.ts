@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 export interface IRepository<T, Error> {
   readonly name: string
-  readonly baseURL: any
+  readonly baseURL: string
   getList(): Promise<T[] | Error | null>
   getById(id: Id): Promise<T | Error | null>
   create(model: T): Promise<T | Error | null>
@@ -19,12 +19,14 @@ export type Id = string | number
 
 export const SINGLETON_KEY = Symbol()
 
-export type Singleton<T extends new (...args: any[]) => any> = T & {
-  [SINGLETON_KEY]: T extends new (...args: any[]) => infer I ? I : never
+export type Singleton<T extends new (...args: unknown[]) => unknown> = T & {
+  [SINGLETON_KEY]: T extends new (...args: unknown[]) => infer I ? I : never
 }
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const Singleton = <T extends new (...args: any[]) => any>(type: T) =>
+export const Singleton = <T extends new (...args: unknown[]) => unknown>(
+  type: T
+) =>
   new Proxy(type, {
     // this will hijack the constructor
     construct(target: Singleton<T>, argsList, newTarget) {

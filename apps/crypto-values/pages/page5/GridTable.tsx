@@ -19,7 +19,7 @@ const STYLE_TOP_RIGHT_GRID = {
   fontWeight: 'bold',
 }
 
-export default ({ tableData }) => {
+export default function Page5({ tableData }) {
   const [state] = useState({
     fixedColumnCount: 1,
     fixedRowCount: 1,
