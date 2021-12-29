@@ -5,14 +5,19 @@
 
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-export interface IRepository<T, Error> {
+export interface IRepository<T, TError> {
   readonly name: string
   readonly baseURL: string
-  getList(): Promise<T[] | Error | null>
-  getById(id: Id): Promise<T | Error | null>
-  create(model: T): Promise<T | Error | null>
-  updateById(model: T): Promise<T | Error | null>
-  deleteById(id: Id): Promise<T | Error | null>
+  getList(): Promise<T[] | TError | null>
+  getList2(
+    period?: number,
+    updatesFrom?: number,
+    currency?: string
+  ): Promise<T[] | TError | null>
+  getById(id: Id): Promise<T | TError | null>
+  create(model: T): Promise<T | TError | null>
+  updateById(model: T): Promise<T | TError | null>
+  deleteById(id: Id): Promise<T | TError | null>
 }
 
 export type Id = string | number
@@ -53,6 +58,17 @@ export const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
   const useGetList = () =>
     useQuery([repository.name], repository.getList, config)
 
+  const useGetList2 = (
+    period: number = 24,
+    updatesFrom: number = 1629894793,
+    currency: string = 'USD'
+  ) =>
+    useQuery(
+      [repository.name, period, updatesFrom, currency],
+      () => repository.getList2(period, updatesFrom, currency),
+      config
+    )
+
   const useGetById = (id: Id) =>
     useQuery([repository.name, id], () => repository.getById(id), config)
 
@@ -65,5 +81,12 @@ export const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
   const useUpdate = () =>
     useMutation((model: T) => repository.updateById(model), { onSuccess })
 
-  return { useGetList, useGetById, useCreate, useDelete, useUpdate }
+  return {
+    useGetList,
+    useGetList2,
+    useGetById,
+    useCreate,
+    useDelete,
+    useUpdate,
+  }
 }

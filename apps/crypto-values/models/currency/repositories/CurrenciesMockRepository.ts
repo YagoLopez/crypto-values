@@ -18,12 +18,25 @@ interface apiResponse {
 export class CurrenciesMockRepository
   implements IRepository<ICurrency, unknown>
 {
-  readonly name = 'currencies'
-  readonly baseURL = '/api/real-data'
+  readonly name = 'crypto-currencies'
+  readonly baseURL = '/api/crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
   getList = async (): Promise<ICurrency[]> => {
-    const { data } = await this.axiosClient.get<apiResponse>(null)
+    const { data } = await this.axiosClient.get<apiResponse>(
+      '?currency=USD&updates_from=1629894793&period=24h&no_charts=true'
+    )
+    return data.data
+  }
+
+  getList2 = async (
+    period: number,
+    updatesFrom: number,
+    currency: string
+  ): Promise<ICurrency[]> => {
+    const { data } = await this.axiosClient.get<apiResponse & Error>(
+      `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
+    )
     return data.data
   }
 

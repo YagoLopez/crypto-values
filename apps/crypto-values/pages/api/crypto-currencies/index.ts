@@ -5,8 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const urlEndpoint =
-    'https://coin360.com/api/coins?currency=USD&updates_from=1629894793&period=24h&no_charts=true'
+  const urlEndpoint = 'https://coin360.com/api/coins'
   try {
     const { data } = await axios.get(urlEndpoint)
     res.status(200).json(data)

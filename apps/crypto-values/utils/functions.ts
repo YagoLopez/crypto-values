@@ -1,16 +1,9 @@
 import { ICurrency } from '../models/currency/ICurrency'
+import { AxiosError } from 'axios'
 
 export const round2Decimals = (num: number): number =>
   Math.round(num * 100) / 100
 
-/**
- * Given a list with currency data coming from api response it returns an array
- * of change values
- *
- * Used to construct the ratios matrix used in the table shown to the user
- * @param currenciesList ICurrency[]
- * @retuns number[]
- */
 export const getCurrencyChangesVector = (
   currenciesList: ICurrency[]
 ): number[] => currenciesList?.map((currency: ICurrency) => currency.ch)
@@ -77,13 +70,16 @@ export const createRatiosMatrix2 = (currencies: ICurrency[]): number[] => {
   return ratiosMatrix
 }
 
-export const createRatiosMatrix3 = (currenciesDateList: ICurrency[]) => {
-  if (!currenciesDateList) return []
-  const currencies = filterInvalidCurrencies(currenciesDateList)
-  currencies.unshift(null)
+export const createRatiosMatrix3 = (
+  currenciesDateList: ICurrency[] | Error
+) => {
+  if (!currenciesDateList) return
+  const currencies = filterInvalidCurrencies(currenciesDateList as ICurrency[])
+  currencies.unshift(null) // Empty first row/column
   const dimension = currencies?.length
   const ratiosMatrix = createEmptyMatrix(dimension)
   ratiosMatrix[0][0] = '-'
+
   for (let i = 0; i < dimension; i++) {
     for (let j = 0; j < dimension; j++) {
       if (isFirstRow(i, j)) {

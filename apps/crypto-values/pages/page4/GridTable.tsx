@@ -30,7 +30,7 @@ export default function Page4() {
 
   const _cellRenderer = ({ columnIndex, key, rowIndex, style }) => {
     return (
-      <div className={styles.Cell} key={key} style={style}>
+      <div className={styles.cell} key={key} style={style}>
         {rowIndex === 0 ? (
           `Header: ${columnIndex}- ${rowIndex}`
         ) : (
