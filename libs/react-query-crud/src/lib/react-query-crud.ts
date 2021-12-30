@@ -8,12 +8,12 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 export interface IRepository<T, TError> {
   readonly name: string
   readonly baseURL: string
-  getList(): Promise<T[] | TError | null>
+  getList(): Promise<T[] | TError>
   getList2(
     period?: number,
     updatesFrom?: number,
     currency?: string
-  ): Promise<T[] | TError | null>
+  ): Promise<T[] | TError>
   getById(id: Id): Promise<T | TError | null>
   create(model: T): Promise<T | TError | null>
   updateById(model: T): Promise<T | TError | null>
