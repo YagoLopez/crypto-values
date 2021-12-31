@@ -59,9 +59,8 @@ export default function GridTable2({ tableData }) {
   // todo: remove
   // console.log('render----------------------------')
   // console.log(getFirstColumn(tableData))
-  console.log(tableData)
-  console.table(tableData)
-  console.log('process.browser', process.browser)
+  // console.log(tableData)
+  // console.table(tableData)
 
   return (
     <>

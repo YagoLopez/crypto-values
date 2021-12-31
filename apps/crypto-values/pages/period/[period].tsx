@@ -26,12 +26,12 @@ import { useRouter } from 'next/router'
 import GridTable2 from './GridTable2'
 import styles from './page5.module.css'
 
-export default function Page5({ period }) {
+export default function Page5({ period, table_dimension }) {
   const router = useRouter()
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList2 } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading, error } = useGetList2(period)
-  const tableData = createRatiosMatrix3(currenciesDataList)
+  const tableData = createRatiosMatrix3(currenciesDataList, +table_dimension)
 
   // console.table(tableData)
   // todo: remove
@@ -41,6 +41,10 @@ export default function Page5({ period }) {
   // console.table(tableData)
   // console.log('process.browser', process.browser)
   // console.log('period state', periodState)
+
+  // Pass query string parameter 'table_dimension' for debugging purposes
+  // For example '?table_dimension=6' and inspect console
+  table_dimension && console.table(table_dimension)
 
   const onChangePeriod = (period: string): Promise<boolean> =>
     void router.push(`/period/${period}`)
@@ -61,10 +65,11 @@ export default function Page5({ period }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const { period } = query
+  const { period, table_dimension } = query
   return {
     props: {
       period,
+      table_dimension: table_dimension ?? null,
     },
   }
 }

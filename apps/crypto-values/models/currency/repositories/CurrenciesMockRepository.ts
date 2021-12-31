@@ -34,8 +34,9 @@ export class CurrenciesMockRepository
     period: 'string',
     currency: string
   ): Promise<ICurrency[]> => {
+    const updatesFrom = getTimestampInSeconds()
     const { data } = await this.axiosClient.get<apiResponse & Error>(
-      `?currency=${currency}&updates_from=${getTimestampInSeconds()}&period=${period}&no_charts=true`
+      `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
     )
     return data.data
   }

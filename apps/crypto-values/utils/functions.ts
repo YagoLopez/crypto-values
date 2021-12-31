@@ -70,13 +70,13 @@ export const createRatiosMatrix2 = (currencies: ICurrency[]): number[] => {
 }
 
 export const createRatiosMatrix3 = (
-  currenciesDateList: ICurrency[] | Error
+  currenciesDataList: ICurrency[] | Error,
+  table_dimension: number
 ) => {
-  if (!currenciesDateList) return
-  const currencies = filterInvalidCurrencies(currenciesDateList as ICurrency[])
-  currencies.unshift(null) // Empty first row/column
-  // const dimension = currencies?.length
-  const dimension = 6
+  if (!currenciesDataList) return
+  const currencies = filterInvalidCurrencies(currenciesDataList as ICurrency[])
+  currencies.unshift(null)
+  const dimension = table_dimension ? table_dimension : currencies?.length
   const ratiosMatrix = createEmptyMatrix(dimension)
   ratiosMatrix[0][0] = '-'
 
