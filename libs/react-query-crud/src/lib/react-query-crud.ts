@@ -47,7 +47,14 @@ export const Singleton = <T extends new (...args: unknown[]) => unknown>(
 export const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
   const queryClient = useQueryClient()
 
-  const config = { staleTime: 0 }
+  const config = {
+    staleTime: 0,
+    enabled: true,
+    //Keep refetching every 5 seconds while we don't stop it
+    refetchInterval: 10000,
+    refetchIntervalInBackground: true,
+    refetchOnWindowFocus: false,
+  }
 
   const onSuccess = () => queryClient.invalidateQueries(repository.name)
 
