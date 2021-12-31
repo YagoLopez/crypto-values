@@ -1,3 +1,7 @@
+// El problema parece ser que no se rerenderiza la tabla al utilizar dynamic routes
+// Posible solucion: utilizar shallow routing pero y usar un estado "period"
+// Al setear el estado "period" la pagina se debería re-renderizar
+
 // todo: add tests
 // todo: make HOC Loader
 // todo: try branch with nextjs/pwa
@@ -12,23 +16,34 @@
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // add more tests
 // todo: center text in first row and column
+// todo: react query as async server state manager
+// todo: parametrize table dimension
 
 import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3 } from '../../utils/functions'
 import { useRouter } from 'next/router'
-import GridTable from './GridTable'
+import GridTable2 from './GridTable2'
 import styles from './page5.module.css'
 
 export default function Page5({ period }) {
   const router = useRouter()
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList2 } = useRepository(currenciesRepository)
-  const { data: currenciesDataList, isLoading, error } = useGetList2(+period)
+  const { data: currenciesDataList, isLoading, error } = useGetList2(period)
   const tableData = createRatiosMatrix3(currenciesDataList)
 
-  const onChangePeriod = (period: number): Promise<boolean> =>
-    router.push(`/period/${period}`)
+  // console.table(tableData)
+  // todo: remove
+  // console.log('render----------------------------')
+  // console.log(getFirstColumn(tableData))
+  // console.log(tableData)
+  // console.table(tableData)
+  // console.log('process.browser', process.browser)
+  // console.log('period state', periodState)
+
+  const onChangePeriod = (period: string): Promise<boolean> =>
+    void router.push(`/period/${period}`)
 
   if (isLoading) return 'Loading...'
   if (error) return 'An error has occurred: ' + (error as Error).message
@@ -36,11 +51,11 @@ export default function Page5({ period }) {
   return (
     <div className={styles.App}>
       <div>Dynamic route</div>
-      <button onClick={() => onChangePeriod(1)}>1 hour</button>
-      <button onClick={() => onChangePeriod(24)}>24 hours</button>
-      <button onClick={() => onChangePeriod(48)}>48 hours</button>
-      <button onClick={() => onChangePeriod(72)}>72 hours</button>
-      <GridTable tableData={tableData} />
+      <button onClick={() => onChangePeriod('1h')}>1 hour</button>
+      <button onClick={() => onChangePeriod('24h')}>24 hours</button>
+      <button onClick={() => onChangePeriod('7d')}>7 días</button>
+      <button onClick={() => onChangePeriod('30d')}>30 días</button>
+      <GridTable2 tableData={tableData} />
     </div>
   )
 }

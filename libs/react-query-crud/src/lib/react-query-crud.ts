@@ -9,11 +9,7 @@ export interface IRepository<T, TError> {
   readonly name: string
   readonly baseURL: string
   getList(): Promise<T[] | TError>
-  getList2(
-    period?: number,
-    updatesFrom?: number,
-    currency?: string
-  ): Promise<T[] | TError>
+  getList2(period?: string, currency?: string): Promise<T[] | TError>
   getById(id: Id): Promise<T | TError | null>
   create(model: T): Promise<T | TError | null>
   updateById(model: T): Promise<T | TError | null>
@@ -58,14 +54,10 @@ export const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
   const useGetList = () =>
     useQuery([repository.name], repository.getList, config)
 
-  const useGetList2 = (
-    period: number = 24,
-    updatesFrom: number = 1629894793,
-    currency: string = 'USD'
-  ) =>
+  const useGetList2 = (period: string = '24h', currency: string = 'USD') =>
     useQuery(
-      [repository.name, period, updatesFrom, currency],
-      () => repository.getList2(period, updatesFrom, currency),
+      [repository.name, period, currency],
+      () => repository.getList2(period, currency),
       config
     )
 

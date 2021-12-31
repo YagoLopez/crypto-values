@@ -27,10 +27,6 @@ describe('Test utility fns', () => {
     it('Dimension 2', () => {
       expect(createEmptyMatrix(2)).toEqual([[], []])
     })
-
-    it('Dimension -1', () => {
-      expect(createEmptyMatrix(-1)).toEqual([])
-    })
   })
 
   it('Should extract currency changes from api json', () => {

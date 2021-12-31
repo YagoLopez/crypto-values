@@ -20,7 +20,9 @@ const STYLE_FIRST_COLUMN = {
   backgroundColor: '#f7f7f7',
 }
 
-export default function Page5({ tableData }) {
+export default function GridTable2({ tableData }) {
+  // todo: remove
+  // console.log(tableData[][0])
   const dimension = tableData?.length
   const [state, setStateValues] = useState({
     fixedColumnCount: 1,
@@ -39,17 +41,27 @@ export default function Page5({ tableData }) {
           <div className={css.ch}>{tableData[rowIndex][columnIndex].ch}</div>
         </div>
       )}
+
       {columnIndex === 0 && (
         <div>
           {tableData[rowIndex][columnIndex].s}
           <div className={css.ch}>{tableData[rowIndex][columnIndex].ch}</div>
         </div>
       )}
+
       {rowIndex !== 0 && columnIndex !== 0 && (
         <div>{tableData[rowIndex][columnIndex]}</div>
       )}
     </div>
   )
+
+  // console.table(tableData)
+  // todo: remove
+  // console.log('render----------------------------')
+  // console.log(getFirstColumn(tableData))
+  console.log(tableData)
+  console.table(tableData)
+  console.log('process.browser', process.browser)
 
   return (
     <>

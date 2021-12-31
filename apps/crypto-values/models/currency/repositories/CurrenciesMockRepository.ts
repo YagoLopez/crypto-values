@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { Id, IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
+import { getTimestampInSeconds } from '../../../utils/dates'
 
 interface apiResponse {
   max: Record<string, unknown>
@@ -30,12 +31,11 @@ export class CurrenciesMockRepository
   }
 
   getList2 = async (
-    period: number,
-    updatesFrom: number,
+    period: 'string',
     currency: string
   ): Promise<ICurrency[]> => {
     const { data } = await this.axiosClient.get<apiResponse & Error>(
-      `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
+      `?currency=${currency}&updates_from=${getTimestampInSeconds()}&period=${period}&no_charts=true`
     )
     return data.data
   }

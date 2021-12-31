@@ -1,5 +1,4 @@
 import { ICurrency } from '../models/currency/ICurrency'
-import { AxiosError } from 'axios'
 
 export const round2Decimals = (num: number): number =>
   Math.round(num * 100) / 100
@@ -76,7 +75,8 @@ export const createRatiosMatrix3 = (
   if (!currenciesDateList) return
   const currencies = filterInvalidCurrencies(currenciesDateList as ICurrency[])
   currencies.unshift(null) // Empty first row/column
-  const dimension = currencies?.length
+  // const dimension = currencies?.length
+  const dimension = 6
   const ratiosMatrix = createEmptyMatrix(dimension)
   ratiosMatrix[0][0] = '-'
 
