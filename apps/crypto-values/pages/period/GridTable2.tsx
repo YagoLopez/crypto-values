@@ -21,8 +21,6 @@ const STYLE_FIRST_COLUMN = {
 }
 
 export default function GridTable2({ tableData }) {
-  // todo: remove
-  // console.log(tableData[][0])
   const dimension = tableData?.length
   const [state, setStateValues] = useState({
     fixedColumnCount: 1,

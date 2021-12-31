@@ -21,7 +21,7 @@
 
 import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import { createRatiosMatrix3 } from '../../utils/functions'
+import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable2 from './GridTable2'
 import styles from './page5.module.css'
@@ -31,20 +31,18 @@ export default function Page5({ period, table_dimension }) {
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList2 } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading, error } = useGetList2(period)
-  const tableData = createRatiosMatrix3(currenciesDataList, +table_dimension)
+  const table = createRatiosMatrix3(currenciesDataList, +table_dimension)
 
-  // console.table(tableData)
+  // console.table(table)
   // todo: remove
   // console.log('render----------------------------')
-  // console.log(getFirstColumn(tableData))
-  // console.log(tableData)
-  // console.table(tableData)
+  // console.log(getFirstColumn(table))
+  // console.log(table)
+  // console.table(table)
   // console.log('process.browser', process.browser)
   // console.log('period state', periodState)
 
-  // Pass query string parameter 'table_dimension' for debugging purposes
-  // For example '?table_dimension=6' and inspect console
-  table_dimension && console.table(table_dimension)
+  logTableToConsole(table, table_dimension)
 
   const onChangePeriod = (period: string): Promise<boolean> =>
     void router.push(`/period/${period}`)
@@ -59,7 +57,7 @@ export default function Page5({ period, table_dimension }) {
       <button onClick={() => onChangePeriod('24h')}>24 hours</button>
       <button onClick={() => onChangePeriod('7d')}>7 días</button>
       <button onClick={() => onChangePeriod('30d')}>30 días</button>
-      <GridTable2 tableData={tableData} />
+      <GridTable2 tableData={table} />
     </div>
   )
 }

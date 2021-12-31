@@ -11,7 +11,7 @@ export const getCurrencyNamesVector = (
   currenciesList: ICurrency[] = []
 ): string[] => currenciesList.map?.((currency) => currency.s)
 
-export const createEmptyMatrix = (dimension: number): number[] => {
+export const createEmptyMatrix = (dimension: number): any[] => {
   const matrix = []
   for (let i = 0; i < dimension; i++) {
     matrix.push([])
@@ -71,8 +71,8 @@ export const createRatiosMatrix2 = (currencies: ICurrency[]): number[] => {
 
 export const createRatiosMatrix3 = (
   currenciesDataList: ICurrency[] | Error,
-  table_dimension: number
-) => {
+  table_dimension: number = undefined
+): any[][] => {
   if (!currenciesDataList) return
   const currencies = filterInvalidCurrencies(currenciesDataList as ICurrency[])
   currencies.unshift(null)
@@ -138,4 +138,18 @@ export const createTableColumns = (
       }
     }
   )
+}
+
+/**
+ * (For testing purposes)
+ * Pass to the url a query string parameter called 'table_dimension' to log
+ * the table with the ratios to te console. For example '?tableDimension=6'
+ * @param table
+ * @param tableDimension
+ */
+export const logTableToConsole = (
+  table: any[][],
+  tableDimension: number
+): void => {
+  tableDimension && console.table(table)
 }
