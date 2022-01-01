@@ -9,7 +9,11 @@ export interface IRepository<T, TError> {
   readonly name: string
   readonly baseURL: string
   getList(): Promise<T[] | TError>
-  getList2(period?: string, currency?: string): Promise<T[] | TError>
+  getList2(
+    period?: string,
+    currency?: string,
+    updatesFrom?: number
+  ): Promise<T[] | TError>
   getListCustomPeriod(
     periodStart: string,
     periodEnd: string,
@@ -68,10 +72,14 @@ export const useRepository = <T, Error>(
   const useGetList = () =>
     useQuery([repository.name], repository.getList, config)
 
-  const useGetList2 = (period: string = '24h', currency: string = 'USD') =>
+  const useGetList2 = (
+    period: string = '24h',
+    currency: string = 'USD',
+    updatestFrom: number = 1629894793
+  ) =>
     useQuery(
-      [repository.name, period, currency],
-      () => repository.getList2(period, currency),
+      [repository.name, period, currency, updatestFrom],
+      () => repository.getList2(period, currency, updatestFrom),
       config
     )
 

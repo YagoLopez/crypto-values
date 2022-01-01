@@ -49,24 +49,22 @@ import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { MoreTime } from '@mui/icons-material'
 
+import TextField from '@mui/material/TextField'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
+import DatePicker from '@mui/lab/DatePicker'
+import DateFnsAdapter from '@mui/lab/AdapterDateFns'
+
 export default function Period({ period, table_dimension }) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const [isOpenSelectPeriod, setIsOpenSelectPeriod] = useState<boolean>(false)
+  const [startDate, setStartDate] = useState<Date | null>(null)
+  const [endDate, setEndDate] = useState<Date | null>(null)
 
   const router = useRouter()
   const currenciesRepository = new CurrenciesRepository()
   const { useGetList2 } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList2(period)
   const table = createRatiosMatrix3(currenciesDataList, +table_dimension)
-
-  // console.table(table)
-  // todo: remove
-  // console.log('render----------------------------')
-  // console.log(getFirstColumn(table))
-  // console.log(table)
-  // console.table(table)
-  // console.log('process.browser', process.browser)
-  // console.log('period state', periodState)
 
   logTableToConsole(table, table_dimension)
 
@@ -83,6 +81,10 @@ export default function Period({ period, table_dimension }) {
       setIsOpenSelectPeriod(false)
     }
   }
+
+  const onChangeStartDate = () => {}
+
+  const onChangeEndDate = () => {}
 
   if (isLoading) return 'Loading...'
   if (error) return 'An error has occurred: ' + (error as Error).message
@@ -120,6 +122,32 @@ export default function Period({ period, table_dimension }) {
           >
             Select period
           </Button>
+
+          <br />
+          <br />
+
+          <div>
+            <LocalizationProvider dateAdapter={DateFnsAdapter}>
+              <DatePicker
+                label="Start Date"
+                value={startDate}
+                onChange={(newValue) => {
+                  setStartDate(newValue)
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <DatePicker
+                label="End Date"
+                value={endDate}
+                onChange={(newValue) => {
+                  setStartDate(newValue)
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </div>
+
+          <br />
 
           <Dialog
             disableEscapeKeyDown
