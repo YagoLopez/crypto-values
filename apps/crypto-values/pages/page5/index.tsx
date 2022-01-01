@@ -7,7 +7,7 @@
 // todo: error boundaries
 // todo: add favico
 
-import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3 } from '../../utils/functions'
 import styles from './page5.module.css'
@@ -16,7 +16,7 @@ import { useRouter } from 'next/router'
 
 export default function Page5() {
   const router = useRouter()
-  const currenciesRepository = new CurrenciesMockRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList2 } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading, error } = useGetList2('24h')
   const tableData = createRatiosMatrix3(currenciesDataList)

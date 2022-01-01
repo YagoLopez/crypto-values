@@ -2,7 +2,7 @@
 // todo: add tests
 // todo: remove styles
 
-import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import React, { useCallback, useRef, Fragment } from 'react'
 import {
@@ -15,7 +15,7 @@ import { MOCK_DATA } from '../../utils/mock-data'
 import { useVirtual } from 'react-virtual'
 
 function GridVirtualizerFixed() {
-  const currenciesRepository = new CurrenciesMockRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading } = useGetList()
 
@@ -84,7 +84,7 @@ function GridVirtualizerFixed() {
 }
 
 export default function Page2() {
-  // const currenciesRepository = new CurrenciesMockRepository()
+  // const currenciesRepository = new CurrenciesRepository()
   // const { useGetList } = useRepository(currenciesRepository)
   // const { data: currenciesDataList, isLoading } = useGetList()
   // const { data: currenciesDataList } = MOCK_DATA

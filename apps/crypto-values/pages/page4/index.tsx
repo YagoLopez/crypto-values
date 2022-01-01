@@ -4,7 +4,7 @@
 // todo: make HOC Loader
 // todo: add other char type
 
-import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import GridTable from './GridTable'
 import {
@@ -15,7 +15,7 @@ import {
 import styles from './page4.module.css'
 
 export default function Page4() {
-  const currenciesRepository = new CurrenciesMockRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currenciesList, isLoading } = useGetList()
 

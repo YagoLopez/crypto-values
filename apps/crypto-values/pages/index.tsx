@@ -1,7 +1,7 @@
 // todo: error control level api and component
 // todo: add tests
 
-import { CurrenciesMockRepository } from '../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesRepository } from '../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import React, { useCallback, useRef, Fragment } from 'react'
 import {
@@ -84,7 +84,7 @@ function GridVirtualizerFixed() {
 }
 
 export default function Index() {
-  const currenciesRepository = new CurrenciesMockRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading } = useGetList()
   // const { data: currenciesDataList } = MOCK_DATA

@@ -10,6 +10,11 @@ export interface IRepository<T, TError> {
   readonly baseURL: string
   getList(): Promise<T[] | TError>
   getList2(period?: string, currency?: string): Promise<T[] | TError>
+  getListCustomPeriod(
+    periodStart: string,
+    periodEnd: string,
+    currency: string
+  ): Promise<T[] | TError>
   getById(id: Id): Promise<T | TError | null>
   create(model: T): Promise<T | TError | null>
   updateById(model: T): Promise<T | TError | null>
@@ -70,6 +75,22 @@ export const useRepository = <T, Error>(
       config
     )
 
+  const useGetListCustomPeriod = (
+    periodStart: number,
+    periodEnd: number,
+    currency: string = 'USD'
+  ) =>
+    useQuery(
+      [repository.name, periodStart, periodEnd, currency],
+      () =>
+        repository.getListCustomPeriod(
+          periodStart.toString(),
+          periodEnd.toString(),
+          currency
+        ),
+      config
+    )
+
   const useGetById = (id: Id) =>
     useQuery([repository.name, id], () => repository.getById(id), config)
 
@@ -85,6 +106,7 @@ export const useRepository = <T, Error>(
   return {
     useGetList,
     useGetList2,
+    useGetListCustomPeriod,
     useGetById,
     useCreate,
     useDelete,

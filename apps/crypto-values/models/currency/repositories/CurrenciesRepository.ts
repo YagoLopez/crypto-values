@@ -16,9 +16,7 @@ interface apiResponse {
 }
 
 @Singleton
-export class CurrenciesMockRepository
-  implements IRepository<ICurrency, unknown>
-{
+export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
   readonly name = 'crypto-currencies'
   readonly baseURL = '/api/crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
@@ -38,6 +36,16 @@ export class CurrenciesMockRepository
     const { data } = await this.axiosClient.get<apiResponse & Error>(
       `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
     )
+    return data.data
+  }
+
+  getListCustomPeriod = async (
+    start: string,
+    end: string,
+    currency: string
+  ): Promise<ICurrency[]> => {
+    const urlRequest = `/?currency=${currency}&period=custom&start=${start}&end=${end}&no_charts=true`
+    const { data } = await this.axiosClient.get<apiResponse & Error>(urlRequest)
     return data.data
   }
 

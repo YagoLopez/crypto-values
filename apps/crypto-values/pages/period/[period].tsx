@@ -1,7 +1,3 @@
-// El problema parece ser que no se rerenderiza la tabla al utilizar dynamic routes
-// Posible solucion: utilizar shallow routing pero y usar un estado "period"
-// Al setear el estado "period" la pagina se debería re-renderizar
-
 // todo: add tests
 // todo: make HOC Loader
 // todo: try branch with nextjs/pwa
@@ -28,7 +24,7 @@
 // - Lighthouse audit
 
 import { SyntheticEvent, useState } from 'react'
-import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
@@ -53,12 +49,12 @@ import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { MoreTime } from '@mui/icons-material'
 
-export default function Page5({ period, table_dimension }) {
+export default function Period({ period, table_dimension }) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const [isOpenSelectPeriod, setIsOpenSelectPeriod] = useState<boolean>(false)
 
   const router = useRouter()
-  const currenciesRepository = new CurrenciesMockRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList2 } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList2(period)
   const table = createRatiosMatrix3(currenciesDataList, +table_dimension)

@@ -4,7 +4,7 @@
 // todo: make HOC Loader
 // todo: add other char type
 
-import { CurrenciesMockRepository } from '../../models/currency/repositories/CurrenciesMockRepository'
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import {
   generateRatiosMatrix,
@@ -16,7 +16,7 @@ import { FixedSizeGrid as Grid } from 'react-window'
 import CSS from './page3.module.css'
 
 export default function Page3() {
-  const currenciesRepository = new CurrenciesMockRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository)
   const { data: currenciesDataList, isLoading } = useGetList()
 
