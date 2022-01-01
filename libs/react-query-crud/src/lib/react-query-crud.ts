@@ -44,14 +44,16 @@ export const Singleton = <T extends new (...args: unknown[]) => unknown>(
     },
   })
 
-export const useRepository = <T, Error>(repository: IRepository<T, Error>) => {
+export const useRepository = <T, Error>(
+  repository: IRepository<T, Error>,
+  refetchInterval: number = 0
+) => {
   const queryClient = useQueryClient()
 
   const config = {
     staleTime: 0,
-    enabled: true,
-    //Keep refetching every 10 seconds while we don't stop it
-    // refetchInterval: 10000,
+    // enabled: true,
+    refetchInterval,
     // refetchIntervalInBackground: true,
     // refetchOnWindowFocus: false,
   }

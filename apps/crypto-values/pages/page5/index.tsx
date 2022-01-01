@@ -18,7 +18,7 @@ export default function Page5() {
   const router = useRouter()
   const currenciesRepository = new CurrenciesMockRepository()
   const { useGetList2 } = useRepository(currenciesRepository)
-  const { data: currenciesDataList, isLoading, error } = useGetList2(24)
+  const { data: currenciesDataList, isLoading, error } = useGetList2('24h')
   const tableData = createRatiosMatrix3(currenciesDataList)
 
   const onChangePeriod = (period: number): void => {
