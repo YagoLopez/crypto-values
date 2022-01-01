@@ -51,7 +51,7 @@ import InputLabel from '@mui/material/InputLabel'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { MoreTime } from '@mui/icons-material'
 
 export default function Page5({ period, table_dimension }) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
@@ -79,7 +79,7 @@ export default function Page5({ period, table_dimension }) {
 
   const onClickSelectPeriodBtn = () => setIsOpenSelectPeriod(true)
 
-  const onCloseSelectPeriod = (
+  const onCloseSelectPeriodDialog = (
     event: SyntheticEvent<unknown>,
     reason?: string
   ) => {
@@ -120,15 +120,15 @@ export default function Page5({ period, table_dimension }) {
             variant="contained"
             color="secondary"
             onClick={onClickSelectPeriodBtn}
-            startIcon={<DeleteIcon />}
+            startIcon={<MoreTime />}
           >
-            Select operational period
+            Select period
           </Button>
 
           <Dialog
             disableEscapeKeyDown
             open={isOpenSelectPeriod}
-            onClose={onCloseSelectPeriod}
+            onClose={onCloseSelectPeriodDialog}
             style={{ height: '500px' }}
           >
             <DialogTitle>Select Operational Period</DialogTitle>
@@ -152,14 +152,12 @@ export default function Page5({ period, table_dimension }) {
               </Box>
             </DialogContent>
             <DialogActions>
-              <Button onClick={onCloseSelectPeriod}>Cancel</Button>
-              <Button onClick={onCloseSelectPeriod}>Ok</Button>
+              <Button onClick={onCloseSelectPeriodDialog}>Cancel</Button>
             </DialogActions>
           </Dialog>
         </div>
 
         <GridTable2 tableData={table} />
-        <Button variant="contained">Hello World</Button>
       </div>
     </>
   )
