@@ -22,6 +22,7 @@
 // - E2E tests
 // - TypeScript
 // - Lighthouse audit
+// todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
@@ -53,12 +54,13 @@ import TextField from '@mui/material/TextField'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
 import DateFnsAdapter from '@mui/lab/AdapterDateFns'
+import { getTimestampFromDate3 } from '../../utils/dates'
 
 export default function Period({ period, table_dimension }) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const [isOpenSelectPeriod, setIsOpenSelectPeriod] = useState<boolean>(false)
-  const [startDate, setStartDate] = useState<Date | null>(null)
-  const [endDate, setEndDate] = useState<Date | null>(null)
+  const [startDate, setStartDate] = useState<string>(null)
+  const [endDate, setEndDate] = useState<string>(null)
 
   const router = useRouter()
   const currenciesRepository = new CurrenciesRepository()
@@ -82,11 +84,26 @@ export default function Period({ period, table_dimension }) {
     }
   }
 
-  const onChangeStartDate = () => {}
+  const onChangeStartDate = (newDateValue: string) => {
+    setStartDate(newDateValue)
+    console.log(newDateValue)
+    console.log('getTimestampFromDate3', getTimestampFromDate3(newDateValue))
+  }
 
-  const onChangeEndDate = () => {}
+  const onChangeEndDate = (newDateValue) => {
+    setEndDate(newDateValue)
+    // todo: remove
+    console.log('end date', endDate)
+    const startTimestamp = getTimestampFromDate3(`${startDate}`)
+    const endTimestamp = getTimestampFromDate3(`${newDateValue}`)
+
+    void router.push(
+      `/custom-period?start_date=${startTimestamp}&end_date=${endTimestamp}`
+    )
+  }
 
   if (isLoading) return 'Loading...'
+
   if (error) return 'An error has occurred: ' + (error as Error).message
 
   return (
@@ -131,17 +148,13 @@ export default function Period({ period, table_dimension }) {
               <DatePicker
                 label="Start Date"
                 value={startDate}
-                onChange={(newValue) => {
-                  setStartDate(newValue)
-                }}
+                onChange={onChangeStartDate}
                 renderInput={(params) => <TextField {...params} />}
               />
               <DatePicker
                 label="End Date"
                 value={endDate}
-                onChange={(newValue) => {
-                  setStartDate(newValue)
-                }}
+                onChange={onChangeEndDate}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>

@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import './styles.css'
 import { useRouter } from 'next/router'
 
-export default function CustomApp({ Component, pageProps }: AppProps) {
+export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   return (
     <QueryClientProvider client={new QueryClient()}>

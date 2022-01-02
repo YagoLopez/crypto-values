@@ -39,8 +39,8 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
   }
 
   getListCustomPeriod = async (
-    start: string,
-    end: string,
+    start: number,
+    end: number,
     currency: string
   ): Promise<ICurrency[]> => {
     const urlRequest = `/?currency=${currency}&period=custom&start=${start}&end=${end}&no_charts=true`

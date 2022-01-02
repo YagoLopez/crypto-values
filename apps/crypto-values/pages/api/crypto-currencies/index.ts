@@ -6,16 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let result, url
   const baseUrl = 'https://coin360.com/api/coins'
-  let result, url, queryString
+  const queryString = parseurl(req).query
   try {
     if (req.query.period === 'custom') {
-      queryString = parseurl(req).query
       url = `${baseUrl}/custom?${queryString}`
     } else {
-      queryString = parseurl(req).query
       url = `${baseUrl}?${queryString}`
     }
+    // todo: remove logs
+    console.log(url)
+    console.log(queryString)
     result = await axios.get(url)
     res.status(200).json(result.data)
   } catch (e) {

@@ -24,7 +24,11 @@ import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { MoreTime } from '@mui/icons-material'
 
-export default function CustomPeriod({ table_dimension }) {
+export default function CustomPeriod({
+  start_date = 1610443814,
+  end_date = 1624613414,
+  table_dimension,
+}) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const [isOpenSelectPeriod, setIsOpenSelectPeriod] = useState<boolean>(false)
 
@@ -38,10 +42,10 @@ export default function CustomPeriod({ table_dimension }) {
     data: currenciesDataList,
     isLoading,
     error,
-  } = useGetListCustomPeriod(1610443814, 1624613414)
+  } = useGetListCustomPeriod(start_date, end_date)
   const table = createRatiosMatrix3(currenciesDataList, table_dimension)
 
-  // console.log(currenciesDataList)
+  console.log(start_date)
   // todo: remove
   // console.log('render----------------------------')
   // console.log(getFirstColumn(table))
@@ -80,9 +84,11 @@ export default function CustomPeriod({ table_dimension }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const { table_dimension } = query
+  const { start_date, end_date, table_dimension } = query
   return {
     props: {
+      start_date: start_date ?? null,
+      end_date: end_date ?? null,
       table_dimension: table_dimension ?? null,
     },
   }

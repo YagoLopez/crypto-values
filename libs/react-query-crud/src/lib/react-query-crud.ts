@@ -15,8 +15,8 @@ export interface IRepository<T, TError> {
     updatesFrom?: number
   ): Promise<T[] | TError>
   getListCustomPeriod(
-    periodStart: string,
-    periodEnd: string,
+    periodStart: number,
+    periodEnd: number,
     currency: string
   ): Promise<T[] | TError>
   getById(id: Id): Promise<T | TError | null>
@@ -90,12 +90,7 @@ export const useRepository = <T, Error>(
   ) =>
     useQuery(
       [repository.name, periodStart, periodEnd, currency],
-      () =>
-        repository.getListCustomPeriod(
-          periodStart.toString(),
-          periodEnd.toString(),
-          currency
-        ),
+      () => repository.getListCustomPeriod(periodStart, periodEnd, currency),
       config
     )
 
