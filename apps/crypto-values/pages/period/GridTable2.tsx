@@ -20,35 +20,15 @@ const STYLE_FIRST_COLUMN = {
   backgroundColor: '#f7f7f7',
 }
 
-const getStyleCell = (
-  start: number = 0,
-  end: number = 120,
-  value
-): { backgroundColor: string } => {
-  let colorComponent = (start + (end - start) * value) / 100
-  let backgroundColor = `hsl( ${colorComponent}, 100%, 50% )`
-  console.log(backgroundColor)
-  return { backgroundColor }
-}
-
-const getStyleCell2 = (
-  start: number = 0,
-  end: number = 120,
-  value
-): { backgroundColor: string } => {
-  let colorComponent = (start + (end - start) * value) / 100
-  let backgroundColor = `hsl(calc(${value} * 1.2), 100%, 50%)`
-  console.log(backgroundColor)
-  return { backgroundColor: `hsl(calc(${value} * 1.2), 100%, 50%)` }
-}
-
 export const getStyleCell3 = (value: number): Record<string, string> => {
   let color, backgroundColor, opacity
   if (value > 0) {
     color = 'green'
+    backgroundColor = 'lightgreen'
   }
   if (value < 0) {
     color = 'red'
+    backgroundColor = 'red'
   }
   if (value < 0 && value >= -0.09) {
     opacity = 0.1
@@ -57,31 +37,7 @@ export const getStyleCell3 = (value: number): Record<string, string> => {
   } else {
     opacity = Math.abs(value)
   }
-  return { color, opacity }
-}
-
-// todo: review
-function redYellowGreen(min, max, value) {
-  var green_max = 220
-  var red_max = 220
-  var red = 0
-  var green = 0
-  var blue = 0
-
-  if (value < max / 2) {
-    red = red_max
-    green = Math.round((value / (max / 2)) * green_max)
-  } else {
-    green = green_max
-    red = Math.round((1 - (value - max / 2) / (max / 2)) * red_max)
-  }
-
-  var to_return: any = {}
-  to_return.red = red
-  to_return.green = green
-  to_return.blue = blue
-
-  return to_return
+  return { color: 'navyblue', backgroundColor, opacity }
 }
 
 export default function GridTable2({ tableData }) {
