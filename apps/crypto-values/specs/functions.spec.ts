@@ -11,6 +11,7 @@ import {
   createRatiosMatrix3,
 } from '../utils/functions'
 import { MOCK_DATA } from '../utils/mock-data'
+import { getStyleCell3 } from '../pages/period/GridTable2'
 // import MOCK_JSON from '../pages/api/mock-data/db.json'
 
 const { data: currenciesList } = MOCK_DATA
@@ -186,5 +187,47 @@ describe('Test utility fns', () => {
         em: 69210057,
       },
     ])
+  })
+
+  describe('Test getStyleCell() fn', () => {
+    it('Should return correct table cell style for -0.01 value ', () => {
+      const result = getStyleCell3(-0.01)
+      expect(result).toEqual({
+        color: 'red',
+        opacity: 0.1,
+      })
+    })
+
+    it('Should return correct table cell style for -0.09 value ', () => {
+      const result = getStyleCell3(-0.09)
+      expect(result).toEqual({
+        color: 'red',
+        opacity: 0.1,
+      })
+    })
+
+    it('Should return correct table cell style for 0.01 value ', () => {
+      const result = getStyleCell3(0.01)
+      expect(result).toEqual({
+        color: 'green',
+        opacity: 0.1,
+      })
+    })
+
+    it('Should return correct table cell style for 0.09 value ', () => {
+      const result = getStyleCell3(0.09)
+      expect(result).toEqual({
+        color: 'green',
+        opacity: 0.1,
+      })
+    })
+
+    it('Should return correct table cell style for 0.04 value ', () => {
+      const result = getStyleCell3(0.04)
+      expect(result).toEqual({
+        color: 'green',
+        opacity: 0.1,
+      })
+    })
   })
 })

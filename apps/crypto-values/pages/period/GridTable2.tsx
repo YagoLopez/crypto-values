@@ -20,6 +20,70 @@ const STYLE_FIRST_COLUMN = {
   backgroundColor: '#f7f7f7',
 }
 
+const getStyleCell = (
+  start: number = 0,
+  end: number = 120,
+  value
+): { backgroundColor: string } => {
+  let colorComponent = (start + (end - start) * value) / 100
+  let backgroundColor = `hsl( ${colorComponent}, 100%, 50% )`
+  console.log(backgroundColor)
+  return { backgroundColor }
+}
+
+const getStyleCell2 = (
+  start: number = 0,
+  end: number = 120,
+  value
+): { backgroundColor: string } => {
+  let colorComponent = (start + (end - start) * value) / 100
+  let backgroundColor = `hsl(calc(${value} * 1.2), 100%, 50%)`
+  console.log(backgroundColor)
+  return { backgroundColor: `hsl(calc(${value} * 1.2), 100%, 50%)` }
+}
+
+export const getStyleCell3 = (value: number): Record<string, string> => {
+  let color, backgroundColor, opacity
+  if (value > 0) {
+    color = 'green'
+  }
+  if (value < 0) {
+    color = 'red'
+  }
+  if (value < 0 && value >= -0.09) {
+    opacity = 0.1
+  } else if (value > 0 && value <= 0.09) {
+    opacity = 0.1
+  } else {
+    opacity = Math.abs(value)
+  }
+  return { color, opacity }
+}
+
+// todo: review
+function redYellowGreen(min, max, value) {
+  var green_max = 220
+  var red_max = 220
+  var red = 0
+  var green = 0
+  var blue = 0
+
+  if (value < max / 2) {
+    red = red_max
+    green = Math.round((value / (max / 2)) * green_max)
+  } else {
+    green = green_max
+    red = Math.round((1 - (value - max / 2) / (max / 2)) * red_max)
+  }
+
+  var to_return: any = {}
+  to_return.red = red
+  to_return.green = green
+  to_return.blue = blue
+
+  return to_return
+}
+
 export default function GridTable2({ tableData }) {
   const dimension = tableData?.length
   const [state, setStateValues] = useState({
@@ -31,25 +95,27 @@ export default function GridTable2({ tableData }) {
 
   const onResetScroll = () => {}
 
-  const _cellRenderer = ({ columnIndex, key, rowIndex, style }) => (
-    <div className={styles.cell} key={key} style={style}>
-      {rowIndex === 0 && (
+  const _cellRenderer = ({ columnIndex: j, key, rowIndex: i, style }) => (
+    <div
+      className={styles.cell}
+      key={key}
+      style={{ ...style, ...getStyleCell3(tableData[i][j]) }}
+    >
+      {i === 0 && (
         <div>
-          {tableData[rowIndex][columnIndex].s}
-          <div className={css.ch}>{tableData[rowIndex][columnIndex].ch}</div>
+          {tableData[i][j].s}
+          <div className={css.ch}>{tableData[i][j].ch}</div>
         </div>
       )}
 
-      {columnIndex === 0 && (
+      {j === 0 && (
         <div>
-          {tableData[rowIndex][columnIndex].s}
-          <div className={css.ch}>{tableData[rowIndex][columnIndex].ch}</div>
+          {tableData[i][j].s}
+          <div className={css.ch}>{tableData[i][j].ch}</div>
         </div>
       )}
 
-      {rowIndex !== 0 && columnIndex !== 0 && (
-        <div>{tableData[rowIndex][columnIndex]}</div>
-      )}
+      {i !== 0 && j !== 0 && <div>{tableData[i][j]}</div>}
     </div>
   )
 
