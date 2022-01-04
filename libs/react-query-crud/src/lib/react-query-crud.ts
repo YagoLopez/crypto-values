@@ -3,16 +3,12 @@
 //   return 'react-query-crud'
 // }
 
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 
 export interface IRepository<T, TError> {
   readonly name: string
   readonly baseURL: string
-  getList(
-    period?: string,
-    currency?: string,
-    updatesFrom?: number
-  ): Promise<T[] | TError>
+  getList(period?: string, currency?: string): Promise<T[] | TError>
   getListCustomPeriod(
     periodStart: number,
     periodEnd: number,
@@ -61,12 +57,12 @@ export const useRepository = <T, Error>(
 
   const useGetList = (
     period: string = '24h',
-    currency: string = 'USD',
-    updatestFrom: number = 1629894793
+    currency: string = 'USD'
+    // updatestFrom: number = 1629894793
   ) =>
     useQuery(
-      [repository.name, period, currency, updatestFrom],
-      () => repository.getList(period, currency, updatestFrom),
+      [repository.name, period, currency],
+      () => repository.getList(period, currency),
       config
     )
 

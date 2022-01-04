@@ -15,9 +15,6 @@ export default async function handler(
     } else {
       url = `${baseUrl}?${queryString}`
     }
-    // todo: remove logs
-    // console.log(url)
-    // console.log(queryString)
     result = await axios.get(url)
     res.status(200).json(result.data)
   } catch (e) {

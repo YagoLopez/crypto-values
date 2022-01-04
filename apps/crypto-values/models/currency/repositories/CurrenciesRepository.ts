@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Id, IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
+import { getTimestampFromDate3 } from '../../../utils/dates'
 
 interface apiResponse {
   max: Record<string, unknown>
@@ -16,17 +17,17 @@ interface apiResponse {
 @Singleton
 export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
   readonly name = 'crypto-currencies'
-  // readonly baseURL = '/api/mock-crypto-currencies'
-  readonly baseURL = '/api/crypto-currencies'
+  readonly baseURL = '/api/mock-crypto-currencies'
+  // readonly baseURL = '/api/crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
   getList = async (
     period: 'string',
-    currency: string,
-    updatesFrom: number
+    currency: string
   ): Promise<ICurrency[]> => {
+    const currentDate = new Date()
+    const updatesFrom = getTimestampFromDate3(currentDate.toDateString())
     const urlRequest = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
-    console.log('urlRequest', urlRequest)
     const { data } = await this.axiosClient.get<apiResponse & Error>(urlRequest)
     return data.data
   }
