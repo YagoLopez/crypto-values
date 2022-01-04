@@ -63,8 +63,8 @@ export default function Period({ period, table_dimension }) {
 
   const router = useRouter()
   const currenciesRepository = new CurrenciesRepository()
-  const { useGetList2 } = useRepository(currenciesRepository, refetchInterval)
-  const { data: currenciesDataList, isLoading, error } = useGetList2(period)
+  const { useGetList } = useRepository(currenciesRepository, refetchInterval)
+  const { data: currenciesDataList, isLoading, error } = useGetList(period)
   const table = createRatiosMatrix3(currenciesDataList, +table_dimension)
 
   logTableToConsole(table, table_dimension)

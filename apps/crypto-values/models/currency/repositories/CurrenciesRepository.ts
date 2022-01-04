@@ -1,4 +1,3 @@
-// todo: review methods
 import axios from 'axios'
 import { Id, IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
@@ -21,14 +20,7 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
   readonly baseURL = '/api/crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
-  getList = async (): Promise<ICurrency[]> => {
-    const { data } = await this.axiosClient.get<apiResponse>(
-      '?currency=USD&updates_from=1629894793&period=24h&no_charts=true'
-    )
-    return data.data
-  }
-
-  getList2 = async (
+  getList = async (
     period: 'string',
     currency: string,
     updatesFrom: number
@@ -55,30 +47,5 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
       `/${this.name}/${id}`
     )
     return data
-  }
-
-  create = async (currency: ICurrency): Promise<ICurrency> => {
-    const { data } = await this.axiosClient.post<ICurrency>(
-      `/${this.name}/`,
-      currency
-    )
-    return data
-  }
-
-  deleteById = async (id: Id): Promise<ICurrency | null> => {
-    if (!id) return null
-    const { data } = await this.axiosClient.delete<ICurrency>(
-      `${this.name}/${id}`
-    )
-    return data
-  }
-
-  updateById = async (currency: ICurrency): Promise<ICurrency> => {
-    throw new Error('Not implemented')
-    // const { data } = await this.axiosClient.put<ICurrency>(
-    //   `${this.name}/${currency.id}`,
-    //   currency
-    // )
-    // return data
   }
 }

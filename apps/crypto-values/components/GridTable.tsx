@@ -40,7 +40,7 @@ export const getCellStyle = (value: number): Record<string, string> => {
   return {
     color,
     backgroundColor: `rgb(${backgroundColor}, ${opacity})`,
-    textShadow: '1px 1px 4px grey',
+    textShadow: '2px 2px 4px grey',
   }
 }
 

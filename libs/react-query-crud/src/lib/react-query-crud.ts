@@ -8,8 +8,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 export interface IRepository<T, TError> {
   readonly name: string
   readonly baseURL: string
-  getList(): Promise<T[] | TError>
-  getList2(
+  getList(
     period?: string,
     currency?: string,
     updatesFrom?: number
@@ -19,10 +18,6 @@ export interface IRepository<T, TError> {
     periodEnd: number,
     currency: string
   ): Promise<T[] | TError>
-  getById(id: Id): Promise<T | TError | null>
-  create(model: T): Promise<T | TError | null>
-  updateById(model: T): Promise<T | TError | null>
-  deleteById(id: Id): Promise<T | TError | null>
 }
 
 export type Id = string | number
@@ -38,17 +33,13 @@ export const Singleton = <T extends new (...args: unknown[]) => unknown>(
   type: T
 ) =>
   new Proxy(type, {
-    // this will hijack the constructor
     construct(target: Singleton<T>, argsList, newTarget) {
-      // we should skip the proxy for children of our target class
       if (target.prototype !== newTarget.prototype) {
         return Reflect.construct(target, argsList, newTarget)
       }
-      // if our target class does not have an instance, create it
       if (!target[SINGLETON_KEY]) {
         target[SINGLETON_KEY] = Reflect.construct(target, argsList, newTarget)
       }
-      // return the instance we created!
       return target[SINGLETON_KEY]
     },
   })
@@ -61,7 +52,6 @@ export const useRepository = <T, Error>(
 
   const config = {
     staleTime: 0,
-    // enabled: true,
     refetchInterval,
     refetchIntervalInBackground: true,
     // refetchOnWindowFocus: false,
@@ -69,17 +59,14 @@ export const useRepository = <T, Error>(
 
   const onSuccess = () => queryClient.invalidateQueries(repository.name)
 
-  const useGetList = () =>
-    useQuery([repository.name], repository.getList, config)
-
-  const useGetList2 = (
+  const useGetList = (
     period: string = '24h',
     currency: string = 'USD',
     updatestFrom: number = 1629894793
   ) =>
     useQuery(
       [repository.name, period, currency, updatestFrom],
-      () => repository.getList2(period, currency, updatestFrom),
+      () => repository.getList(period, currency, updatestFrom),
       config
     )
 
@@ -94,25 +81,8 @@ export const useRepository = <T, Error>(
       config
     )
 
-  const useGetById = (id: Id) =>
-    useQuery([repository.name, id], () => repository.getById(id), config)
-
-  const useCreate = () =>
-    useMutation((model: T) => repository.create(model), { onSuccess })
-
-  const useDelete = () =>
-    useMutation((id: Id) => repository.deleteById(id), { onSuccess })
-
-  const useUpdate = () =>
-    useMutation((model: T) => repository.updateById(model), { onSuccess })
-
   return {
     useGetList,
-    useGetList2,
     useGetListCustomPeriod,
-    useGetById,
-    useCreate,
-    useDelete,
-    useUpdate,
   }
 }
