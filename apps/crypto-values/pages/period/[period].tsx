@@ -112,94 +112,71 @@ export default function Period({ period, table_dimension }) {
 
   return (
     <>
-      <CssBaseline />
       <div>
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                News
-              </Typography>
-              <Button color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar>
-        </Box>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={onClickSelectPeriodBtn}
+          startIcon={<MoreTime />}
+        >
+          Select period
+        </Button>
+
+        <br />
+        <br />
 
         <div>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={onClickSelectPeriodBtn}
-            startIcon={<MoreTime />}
-          >
-            Select period
-          </Button>
-
-          <br />
-          <br />
-
-          <div>
-            <LocalizationProvider dateAdapter={DateFnsAdapter}>
-              <DatePicker
-                label="Start Date"
-                value={startDate}
-                onChange={onChangeStartDate}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <DatePicker
-                label="End Date"
-                value={endDate}
-                onChange={onChangeEndDate}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </div>
-
-          <br />
-
-          <Dialog
-            disableEscapeKeyDown
-            open={isOpenSelectPeriod}
-            onClose={onCloseSelectPeriodDialog}
-            style={{ height: '500px' }}
-          >
-            <DialogTitle>Select Operational Period</DialogTitle>
-            <DialogContent>
-              <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel htmlFor="demo-dialog-native">Period</InputLabel>
-                  <Select
-                    native
-                    value={period}
-                    onChange={onChangePeriod}
-                    input={<OutlinedInput label="Period" id="select-period" />}
-                  >
-                    <option aria-label="None" value="" />
-                    <option value={'1h'}>1 hour</option>
-                    <option value={'24h'}>24 hours</option>
-                    <option value={'7d'}>7 days</option>
-                    <option value={'30d'}>30 days</option>
-                  </Select>
-                </FormControl>
-              </Box>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={onCloseSelectPeriodDialog}>Cancel</Button>
-            </DialogActions>
-          </Dialog>
+          <LocalizationProvider dateAdapter={DateFnsAdapter}>
+            <DatePicker
+              label="Start Date"
+              value={startDate}
+              onChange={onChangeStartDate}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <DatePicker
+              label="End Date"
+              value={endDate}
+              onChange={onChangeEndDate}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         </div>
 
-        <GridTable tableData={table} />
+        <br />
+
+        <Dialog
+          disableEscapeKeyDown
+          open={isOpenSelectPeriod}
+          onClose={onCloseSelectPeriodDialog}
+          style={{ height: '500px' }}
+        >
+          <DialogTitle>Select Operational Period</DialogTitle>
+          <DialogContent>
+            <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel htmlFor="demo-dialog-native">Period</InputLabel>
+                <Select
+                  native
+                  value={period}
+                  onChange={onChangePeriod}
+                  input={<OutlinedInput label="Period" id="select-period" />}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={'1h'}>1 hour</option>
+                  <option value={'24h'}>24 hours</option>
+                  <option value={'7d'}>7 days</option>
+                  <option value={'30d'}>30 days</option>
+                </Select>
+              </FormControl>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={onCloseSelectPeriodDialog}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
       </div>
+
+      <GridTable tableData={table} />
     </>
   )
 }
