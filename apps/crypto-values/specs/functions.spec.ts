@@ -127,6 +127,7 @@ describe('Test utility fns', () => {
       { Header: 'LTC', accessor: '4' },
     ])
   })
+  // todo: remove
   it('Test addCurrencyNamesToRatiosMatrix()', () => {
     const res = addCurrencyNamesToRatiosMatrix(currenciesList)
     console.log(res)
@@ -190,43 +191,51 @@ describe('Test utility fns', () => {
   })
 
   describe('Test getStyleCell() fn', () => {
+    it('Should return correct table cell style for -0.17 value ', () => {
+      const result = getStyleCell3(-0.17)
+      expect(result).toEqual({
+        backgroundColor: 'rgb(255, 0, 0, 0.17)',
+        color: 'rgb(139, 0, 0)',
+      })
+    })
+
     it('Should return correct table cell style for -0.01 value ', () => {
       const result = getStyleCell3(-0.01)
       expect(result).toEqual({
-        color: 'red',
-        opacity: 0.1,
+        backgroundColor: 'rgb(255, 0, 0, 0.1)',
+        color: 'rgb(139, 0, 0)',
       })
     })
 
     it('Should return correct table cell style for -0.09 value ', () => {
       const result = getStyleCell3(-0.09)
       expect(result).toEqual({
-        color: 'red',
-        opacity: 0.1,
+        backgroundColor: 'rgb(255, 0, 0, 0.1)',
+        color: 'rgb(139, 0, 0)',
       })
     })
 
     it('Should return correct table cell style for 0.01 value ', () => {
       const result = getStyleCell3(0.01)
       expect(result).toEqual({
-        color: 'green',
-        opacity: 0.1,
+        backgroundColor: 'rgb(144, 238, 144, 0.1)',
+        color: 'rgb(0, 100, 0)',
       })
     })
 
     it('Should return correct table cell style for 0.09 value ', () => {
       const result = getStyleCell3(0.09)
       expect(result).toEqual({
-        color: 'green',
-        opacity: 0.1,
+        backgroundColor: 'rgb(144, 238, 144, 0.1)',
+        color: 'rgb(0, 100, 0)',
       })
     })
 
     it('Should return correct table cell style for 0.04 value ', () => {
       const result = getStyleCell3(0.04)
       expect(result).toEqual({
-        color: 'green',
-        opacity: 0.1,
+        backgroundColor: 'rgb(144, 238, 144, 0.1)',
+        color: 'rgb(0, 100, 0)',
       })
     })
   })

@@ -22,23 +22,44 @@ const STYLE_FIRST_COLUMN = {
 
 export const getStyleCell3 = (value: number): Record<string, string> => {
   let color, backgroundColor, opacity
+  const rgbRed = '255, 0, 0'
+  const rgbGreen = '144, 238, 144'
   if (value > 0) {
-    color = 'green'
-    backgroundColor = 'lightgreen'
+    backgroundColor = rgbGreen
+    color = 'rgb(0, 100, 0)'
   }
   if (value < 0) {
-    color = 'red'
-    backgroundColor = 'red'
+    backgroundColor = rgbRed
+    color = 'rgb(139, 0, 0)'
   }
-  if (value < 0 && value >= -0.09) {
+  if (value >= -0.09 && value < 0) {
     opacity = 0.1
   } else if (value > 0 && value <= 0.09) {
     opacity = 0.1
   } else {
     opacity = Math.abs(value)
   }
-  return { color: 'navyblue', backgroundColor, opacity }
+  return { color, backgroundColor: `rgb(${backgroundColor}, ${opacity})` }
 }
+// export const getStyleCell3 = (value: number): Record<string, string> => {
+//   let color, backgroundColor, opacity
+//   if (value > 0) {
+//     // color = 'green'
+//     backgroundColor = 'lightgreen'
+//   }
+//   if (value < 0) {
+//     // color = 'red'
+//     backgroundColor = 'red'
+//   }
+//   if (value < 0 && value >= -0.09) {
+//     opacity = 0.1
+//   } else if (value > 0 && value <= 0.09) {
+//     opacity = 0.1
+//   } else {
+//     opacity = Math.abs(value)
+//   }
+//   return { backgroundColor, opacity }
+// }
 
 export default function GridTable2({ tableData }) {
   const dimension = tableData?.length
