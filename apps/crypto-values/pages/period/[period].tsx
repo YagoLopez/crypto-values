@@ -1,7 +1,6 @@
+// todo: realtime toggle
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
-// todo: layout
-// todo: realtime toggle
 // todo: pass lint
 // todo: pass lighthouse audit
 // todo: write docs
@@ -17,9 +16,9 @@
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // add more tests
 // todo: center text in first row and column
-// todo: react query as async server state manager
 // todo: use global loading indicator from react query
 // DOCS
+// react query as async server state manager
 // - Data Abstraction Layer using Repository Pattern
 // - Singleton Pattern for repositories to avoid creating new instances in each rerender
 // Quality control:
@@ -54,32 +53,36 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
 import DateFnsAdapter from '@mui/lab/AdapterDateFns'
 import { getTimestampFromDate3 } from '../../utils/dates'
+import Switch from '@mui/material/Switch'
+import { FormControlLabel } from '@mui/material'
 
 export default function Period({ period, table_dimension }) {
-  const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const [isOpenSelectPeriod, setIsOpenSelectPeriod] = useState<boolean>(false)
-  const [startDate, setStartDate] = useState<string>(null)
-  const [endDate, setEndDate] = useState<string>(null)
-
-  const router = useRouter()
   const currenciesRepository = new CurrenciesRepository()
+  const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(period)
   const table = createRatiosMatrix3(currenciesDataList, +table_dimension)
+
+  const [isOpenSelectPeriodDialog, setIsOpenSelectPeriodDialog] =
+    useState<boolean>(false)
+  const [startDate, setStartDate] = useState<string>(null)
+  const [endDate, setEndDate] = useState<string>(null)
+  const router = useRouter()
+  const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
   logTableToConsole(table, table_dimension)
 
   const onChangePeriod = (e: SelectChangeEvent<typeof period>) =>
     void router.push(`/period/${e.target.value}`)
 
-  const onClickSelectPeriodBtn = () => setIsOpenSelectPeriod(true)
+  const onClickSelectPeriodBtn = () => setIsOpenSelectPeriodDialog(true)
 
   const onCloseSelectPeriodDialog = (
     event: SyntheticEvent<unknown>,
     reason?: string
   ) => {
     if (reason !== 'backdropClick') {
-      setIsOpenSelectPeriod(false)
+      setIsOpenSelectPeriodDialog(false)
     }
   }
 
@@ -99,6 +102,12 @@ export default function Period({ period, table_dimension }) {
     void router.push(
       `/custom-period?start_date=${startTimestamp}&end_date=${endTimestamp}`
     )
+  }
+
+  const isRefetchActive = refetchInterval !== 0
+
+  const onChangeRefetchInterval = () => {
+    refetchInterval === 0 ? setRefetchInterval(5000) : setRefetchInterval(0)
   }
 
   if (isLoading) return 'Loading...'
@@ -139,9 +148,20 @@ export default function Period({ period, table_dimension }) {
 
         <br />
 
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isRefetchActive}
+              onChange={onChangeRefetchInterval}
+              inputProps={{ 'aria-label': 'Real Time Data' }}
+            />
+          }
+          label="Realtime Data"
+        />
+
         <Dialog
           disableEscapeKeyDown
-          open={isOpenSelectPeriod}
+          open={isOpenSelectPeriodDialog}
           onClose={onCloseSelectPeriodDialog}
           style={{ height: '500px' }}
         >
