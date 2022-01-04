@@ -30,6 +30,7 @@
 // - Lighthouse audit
 // todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
 // todo: improvements use storybooks for components
+// todo: use dynamic imports with some mui components to improve performance
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'

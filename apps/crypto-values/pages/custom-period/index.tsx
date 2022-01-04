@@ -4,7 +4,6 @@ import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
-import CssBaseline from '@mui/material/CssBaseline'
 
 export default function CustomPeriod({
   start_date = 1610443814,
@@ -28,14 +27,12 @@ export default function CustomPeriod({
   logTableToConsole(table, table_dimension)
 
   if (isLoading) return 'Loading...'
+
   if (error) return 'An error has occurred: ' + (error as Error).message
 
   return (
     <>
-      <CssBaseline />
-      <div>
-        <GridTable tableData={table} />
-      </div>
+      <GridTable tableData={table} />
     </>
   )
 }

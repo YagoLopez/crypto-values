@@ -6,9 +6,16 @@ const withNx = require('@nrwl/next/plugins/with-nx')
  **/
 const nextConfig = {
   nx: {
-    // Set this to true if you would like to to use SVGR
-    // See: https://github.com/gregberge/svgr
     svgr: false,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/period/24h',
+        permanent: true,
+      },
+    ]
   },
 }
 
