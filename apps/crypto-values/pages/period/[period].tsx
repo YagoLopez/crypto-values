@@ -1,3 +1,5 @@
+// todo: fix diagonal 1 problem
+// todo: use useCallback for user events
 // todo: layout
 // todo: realtime toggle
 // todo: pass lint
@@ -7,20 +9,19 @@
 // todo: make HOC Loader
 // todo: try branch with nextjs/pwa
 // todo: storybook?
-// todo: remove query-string npm package
 // todo: add favico
 // todo: add number of rowns and columns as info
 // todo: preconnect to coin360.com domain
 // todo: add fadeIn transition for page content
 // todo: add currency choosable
-// todo: small adjustments: make profilage and improve a bit performance,
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // add more tests
 // todo: center text in first row and column
 // todo: react query as async server state manager
-// todo: parametrize table dimension
 // todo: use global loading indicator from react query
-// todo: use useCallback for user events
+// DOCS
+// - Data Abstraction Layer using Repository Pattern
+// - Singleton Pattern for repositories to avoid creating new instances in each rerender
 // Quality control:
 // - Linting
 // - Unit tests
@@ -28,6 +29,7 @@
 // - TypeScript
 // - Lighthouse audit
 // todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
+// todo: improvements use storybooks for components
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
@@ -35,15 +37,8 @@ import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
-import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
-import CssBaseline from '@mui/material/CssBaseline'
-
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -53,7 +48,6 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { MoreTime } from '@mui/icons-material'
-
 import TextField from '@mui/material/TextField'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'

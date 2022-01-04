@@ -1,27 +1,10 @@
-import { SyntheticEvent, useState } from 'react'
+import { useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import CssBaseline from '@mui/material/CssBaseline'
-
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
-import InputLabel from '@mui/material/InputLabel'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { MoreTime } from '@mui/icons-material'
 
 export default function CustomPeriod({
   start_date = 1610443814,
@@ -29,8 +12,6 @@ export default function CustomPeriod({
   table_dimension,
 }) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const [isOpenSelectPeriod, setIsOpenSelectPeriod] = useState<boolean>(false)
-
   const router = useRouter()
   const currenciesRepository = new CurrenciesRepository()
   const { useGetListCustomPeriod } = useRepository(
@@ -45,20 +26,6 @@ export default function CustomPeriod({
   const table = createRatiosMatrix3(currenciesDataList, table_dimension)
 
   logTableToConsole(table, table_dimension)
-
-  // const onChangePeriod = (e: SelectChangeEvent<typeof period>) =>
-  //   void router.push(`/period/${e.target.value}`)
-
-  const onClickSelectPeriodBtn = () => setIsOpenSelectPeriod(true)
-
-  const onCloseSelectPeriodDialog = (
-    event: SyntheticEvent<unknown>,
-    reason?: string
-  ) => {
-    if (reason !== 'backdropClick') {
-      setIsOpenSelectPeriod(false)
-    }
-  }
 
   if (isLoading) return 'Loading...'
   if (error) return 'An error has occurred: ' + (error as Error).message
