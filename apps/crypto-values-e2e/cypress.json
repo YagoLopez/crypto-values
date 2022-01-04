@@ -1,11 +1,12 @@
 {
+  "baseUrl": "http://localhost:4200/",
   "fileServerFolder": ".",
   "fixturesFolder": "./src/fixtures",
   "integrationFolder": "./src/integration",
   "modifyObstructiveCode": false,
   "supportFile": "./src/support/index.ts",
   "pluginsFile": false,
-  "video": true,
+  "video": false,
   "videosFolder": "../../dist/cypress/apps/crypto-values-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/crypto-values-e2e/screenshots",
   "chromeWebSecurity": false

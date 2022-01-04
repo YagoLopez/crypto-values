@@ -63,7 +63,7 @@ export const useRepository = <T, Error>(
     staleTime: 0,
     // enabled: true,
     refetchInterval,
-    // refetchIntervalInBackground: true,
+    refetchIntervalInBackground: true,
     // refetchOnWindowFocus: false,
   }
 

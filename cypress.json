@@ -1,0 +1,14 @@
+{
+  "baseUrl": "http://localhost:4200/",
+  "fileServerFolder": ".",
+  "fixturesFolder": "./apps/crypto-values-e2e/src/fixtures",
+  "integrationFolder": "./apps/crypto-values-e2e/src/integration",
+  "modifyObstructiveCode": false,
+  "supportFile": "./apps/crypto-values-e2e/src/support/index.ts",
+  "pluginsFile": false,
+  "video": false,
+  "videosFolder": "./apps/crypto-values-e2e/videos",
+  "screenshotsFolder": "./apps/crypto-values-e2e/screenshots",
+  "chromeWebSecurity": false
+}
+

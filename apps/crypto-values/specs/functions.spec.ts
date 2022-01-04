@@ -195,7 +195,8 @@ describe('Test utility fns', () => {
       const result = getStyleCell3(-0.17)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.17)',
-        color: 'rgb(139, 0, 0)',
+        color: 'brown',
+        textShadow: '1px 1px 4px grey',
       })
     })
 
@@ -203,7 +204,8 @@ describe('Test utility fns', () => {
       const result = getStyleCell3(-0.01)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.1)',
-        color: 'rgb(139, 0, 0)',
+        color: 'brown',
+        textShadow: '1px 1px 4px grey',
       })
     })
 
@@ -211,7 +213,8 @@ describe('Test utility fns', () => {
       const result = getStyleCell3(-0.09)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.1)',
-        color: 'rgb(139, 0, 0)',
+        color: 'brown',
+        textShadow: '1px 1px 4px grey',
       })
     })
 
@@ -219,7 +222,8 @@ describe('Test utility fns', () => {
       const result = getStyleCell3(0.01)
       expect(result).toEqual({
         backgroundColor: 'rgb(144, 238, 144, 0.1)',
-        color: 'rgb(0, 100, 0)',
+        color: '#38b438',
+        textShadow: '1px 1px 4px grey',
       })
     })
 
@@ -227,7 +231,8 @@ describe('Test utility fns', () => {
       const result = getStyleCell3(0.09)
       expect(result).toEqual({
         backgroundColor: 'rgb(144, 238, 144, 0.1)',
-        color: 'rgb(0, 100, 0)',
+        color: '#38b438',
+        textShadow: '1px 1px 4px grey',
       })
     })
 
@@ -235,7 +240,8 @@ describe('Test utility fns', () => {
       const result = getStyleCell3(0.04)
       expect(result).toEqual({
         backgroundColor: 'rgb(144, 238, 144, 0.1)',
-        color: 'rgb(0, 100, 0)',
+        color: '#38b438',
+        textShadow: '1px 1px 4px grey',
       })
     })
   })
