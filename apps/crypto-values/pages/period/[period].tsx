@@ -55,6 +55,7 @@ import DateFnsAdapter from '@mui/lab/AdapterDateFns'
 import { getTimestampFromDate3 } from '../../utils/dates'
 import Switch from '@mui/material/Switch'
 import { FormControlLabel } from '@mui/material'
+import { useIsFetching } from 'react-query'
 
 export default function Period({ period, table_dimension }) {
   const currenciesRepository = new CurrenciesRepository()
@@ -68,7 +69,7 @@ export default function Period({ period, table_dimension }) {
   const [startDate, setStartDate] = useState<string>(null)
   const [endDate, setEndDate] = useState<string>(null)
   const router = useRouter()
-  const label = { inputProps: { 'aria-label': 'Switch demo' } }
+  const isBackgroundFetching = useIsFetching()
 
   logTableToConsole(table, table_dimension)
 
@@ -106,9 +107,8 @@ export default function Period({ period, table_dimension }) {
 
   const isRefetchActive = refetchInterval !== 0
 
-  const onChangeRefetchInterval = () => {
+  const onChangeRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(5000) : setRefetchInterval(0)
-  }
 
   if (isLoading) return 'Loading...'
 
@@ -148,16 +148,19 @@ export default function Period({ period, table_dimension }) {
 
         <br />
 
-        <FormControlLabel
-          control={
-            <Switch
-              checked={isRefetchActive}
-              onChange={onChangeRefetchInterval}
-              inputProps={{ 'aria-label': 'Real Time Data' }}
-            />
-          }
-          label="Realtime Data"
-        />
+        <div>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isRefetchActive}
+                onChange={onChangeRefetchInterval}
+                inputProps={{ 'aria-label': 'Real Time Data' }}
+              />
+            }
+            label="Realtime Data"
+          />
+          {isBackgroundFetching ? '(Loading)' : null}
+        </div>
 
         <Dialog
           disableEscapeKeyDown
