@@ -3,8 +3,7 @@ import { CurrenciesRepository } from '../../models/currency/repositories/Currenc
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
-import GridTable2 from './GridTable2'
-import styles from './page5.module.css'
+import GridTable from '../../components/GridTable'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -45,15 +44,6 @@ export default function CustomPeriod({
   } = useGetListCustomPeriod(start_date, end_date)
   const table = createRatiosMatrix3(currenciesDataList, table_dimension)
 
-  console.log(start_date)
-  // todo: remove
-  // console.log('render----------------------------')
-  // console.log(getFirstColumn(table))
-  // console.log(table)
-  // console.table(table)
-  // console.log('process.browser', process.browser)
-  // console.log('period state', periodState)
-
   logTableToConsole(table, table_dimension)
 
   // const onChangePeriod = (e: SelectChangeEvent<typeof period>) =>
@@ -76,8 +66,8 @@ export default function CustomPeriod({
   return (
     <>
       <CssBaseline />
-      <div className={styles.App}>
-        <GridTable2 tableData={table} />
+      <div>
+        <GridTable tableData={table} />
       </div>
     </>
   )
