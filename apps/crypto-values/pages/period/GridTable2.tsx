@@ -26,13 +26,11 @@ export const getStyleCell3 = (value: number): Record<string, string> => {
   const rgbGreen = '144, 238, 144'
   if (value > 0) {
     backgroundColor = rgbGreen
-    // color = 'rgb(0, 100, 0)'
     color = '#38b438'
   }
   if (value < 0) {
     backgroundColor = rgbRed
-    // color = 'rgb(139, 0, 0)'
-    color = 'black'
+    color = 'brown'
   }
   if (value >= -0.09 && value < 0) {
     opacity = 0.1
@@ -44,28 +42,9 @@ export const getStyleCell3 = (value: number): Record<string, string> => {
   return {
     color,
     backgroundColor: `rgb(${backgroundColor}, ${opacity})`,
-    textShadow: '2px 2px 8px grey',
+    textShadow: '1px 1px 4px grey',
   }
 }
-// export const getStyleCell3 = (value: number): Record<string, string> => {
-//   let color, backgroundColor, opacity
-//   if (value > 0) {
-//     // color = 'green'
-//     backgroundColor = 'lightgreen'
-//   }
-//   if (value < 0) {
-//     // color = 'red'
-//     backgroundColor = 'red'
-//   }
-//   if (value < 0 && value >= -0.09) {
-//     opacity = 0.1
-//   } else if (value > 0 && value <= 0.09) {
-//     opacity = 0.1
-//   } else {
-//     opacity = Math.abs(value)
-//   }
-//   return { backgroundColor, opacity }
-// }
 
 export default function GridTable2({ tableData }) {
   const dimension = tableData?.length
