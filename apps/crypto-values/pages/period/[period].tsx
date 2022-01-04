@@ -1,3 +1,8 @@
+// todo: layout
+// todo: realtime toggle
+// todo: pass lint
+// todo: pass lighthouse audit
+// todo: write docs
 // todo: add tests
 // todo: make HOC Loader
 // todo: try branch with nextjs/pwa
@@ -29,8 +34,7 @@ import { CurrenciesRepository } from '../../models/currency/repositories/Currenc
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
-import GridTable2 from './GridTable2'
-import styles from './page5.module.css'
+import GridTable from '../../components/GridTable'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -109,7 +113,7 @@ export default function Period({ period, table_dimension }) {
   return (
     <>
       <CssBaseline />
-      <div className={styles.App}>
+      <div>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
@@ -194,7 +198,7 @@ export default function Period({ period, table_dimension }) {
           </Dialog>
         </div>
 
-        <GridTable2 tableData={table} />
+        <GridTable tableData={table} />
       </div>
     </>
   )

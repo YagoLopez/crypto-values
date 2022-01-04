@@ -1,8 +1,6 @@
-// todo: add tool tip to first row and column with "change value" text
 import { AutoSizer, MultiGrid } from 'react-virtualized'
 import styles from './gridtable.module.css'
 import { useState } from 'react'
-import css from './gridtable.module.css'
 
 const TABLE_STYLE = {
   border: '5px solid #ddd',
@@ -20,7 +18,7 @@ const STYLE_FIRST_COLUMN = {
   backgroundColor: '#f7f7f7',
 }
 
-export const getStyleCell3 = (value: number): Record<string, string> => {
+export const getCellStyle = (value: number): Record<string, string> => {
   let color, backgroundColor, opacity
   const rgbRed = '255, 0, 0'
   const rgbGreen = '144, 238, 144'
@@ -46,7 +44,7 @@ export const getStyleCell3 = (value: number): Record<string, string> => {
   }
 }
 
-export default function GridTable2({ tableData }) {
+export default function GridTable({ tableData }) {
   const dimension = tableData?.length
   const [state, setStateValues] = useState({
     fixedColumnCount: 1,
@@ -61,32 +59,25 @@ export default function GridTable2({ tableData }) {
     <div
       className={styles.cell}
       key={key}
-      style={{ ...style, ...getStyleCell3(tableData[i][j]) }}
+      style={{ ...style, ...getCellStyle(tableData[i][j]) }}
     >
       {i === 0 && (
         <div>
           {tableData[i][j].s}
-          <div className={css.ch}>{tableData[i][j].ch}</div>
+          <div className={styles.ch}>{tableData[i][j].ch}</div>
         </div>
       )}
 
       {j === 0 && (
         <div>
           {tableData[i][j].s}
-          <div className={css.ch}>{tableData[i][j].ch}</div>
+          <div className={styles.ch}>{tableData[i][j].ch}</div>
         </div>
       )}
 
       {i !== 0 && j !== 0 && <div>{tableData[i][j]}</div>}
     </div>
   )
-
-  // console.table(tableData)
-  // todo: remove
-  // console.log('render----------------------------')
-  // console.log(getFirstColumn(tableData))
-  // console.log(tableData)
-  // console.table(tableData)
 
   return (
     <>
