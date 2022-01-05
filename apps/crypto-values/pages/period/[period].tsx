@@ -1,4 +1,3 @@
-// todo: center loader
 // todo: pass repository as prop to component to decouple
 // todo: fix reset scrollbars
 // todo: fix diagonal 1 problem
@@ -52,6 +51,7 @@ import Switch from '@mui/material/Switch'
 import { FormControlLabel } from '@mui/material'
 import { useIsFetching } from 'react-query'
 import styles from './period.module.css'
+import Loader from '../../components/Loader'
 
 export default function Period({ period, table_dimension }) {
   const currenciesRepository = new CurrenciesRepository()
@@ -98,7 +98,7 @@ export default function Period({ period, table_dimension }) {
   const onToggleRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(5000) : setRefetchInterval(0)
 
-  if (isLoading) return <>Loading...</>
+  if (isLoading) return <Loader />
 
   if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
 

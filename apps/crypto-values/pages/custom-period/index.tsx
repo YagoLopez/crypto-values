@@ -4,6 +4,7 @@ import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
+import Loader from '../../components/Loader'
 
 export default function CustomPeriod({
   start_date = 1610443814,
@@ -26,7 +27,7 @@ export default function CustomPeriod({
 
   logTableToConsole(table, table_dimension)
 
-  if (isLoading) return <>Loading...</>
+  if (isLoading) return <Loader />
 
   if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
 
