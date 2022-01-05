@@ -1,4 +1,6 @@
-// todo: add fadeIn transition for page content
+// todo: rename functions
+// todo: pass repository to page component
+// improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: pass lint
@@ -11,10 +13,6 @@
 // todo: add number of rowns and columns as info
 // todo: preconnect to coin360.com domain
 // todo: add currency choosable
-// improve ui design, better responsiveness on mobile devices for example make fonts smaller
-// add more tests
-// todo: center text in first row and column
-// todo: use global loading indicator from react query
 // DOCS
 // react query as async server state manager
 // - Data Abstraction Layer using Repository Pattern
@@ -30,7 +28,6 @@
 // todo: use dynamic imports with some mui components to improve performance
 // todo: possible improvements: allow user to choose reference currency
 // todo: back button in custom period page
-// todo: rename functions
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
