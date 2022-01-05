@@ -4,7 +4,7 @@ import {
   createRatiosMatrix,
 } from '../utils/functions'
 import { MOCK_DATA } from '../utils/mock-data'
-import { getCellStyle } from '../components/GridTable'
+import { getCellStyle } from '../components/GridTable/GridTable'
 // import MOCK_JSON from '../pages/api/mock-data/db.json'
 
 const { data: currenciesList } = MOCK_DATA

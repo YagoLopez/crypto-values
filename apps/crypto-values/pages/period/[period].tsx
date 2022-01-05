@@ -1,11 +1,10 @@
+// todo: pass lighthouse audit
 // todo: fix reset scrollbars
+// todo: add favico
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
-// todo: pass lint
-// todo: pass lighthouse audit
 // todo: write docs
 // todo: try branch with nextjs/pwa
-// todo: add favico
 // todo: preconnect to coin360.com domain
 // DOCS
 // react query as async server state manager
@@ -23,13 +22,15 @@
 // todo: improvements use storybooks for components
 // todo: possible improvements: improve performance using dynamic imports with some mui components to improve performance
 // todo: possible improvements: allow user to choose reference currency
+// endpoint1 /api/crypto-currencies
+// endpoint2 /api/mock-crypto-currencies
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { IRepository, useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
-import GridTable from '../../components/GridTable'
+import GridTable from '../../components/GridTable/GridTable'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -50,18 +51,20 @@ import Switch from '@mui/material/Switch'
 import { FormControlLabel } from '@mui/material'
 import { useIsFetching } from 'react-query'
 import styles from './period.module.css'
-import Loader from '../../components/Loader'
+import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
+
+interface IPeriodPage {
+  period: string
+  table_dimension: number
+  currenciesRepository: IRepository<ICurrency, unknown>
+}
 
 export default function PeriodPage({
   period,
   table_dimension,
   currenciesRepository = new CurrenciesRepository(),
-}: {
-  period: string
-  table_dimension: number
-  currenciesRepository: IRepository<ICurrency, unknown>
-}) {
+}: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(period)
@@ -114,7 +117,7 @@ export default function PeriodPage({
 
   return (
     <>
-      <div className={[styles.maincontainer, 'scale-in-ver-center'].join(' ')}>
+      <div className={styles.maincontainer}>
         <div>
           <Button
             className={styles.selectbtn}

@@ -53,7 +53,10 @@ export default function GridTable({ tableData }) {
     scrollToRow: 0,
   })
 
-  const onResetScroll = () => {}
+  const onResetScroll = () => {
+    // todo: review
+    return null
+  }
 
   const _cellRenderer = ({ columnIndex: j, key, rowIndex: i, style }) => (
     <div

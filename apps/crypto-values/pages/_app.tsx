@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import './styles.css'
 import { useRouter } from 'next/router'
 import CssBaseline from '@mui/material/CssBaseline'
-import TopAppBar from '../components/TopAppBar'
+import TopAppBar from '../components/TopAppBar/TopAppBar'
 
 export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
   const router = useRouter()

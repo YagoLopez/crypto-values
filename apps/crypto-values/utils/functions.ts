@@ -3,7 +3,7 @@ import { ICurrency } from '../models/currency/ICurrency'
 export const round2Decimals = (num: number): number =>
   Math.round(num * 100) / 100
 
-export const createEmptyMatrix = (dimension: number): any[] => {
+export const createEmptyMatrix = (dimension: number): unknown[] => {
   const matrix = []
   for (let i = 0; i < dimension; i++) {
     matrix.push([])
@@ -34,7 +34,7 @@ export const filterInvalidCurrencies = (currencies: ICurrency[]): ICurrency[] =>
 export const createRatiosMatrix = (
   currenciesDataList: ICurrency[] | Error,
   table_dimension: number = undefined
-): any[][] => {
+): unknown[] => {
   if (!currenciesDataList) return
   const currencies = filterInvalidCurrencies(currenciesDataList as ICurrency[])
   currencies.unshift(null)
@@ -74,7 +74,7 @@ export const createRatiosMatrix = (
  * @param tableDimension
  */
 export const logTableToConsole = (
-  table: any[][],
+  table: unknown[],
   tableDimension: number
 ): void => {
   tableDimension && console.table(table)

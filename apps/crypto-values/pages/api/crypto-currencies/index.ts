@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
-const parseurl = require('parseurl')
+import parseurl from 'parseurl'
 
 export default async function handler(
   req: NextApiRequest,

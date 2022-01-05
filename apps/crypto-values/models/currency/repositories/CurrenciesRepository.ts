@@ -1,8 +1,11 @@
 import axios from 'axios'
-import { IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
 import { getTimestampFromDate } from '../../../utils/dates'
-import { IResponse } from '@crypto-values/react-query-crud'
+import {
+  IRepository,
+  IResponse,
+  Singleton,
+} from '@crypto-values/react-query-crud'
 
 @Singleton
 export class CurrenciesRepository implements IRepository<ICurrency, unknown> {

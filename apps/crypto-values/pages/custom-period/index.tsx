@@ -2,21 +2,23 @@ import { useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { IRepository, useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
-import GridTable from '../../components/GridTable'
-import Loader from '../../components/Loader'
+import GridTable from '../../components/GridTable/GridTable'
+import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
+
+interface ICustomPeriodPage {
+  start_date: number
+  end_date: number
+  table_dimension: number
+  currenciesRepository: IRepository<ICurrency, unknown>
+}
 
 export default function CustomPeriodPage({
   start_date,
   end_date,
   table_dimension,
   currenciesRepository = new CurrenciesRepository(),
-}: {
-  start_date: number
-  end_date: number
-  table_dimension: number
-  currenciesRepository: IRepository<ICurrency, unknown>
-}) {
+}: ICustomPeriodPage) {
   const [refetchInterval] = useState<number>(0)
   const { useGetListCustomPeriod } = useRepository(
     currenciesRepository,
@@ -38,11 +40,7 @@ export default function CustomPeriodPage({
 
   if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
 
-  return (
-    <>
-      <GridTable tableData={table} />
-    </>
-  )
+  return <GridTable tableData={table} />
 }
 
 export async function getServerSideProps({ query }) {
