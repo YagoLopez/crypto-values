@@ -1,7 +1,7 @@
 import {
   createEmptyMatrix,
   filterInvalidCurrencies,
-  createRatiosMatrix3,
+  createRatiosMatrix,
 } from '../utils/functions'
 import { MOCK_DATA } from '../utils/mock-data'
 import { getCellStyle } from '../components/GridTable'
@@ -24,9 +24,9 @@ describe('Test utility fns', () => {
     })
   })
 
-  describe('Test createRatiosMatrix3() fn', () => {
+  describe('Test createRatiosMatrix() fn', () => {
     it('Without "table_dimension" parameter', () => {
-      const ratiosMatrix = createRatiosMatrix3(currenciesList)
+      const ratiosMatrix = createRatiosMatrix(currenciesList)
       console.log(ratiosMatrix)
       expect(ratiosMatrix).toEqual([
         [
@@ -46,7 +46,7 @@ describe('Test utility fns', () => {
     })
 
     it('With "table_dimension" parameter"', () => {
-      const ratiosMatrix = createRatiosMatrix3(currenciesList, 6)
+      const ratiosMatrix = createRatiosMatrix(currenciesList, 6)
       console.log(ratiosMatrix)
       expect(ratiosMatrix).toEqual([
         [

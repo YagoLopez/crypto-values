@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
+import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
 
@@ -10,7 +10,7 @@ export default function CustomPeriod({
   end_date = 1624613414,
   table_dimension,
 }) {
-  const [refetchInterval, setRefetchInterval] = useState<number>(0)
+  const [refetchInterval] = useState<number>(0)
   const router = useRouter()
   const currenciesRepository = new CurrenciesRepository()
   const { useGetListCustomPeriod } = useRepository(
@@ -22,7 +22,7 @@ export default function CustomPeriod({
     isLoading,
     error,
   } = useGetListCustomPeriod(start_date, end_date)
-  const table = createRatiosMatrix3(currenciesDataList, table_dimension)
+  const table = createRatiosMatrix(currenciesDataList, table_dimension)
 
   logTableToConsole(table, table_dimension)
 

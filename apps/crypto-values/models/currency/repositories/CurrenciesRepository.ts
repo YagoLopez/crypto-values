@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
-import { getTimestampFromDate3 } from '../../../utils/dates'
+import { getTimestampFromDate } from '../../../utils/dates'
 import { IResponse } from '@crypto-values/react-query-crud'
 
 @Singleton
@@ -16,7 +16,7 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
     currency: string
   ): Promise<ICurrency[]> => {
     const currentDate = new Date()
-    const updatesFrom = getTimestampFromDate3(currentDate.toDateString())
+    const updatesFrom = getTimestampFromDate(currentDate.toDateString())
     const queryString = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
     const { data } = await this.axiosClient.get<IResponse & Error>(queryString)
     return data.data

@@ -31,7 +31,7 @@ const isSubmatrixRatios = (i: number, j: number): boolean =>
 export const filterInvalidCurrencies = (currencies: ICurrency[]): ICurrency[] =>
   currencies.filter((currency: ICurrency) => currency.ch !== 0)
 
-export const createRatiosMatrix3 = (
+export const createRatiosMatrix = (
   currenciesDataList: ICurrency[] | Error,
   table_dimension: number = undefined
 ): any[][] => {

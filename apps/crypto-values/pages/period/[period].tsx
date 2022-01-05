@@ -1,12 +1,11 @@
-// todo: rename functions
-// todo: pass repository to page component
+// todo: add cypress tests
+// todo: pass repository as prop to component to decouple
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: pass lint
 // todo: pass lighthouse audit
 // todo: write docs
-// todo: add tests
 // todo: try branch with nextjs/pwa
 // todo: storybook?
 // todo: add favico
@@ -32,7 +31,7 @@
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
-import { createRatiosMatrix3, logTableToConsole } from '../../utils/functions'
+import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
 import Box from '@mui/material/Box'
@@ -50,7 +49,7 @@ import TextField from '@mui/material/TextField'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
 import DateFnsAdapter from '@mui/lab/AdapterDateFns'
-import { getTimestampFromDate3 } from '../../utils/dates'
+import { getTimestampFromDate } from '../../utils/dates'
 import Switch from '@mui/material/Switch'
 import { FormControlLabel } from '@mui/material'
 import { useIsFetching } from 'react-query'
@@ -61,7 +60,7 @@ export default function Period({ period, table_dimension }) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(period)
-  const table = createRatiosMatrix3(currenciesDataList, +table_dimension)
+  const table = createRatiosMatrix(currenciesDataList, +table_dimension)
 
   const [isOpenSelectPeriodDialog, setIsOpenSelectPeriodDialog] =
     useState<boolean>(false)
@@ -91,8 +90,8 @@ export default function Period({ period, table_dimension }) {
 
   const onChangeEndDate = (newDateValue) => {
     setEndDate(newDateValue)
-    const startTimestamp = getTimestampFromDate3(`${startDate}`)
-    const endTimestamp = getTimestampFromDate3(`${newDateValue}`)
+    const startTimestamp = getTimestampFromDate(`${startDate}`)
+    const endTimestamp = getTimestampFromDate(`${newDateValue}`)
     void router.push(
       `/custom-period?start_date=${startTimestamp}&end_date=${endTimestamp}`
     )
