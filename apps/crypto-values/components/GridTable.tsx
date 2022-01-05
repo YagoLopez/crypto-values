@@ -80,7 +80,7 @@ export default function GridTable({ tableData }) {
   )
 
   return (
-    <div id="table" className={styles.gridTable}>
+    <div id="table" className={[styles.gridTable, 'fade-in'].join(' ')}>
       <AutoSizer disableHeight>
         {({ width }) => (
           <MultiGrid

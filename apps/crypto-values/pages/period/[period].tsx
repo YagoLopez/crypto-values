@@ -1,16 +1,15 @@
+// todo: add fadeIn transition for page content
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: pass lint
 // todo: pass lighthouse audit
 // todo: write docs
 // todo: add tests
-// todo: make HOC Loader
 // todo: try branch with nextjs/pwa
 // todo: storybook?
 // todo: add favico
 // todo: add number of rowns and columns as info
 // todo: preconnect to coin360.com domain
-// todo: add fadeIn transition for page content
 // todo: add currency choosable
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // add more tests
@@ -29,6 +28,9 @@
 // todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
 // todo: improvements use storybooks for components
 // todo: use dynamic imports with some mui components to improve performance
+// todo: possible improvements: allow user to choose reference currency
+// todo: back button in custom period page
+// todo: rename functions
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
@@ -70,6 +72,7 @@ export default function Period({ period, table_dimension }) {
   const [endDate, setEndDate] = useState<string>(null)
   const router = useRouter()
   const isBackgroundFetching = useIsFetching()
+  const isRefetchActive = refetchInterval !== 0
 
   logTableToConsole(table, table_dimension)
 
@@ -93,15 +96,12 @@ export default function Period({ period, table_dimension }) {
     setEndDate(newDateValue)
     const startTimestamp = getTimestampFromDate3(`${startDate}`)
     const endTimestamp = getTimestampFromDate3(`${newDateValue}`)
-
     void router.push(
       `/custom-period?start_date=${startTimestamp}&end_date=${endTimestamp}`
     )
   }
 
-  const isRefetchActive = refetchInterval !== 0
-
-  const onChangeRefetchInterval = () =>
+  const onToggleRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(5000) : setRefetchInterval(0)
 
   if (isLoading) return 'Loading...'
@@ -110,8 +110,8 @@ export default function Period({ period, table_dimension }) {
 
   return (
     <>
-      <div className={styles.mainContainer}>
-        <div id="top-controls">
+      <div className={[styles.maincontainer, 'scale-in-ver-center'].join(' ')}>
+        <div>
           <Button
             variant="contained"
             color="secondary"
@@ -143,7 +143,7 @@ export default function Period({ period, table_dimension }) {
             control={
               <Switch
                 checked={isRefetchActive}
-                onChange={onChangeRefetchInterval}
+                onChange={onToggleRefetchInterval}
                 inputProps={{ 'aria-label': 'Real Time Data' }}
               />
             }
@@ -162,12 +162,12 @@ export default function Period({ period, table_dimension }) {
           <DialogContent>
             <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel htmlFor="demo-dialog-native">Period</InputLabel>
+                <InputLabel htmlFor="period">Period</InputLabel>
                 <Select
                   native
                   value={period}
                   onChange={onChangePeriod}
-                  input={<OutlinedInput label="Period" id="select-period" />}
+                  input={<OutlinedInput label="Period" id="period" />}
                 >
                   <option aria-label="None" value="" />
                   <option value={'1h'}>1 hour</option>
@@ -184,7 +184,7 @@ export default function Period({ period, table_dimension }) {
         </Dialog>
       </div>
 
-      <div className={styles.tableContainer}>
+      <div className={styles.tablecontainer}>
         <GridTable tableData={table} />
       </div>
     </>

@@ -1,7 +1,6 @@
 import { IRepository } from './IRepository'
 import { Singleton } from './Singleton'
 import { useRepository } from './useRepository'
+import { IResponse } from './IResponse'
 
-export type Id = string | number
-
-export { IRepository, Singleton, useRepository }
+export { IRepository, IResponse, Singleton, useRepository }

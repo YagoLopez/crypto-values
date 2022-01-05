@@ -1,18 +1,8 @@
 import axios from 'axios'
-import { Id, IRepository, Singleton } from '@crypto-values/react-query-crud'
+import { IRepository, Singleton } from '@crypto-values/react-query-crud'
 import { ICurrency } from '../ICurrency'
 import { getTimestampFromDate3 } from '../../../utils/dates'
-
-interface apiResponse {
-  max: Record<string, unknown>
-  min: Record<string, unknown>
-  data: ICurrency[]
-  global: Record<string, unknown>
-  protocols: Record<string, unknown>
-  categories: Record<string, unknown>
-  subtypes: Record<string, unknown>
-  timestamp: number
-}
+import { IResponse } from '@crypto-values/react-query-crud'
 
 @Singleton
 export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
@@ -27,8 +17,8 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
   ): Promise<ICurrency[]> => {
     const currentDate = new Date()
     const updatesFrom = getTimestampFromDate3(currentDate.toDateString())
-    const urlRequest = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
-    const { data } = await this.axiosClient.get<apiResponse & Error>(urlRequest)
+    const queryString = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
+    const { data } = await this.axiosClient.get<IResponse & Error>(queryString)
     return data.data
   }
 
@@ -37,16 +27,8 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
     end: number,
     currency: string
   ): Promise<ICurrency[]> => {
-    const urlRequest = `/?currency=${currency}&period=custom&start=${start}&end=${end}&no_charts=true`
-    const { data } = await this.axiosClient.get<apiResponse & Error>(urlRequest)
+    const queryString = `/?currency=${currency}&period=custom&start=${start}&end=${end}&no_charts=true`
+    const { data } = await this.axiosClient.get<IResponse & Error>(queryString)
     return data.data
-  }
-
-  getById = async (id: Id): Promise<ICurrency | undefined> => {
-    if (!id) return
-    const { data } = await this.axiosClient.get<ICurrency>(
-      `/${this.name}/${id}`
-    )
-    return data
   }
 }

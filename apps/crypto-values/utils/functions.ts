@@ -143,7 +143,7 @@ export const createTableColumns = (
 /**
  * (For testing purposes)
  * Pass to the url a query string parameter called 'table_dimension' to log
- * the table with the ratios to te console. For example '?tableDimension=6'
+ * the table to te console. For example '?tableDimension=6'
  * @param table
  * @param tableDimension
  */

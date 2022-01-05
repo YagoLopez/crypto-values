@@ -22,6 +22,7 @@ export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="app">
         <CssBaseline />
+        {/*todo: create TopAppBar cmp*/}
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>

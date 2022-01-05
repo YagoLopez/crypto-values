@@ -1,8 +1,8 @@
-.tableContainer {
-  margin: 0.5em;
+.tablecontainer {
+  margin: 0.1em;
 }
 
-.mainContainer {
-  margin: 0.5em;
+.maincontainer {
+  margin-top: 1em;
   text-align: center;
 }

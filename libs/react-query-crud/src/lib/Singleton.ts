@@ -4,6 +4,10 @@ export type Singleton<T extends new (...args: unknown[]) => unknown> = T & {
   [SINGLETON_KEY]: T extends new (...args: unknown[]) => infer I ? I : never
 }
 
+/**
+ * Singleton decorator
+ * See: https://trevoratlas.com/posts/how-to-create-a-typescript-singleton-decorator
+ */
 export const Singleton = <T extends new (...args: unknown[]) => unknown>(
   type: T
 ) =>
