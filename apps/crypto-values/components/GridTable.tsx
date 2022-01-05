@@ -1,13 +1,13 @@
+import { useState } from 'react'
 import { AutoSizer, MultiGrid } from 'react-virtualized'
 import styles from './gridtable.module.css'
-import { useState } from 'react'
 
 const TABLE_STYLE = {
-  border: '5px solid #ddd',
+  border: '1px solid #ddd',
 }
 
 const STYLE_FIRST_CELL = {
-  background: 'lightgrey',
+  background: 'hsl(0deg 0% 97%)',
 }
 
 const STYLE_FIRST_ROW = {
@@ -80,7 +80,7 @@ export default function GridTable({ tableData }) {
   )
 
   return (
-    <>
+    <div id="table" className={styles.gridTable}>
       <AutoSizer disableHeight>
         {({ width }) => (
           <MultiGrid
@@ -105,6 +105,6 @@ export default function GridTable({ tableData }) {
         )}
       </AutoSizer>
       <button onClick={onResetScroll}>Reset Scroll Bars</button>
-    </>
+    </div>
   )
 }

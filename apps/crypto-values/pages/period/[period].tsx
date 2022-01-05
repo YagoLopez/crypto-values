@@ -1,4 +1,3 @@
-// todo: realtime toggle
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: pass lint
@@ -56,6 +55,7 @@ import { getTimestampFromDate3 } from '../../utils/dates'
 import Switch from '@mui/material/Switch'
 import { FormControlLabel } from '@mui/material'
 import { useIsFetching } from 'react-query'
+import styles from './period.module.css'
 
 export default function Period({ period, table_dimension }) {
   const currenciesRepository = new CurrenciesRepository()
@@ -87,16 +87,10 @@ export default function Period({ period, table_dimension }) {
     }
   }
 
-  const onChangeStartDate = (newDateValue: string) => {
-    setStartDate(newDateValue)
-    console.log(newDateValue)
-    console.log('getTimestampFromDate3', getTimestampFromDate3(newDateValue))
-  }
+  const onChangeStartDate = (newDateValue: string) => setStartDate(newDateValue)
 
   const onChangeEndDate = (newDateValue) => {
     setEndDate(newDateValue)
-    // todo: remove
-    console.log('end date', endDate)
     const startTimestamp = getTimestampFromDate3(`${startDate}`)
     const endTimestamp = getTimestampFromDate3(`${newDateValue}`)
 
@@ -116,20 +110,16 @@ export default function Period({ period, table_dimension }) {
 
   return (
     <>
-      <div>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={onClickSelectPeriodBtn}
-          startIcon={<MoreTime />}
-        >
-          Select period
-        </Button>
-
-        <br />
-        <br />
-
-        <div>
+      <div className={styles.mainContainer}>
+        <div id="top-controls">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={onClickSelectPeriodBtn}
+            startIcon={<MoreTime />}
+          >
+            Select period
+          </Button>
           <LocalizationProvider dateAdapter={DateFnsAdapter}>
             <DatePicker
               label="Start Date"
@@ -194,7 +184,9 @@ export default function Period({ period, table_dimension }) {
         </Dialog>
       </div>
 
-      <GridTable tableData={table} />
+      <div className={styles.tableContainer}>
+        <GridTable tableData={table} />
+      </div>
     </>
   )
 }
