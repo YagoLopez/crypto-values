@@ -13,6 +13,7 @@ export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Crypto-values, by Yago López</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
       </Head>
       <main className="app">
         <CssBaseline />

@@ -1,6 +1,6 @@
+// todo: red realtime data
 // todo: pass lighthouse audit
 // todo: fix reset scrollbars
-// todo: add favico
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: write docs
@@ -24,6 +24,7 @@
 // todo: possible improvements: allow user to choose reference currency
 // endpoint1 /api/crypto-currencies
 // endpoint2 /api/mock-crypto-currencies
+// run in sandbox
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
@@ -111,6 +112,10 @@ export default function PeriodPage({
   const onToggleRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
 
+  const getRTtextStyle = (refetchInterval) => ({
+    color: refetchInterval !== 0 ? '#1976d2' : 'black',
+  })
+
   if (isLoading) return <Loader />
 
   if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
@@ -165,9 +170,13 @@ export default function PeriodPage({
                 inputProps={{ 'aria-label': 'Real Time Data' }}
               />
             }
-            label="Realtime Data"
+            label={
+              <div style={getRTtextStyle(refetchInterval)}>Real Time Data</div>
+            }
           />
-          {isBackgroundFetching ? '(Loading)' : null}
+          {isBackgroundFetching ? (
+            <span className={styles.refetchindicator}>(Loading)</span>
+          ) : null}
         </div>
 
         <Dialog
