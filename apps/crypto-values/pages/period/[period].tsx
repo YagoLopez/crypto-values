@@ -1,5 +1,6 @@
-// improve ui design, better responsiveness on mobile devices for example make fonts smaller
+// todo: center loader
 // todo: pass repository as prop to component to decouple
+// todo: fix reset scrollbars
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: pass lint
