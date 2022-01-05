@@ -1,11 +1,9 @@
-// todo: red realtime data
-// todo: pass lighthouse audit
 // todo: fix reset scrollbars
+// todo: pass lighthouse audit
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
-// todo: write docs
-// todo: try branch with nextjs/pwa
 // todo: preconnect to coin360.com domain
+// todo: write docs
 // DOCS
 // react query as async server state manager
 // - Data Abstraction Layer using Repository Pattern
@@ -17,6 +15,7 @@
 // - E2E tests
 // - TypeScript
 // - Lighthouse audit
+// - On browser window focus data is refetches thanks to react-query
 // todo: possible improvements: implement service worker for progressive web application
 // todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
 // todo: improvements use storybooks for components
@@ -25,6 +24,7 @@
 // endpoint1 /api/crypto-currencies
 // endpoint2 /api/mock-crypto-currencies
 // run in sandbox
+// todo: try branch with nextjs/pwa
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
@@ -112,9 +112,14 @@ export default function PeriodPage({
   const onToggleRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
 
-  const getRTtextStyle = (refetchInterval) => ({
-    color: refetchInterval !== 0 ? '#1976d2' : 'black',
-  })
+  const getRTtextStyle = (isRefetchActive: boolean) => {
+    if (isBackgroundFetching) {
+      return { background: 'cyan' }
+    }
+    if (isRefetchActive) {
+      return { color: '#1976d2' }
+    }
+  }
 
   if (isLoading) return <Loader />
 
@@ -171,12 +176,9 @@ export default function PeriodPage({
               />
             }
             label={
-              <div style={getRTtextStyle(refetchInterval)}>Real Time Data</div>
+              <div style={getRTtextStyle(isRefetchActive)}>Real Time Data</div>
             }
           />
-          {isBackgroundFetching ? (
-            <span className={styles.refetchindicator}>(Loading)</span>
-          ) : null}
         </div>
 
         <Dialog
