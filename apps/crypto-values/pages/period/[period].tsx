@@ -101,9 +101,9 @@ export default function Period({ period, table_dimension }) {
   const onToggleRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(5000) : setRefetchInterval(0)
 
-  if (isLoading) return 'Loading...'
+  if (isLoading) return <>Loading...</>
 
-  if (error) return 'An error has occurred: ' + (error as Error).message
+  if (error) return <>`An error has occurred: ${(error as Error).message}`</>
 
   return (
     <>

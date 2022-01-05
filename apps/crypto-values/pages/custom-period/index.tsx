@@ -26,9 +26,9 @@ export default function CustomPeriod({
 
   logTableToConsole(table, table_dimension)
 
-  if (isLoading) return 'Loading...'
+  if (isLoading) return <>Loading...</>
 
-  if (error) return 'An error has occurred: ' + (error as Error).message
+  if (error) return <>`An error has occurred: ${(error as Error).message}`</>
 
   return (
     <>

@@ -1,23 +1,16 @@
-// todo: redo tests with new data
 import {
-  generateRatiosMatrix,
-  createRatiosMatrix2,
-  createTableColumns,
-  getCurrencyChangesVector,
-  getCurrencyNamesVector,
   createEmptyMatrix,
-  addCurrencyNamesToRatiosMatrix,
   filterInvalidCurrencies,
   createRatiosMatrix3,
 } from '../utils/functions'
 import { MOCK_DATA } from '../utils/mock-data'
-import { getStyleCell3 } from '../pages/period/GridTable2'
+import { getCellStyle } from '../components/GridTable'
 // import MOCK_JSON from '../pages/api/mock-data/db.json'
 
 const { data: currenciesList } = MOCK_DATA
 
 describe('Test utility fns', () => {
-  describe('Test initializeMatrix()', () => {
+  describe('Test createEmptyMatrix()', () => {
     it('Dimension 0', () => {
       expect(createEmptyMatrix(0)).toEqual([])
     })
@@ -29,39 +22,6 @@ describe('Test utility fns', () => {
     it('Dimension 2', () => {
       expect(createEmptyMatrix(2)).toEqual([[], []])
     })
-  })
-
-  it('Should extract currency changes from api json', () => {
-    expect(getCurrencyChangesVector(currenciesList)).toEqual([
-      4.64, 3.26, -0.77, 3.8, 4.32,
-    ])
-  })
-
-  it('Should create ratios matrix correctly', () => {
-    const currenciesChangesVector = getCurrencyChangesVector(currenciesList)
-    const ratiosMatrix = generateRatiosMatrix(currenciesChangesVector)
-    console.log(ratiosMatrix)
-  })
-
-  it('Test createRatiosMatrix2()', () => {
-    const currenciesListFiltered = filterInvalidCurrencies(currenciesList)
-    const ratiosMatrix = createRatiosMatrix2(currenciesListFiltered)
-    console.log(ratiosMatrix)
-    expect(ratiosMatrix).toEqual([
-      [
-        '-',
-        { ch: 4.64, s: 'BTC' },
-        { ch: 3.26, s: 'ETH' },
-        { ch: -0.77, s: 'XRP' },
-        { ch: 3.8, s: 'BCH' },
-        { ch: 4.32, s: 'LTC' },
-      ],
-      [{ ch: 4.64, s: 'BTC' }, 1, 0.7, -0.17, 0.82, 0.93],
-      [{ ch: 3.26, s: 'ETH' }, 1.42, 1, -0.24, 1.17, 1.33],
-      [{ ch: -0.77, s: 'XRP' }, -6.03, -4.23, 1, -4.94, -5.61],
-      [{ ch: 3.8, s: 'BCH' }, 1.22, 0.86, -0.2, 1, 1.14],
-      [{ ch: 4.32, s: 'LTC' }, 1.07, 0.75, -0.18, 0.88, 1],
-    ])
   })
 
   describe('Test createRatiosMatrix3() fn', () => {
@@ -104,34 +64,6 @@ describe('Test utility fns', () => {
         [{ ch: 4.32, s: 'LTC' }, 1.07, 0.75, -0.18, 0.88, 1],
       ])
     })
-  })
-
-  it.skip('Test extracting currency names', () => {
-    const res = getCurrencyNamesVector(currenciesList)
-    expect(res).toEqual([
-      { Header: 'BTC', accessor: 's' },
-      { Header: 'ETH', accessor: 's' },
-      { Header: 'XRP', accessor: 's' },
-      { Header: 'BCH', accessor: 's' },
-      { Header: 'LTC', accessor: 's' },
-    ])
-  })
-  it('Test createTableColumns()', () => {
-    const currencyNamesVector = getCurrencyNamesVector(currenciesList)
-    const res = createTableColumns(currencyNamesVector)
-    expect(res).toEqual([
-      { Header: 'BTC', accessor: '0' },
-      { Header: 'ETH', accessor: '1' },
-      { Header: 'XRP', accessor: '2' },
-      { Header: 'BCH', accessor: '3' },
-      { Header: 'LTC', accessor: '4' },
-    ])
-  })
-  // todo: remove
-  it('Test addCurrencyNamesToRatiosMatrix()', () => {
-    const res = addCurrencyNamesToRatiosMatrix(currenciesList)
-    console.log(res)
-    // expect(res).toEqual([])
   })
 
   it('Test filterInvalidCurrencies()', () => {
@@ -192,56 +124,56 @@ describe('Test utility fns', () => {
 
   describe('Test getStyleCell() fn', () => {
     it('Should return correct table cell style for -0.17 value ', () => {
-      const result = getStyleCell3(-0.17)
+      const result = getCellStyle(-0.17)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.17)',
         color: 'brown',
-        textShadow: '1px 1px 4px grey',
+        textShadow: '2px 2px 4px grey',
       })
     })
 
     it('Should return correct table cell style for -0.01 value ', () => {
-      const result = getStyleCell3(-0.01)
+      const result = getCellStyle(-0.01)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.1)',
         color: 'brown',
-        textShadow: '1px 1px 4px grey',
+        textShadow: '2px 2px 4px grey',
       })
     })
 
     it('Should return correct table cell style for -0.09 value ', () => {
-      const result = getStyleCell3(-0.09)
+      const result = getCellStyle(-0.09)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.1)',
         color: 'brown',
-        textShadow: '1px 1px 4px grey',
+        textShadow: '2px 2px 4px grey',
       })
     })
 
     it('Should return correct table cell style for 0.01 value ', () => {
-      const result = getStyleCell3(0.01)
+      const result = getCellStyle(0.01)
       expect(result).toEqual({
         backgroundColor: 'rgb(144, 238, 144, 0.1)',
         color: '#38b438',
-        textShadow: '1px 1px 4px grey',
+        textShadow: '2px 2px 4px grey',
       })
     })
 
     it('Should return correct table cell style for 0.09 value ', () => {
-      const result = getStyleCell3(0.09)
+      const result = getCellStyle(0.09)
       expect(result).toEqual({
         backgroundColor: 'rgb(144, 238, 144, 0.1)',
         color: '#38b438',
-        textShadow: '1px 1px 4px grey',
+        textShadow: '2px 2px 4px grey',
       })
     })
 
     it('Should return correct table cell style for 0.04 value ', () => {
-      const result = getStyleCell3(0.04)
+      const result = getCellStyle(0.04)
       expect(result).toEqual({
         backgroundColor: 'rgb(144, 238, 144, 0.1)',
         color: '#38b438',
-        textShadow: '1px 1px 4px grey',
+        textShadow: '2px 2px 4px grey',
       })
     })
   })
