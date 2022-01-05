@@ -1,4 +1,3 @@
-// todo: pass repository as prop to component to decouple
 // todo: fix reset scrollbars
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
@@ -6,7 +5,6 @@
 // todo: pass lighthouse audit
 // todo: write docs
 // todo: try branch with nextjs/pwa
-// todo: storybook?
 // todo: add favico
 // todo: preconnect to coin360.com domain
 // DOCS
@@ -15,19 +13,20 @@
 // - Singleton Pattern for repositories to avoid creating new instances in each rerender
 // Quality control:
 // - Linting
+// - Prettier (Code Formatting)
 // - Unit tests
 // - E2E tests
 // - TypeScript
 // - Lighthouse audit
+// todo: possible improvements: implement service worker for progressive web application
 // todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
 // todo: improvements use storybooks for components
-// todo: use dynamic imports with some mui components to improve performance
+// todo: possible improvements: improve performance using dynamic imports with some mui components to improve performance
 // todo: possible improvements: allow user to choose reference currency
-// todo: back button in custom period page
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
-import { useRepository } from '@crypto-values/react-query-crud'
+import { IRepository, useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable'
@@ -52,13 +51,24 @@ import { FormControlLabel } from '@mui/material'
 import { useIsFetching } from 'react-query'
 import styles from './period.module.css'
 import Loader from '../../components/Loader'
+import { ICurrency } from '../../models/currency/ICurrency'
 
-export default function Period({ period, table_dimension }) {
-  const currenciesRepository = new CurrenciesRepository()
+export default function Period({
+  period,
+  table_dimension,
+  currenciesRepository = new CurrenciesRepository(),
+}: {
+  period: string
+  table_dimension: number
+  currenciesRepository: IRepository<ICurrency, unknown>
+}) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(period)
-  const table = createRatiosMatrix(currenciesDataList, +table_dimension)
+  const table = createRatiosMatrix(
+    currenciesDataList as ICurrency[],
+    +table_dimension
+  )
 
   const [isOpenSelectPeriodDialog, setIsOpenSelectPeriodDialog] =
     useState<boolean>(false)
@@ -96,7 +106,7 @@ export default function Period({ period, table_dimension }) {
   }
 
   const onToggleRefetchInterval = () =>
-    refetchInterval === 0 ? setRefetchInterval(5000) : setRefetchInterval(0)
+    refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
 
   if (isLoading) return <Loader />
 
