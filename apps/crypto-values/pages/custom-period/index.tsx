@@ -28,7 +28,7 @@ export default function CustomPeriod({
 
   if (isLoading) return <>Loading...</>
 
-  if (error) return <>`An error has occurred: ${(error as Error).message}`</>
+  if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
 
   return (
     <>

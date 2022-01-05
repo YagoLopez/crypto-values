@@ -1,4 +1,3 @@
-// todo: add cypress tests
 // todo: pass repository as prop to component to decouple
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
 // todo: fix diagonal 1 problem
@@ -102,7 +101,7 @@ export default function Period({ period, table_dimension }) {
 
   if (isLoading) return <>Loading...</>
 
-  if (error) return <>`An error has occurred: ${(error as Error).message}`</>
+  if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
 
   return (
     <>
