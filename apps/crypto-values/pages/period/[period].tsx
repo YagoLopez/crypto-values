@@ -53,7 +53,7 @@ import styles from './period.module.css'
 import Loader from '../../components/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 
-export default function Period({
+export default function PeriodPage({
   period,
   table_dimension,
   currenciesRepository = new CurrenciesRepository(),

@@ -1,30 +1,18 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import Period from '../pages/period/[period]'
+import CustomPeriodPage from '../pages/custom-period/index'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
 
-describe('Test Period Page', () => {
-  it('should render ok with table dimension equals to 6', () => {
+describe('Test CustomPeriod Page', () => {
+  it('should render successfully', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>
-        <Period
-          period={'24h'}
-          table_dimension={6}
+        <CustomPeriodPage
           currenciesRepository={new MockCurrenciesRepository()}
-        />
-      </QueryClientProvider>
-    )
-    expect(baseElement).toBeTruthy()
-  })
-
-  it('should render ok with table dimension equals to undefined', () => {
-    const { baseElement } = render(
-      <QueryClientProvider client={new QueryClient()}>
-        <Period
-          period={'24h'}
+          start_date={1610443814}
+          end_date={1624613414}
           table_dimension={undefined}
-          currenciesRepository={new MockCurrenciesRepository()}
         />
       </QueryClientProvider>
     )
@@ -35,15 +23,17 @@ describe('Test Period Page', () => {
     try {
       render(
         <QueryClientProvider client={new QueryClient()}>
-          <Period
-            period={'24h'}
-            table_dimension={undefined}
+          <CustomPeriodPage
             currenciesRepository={null}
+            start_date={1610443814}
+            end_date={1624613414}
+            table_dimension={undefined}
           />
         </QueryClientProvider>
       )
       expect(true).toBe(false)
     } catch (e) {
+      console.log('TESTING FORCED EXCEPTION')
       expect(e.message).toBe("Cannot read property 'name' of null")
     }
   })

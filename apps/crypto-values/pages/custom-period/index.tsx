@@ -6,7 +6,7 @@ import GridTable from '../../components/GridTable'
 import Loader from '../../components/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 
-export default function CustomPeriod({
+export default function CustomPeriodPage({
   start_date,
   end_date,
   table_dimension,
