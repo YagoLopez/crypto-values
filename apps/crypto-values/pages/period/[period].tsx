@@ -1,5 +1,5 @@
-// todo: pass repository as prop to component to decouple
 // improve ui design, better responsiveness on mobile devices for example make fonts smaller
+// todo: pass repository as prop to component to decouple
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
 // todo: pass lint
@@ -8,9 +8,7 @@
 // todo: try branch with nextjs/pwa
 // todo: storybook?
 // todo: add favico
-// todo: add number of rowns and columns as info
 // todo: preconnect to coin360.com domain
-// todo: add currency choosable
 // DOCS
 // react query as async server state manager
 // - Data Abstraction Layer using Repository Pattern
@@ -108,30 +106,41 @@ export default function Period({ period, table_dimension }) {
       <div className={[styles.maincontainer, 'scale-in-ver-center'].join(' ')}>
         <div>
           <Button
+            className={styles.selectbtn}
             variant="contained"
             color="secondary"
             onClick={onClickSelectPeriodBtn}
             startIcon={<MoreTime />}
           >
-            Select period
+            Select Period
           </Button>
           <LocalizationProvider dateAdapter={DateFnsAdapter}>
             <DatePicker
               label="Start Date"
               value={startDate}
               onChange={onChangeStartDate}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField
+                  size="small"
+                  className={styles.inputdate}
+                  {...params}
+                />
+              )}
             />
             <DatePicker
               label="End Date"
               value={endDate}
               onChange={onChangeEndDate}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField
+                  size="small"
+                  className={styles.inputdate}
+                  {...params}
+                />
+              )}
             />
           </LocalizationProvider>
         </div>
-
-        <br />
 
         <div>
           <FormControlLabel
