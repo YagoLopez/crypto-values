@@ -51,22 +51,29 @@ import { useIsFetching } from 'react-query'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
-import { CurrenciesRepository } from "../../models/currency/repositories/CurrenciesRepository";
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 
-interface IPeriodPage {
-  time: string
-  table_dimension: number
-  currenciesRepository: IRepository<ICurrency, unknown>
-}
+// interface IPeriodPage {
+//   time: string
+//   table_dimension: number
+//   currenciesRepository?: IRepository<ICurrency, unknown>
+// }
 
-export default function Page({
-  time = '24h',
-  table_dimension = undefined,
-}: IPeriodPage) {
+// interface IPeriodPage {
+//   currenciesRepository?: IRepository<ICurrency, unknown>
+// }
+
+export default function Page() {
+  const router = useRouter()
+  const { time, table_dimension } = router.query
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
-  const { data: currenciesDataList, isLoading, error } = useGetList(time)
+  const {
+    data: currenciesDataList,
+    isLoading,
+    error,
+  } = useGetList(time as string)
   const table = createRatiosMatrix(
     currenciesDataList as ICurrency[],
     +table_dimension
@@ -76,14 +83,13 @@ export default function Page({
     useState<boolean>(false)
   const [startDate, setStartDate] = useState<string>(null)
   const [endDate, setEndDate] = useState<string>(null)
-  const router = useRouter()
   const isBackgroundFetching = useIsFetching()
   const isRefetchActive = refetchInterval !== 0
 
-  logTableToConsole(table, table_dimension)
+  logTableToConsole(table, +table_dimension)
 
   const onChangePeriod = (e: SelectChangeEvent<typeof time>) =>
-    void router.push(`/period/${e.target.value}`)
+    void router.push(`/mock-data/${e.target.value}`)
 
   const onClickSelectPeriodBtn = () => setIsOpenSelectPeriodDialog(true)
 
@@ -211,14 +217,14 @@ export default function Page({
   )
 }
 
-export async function getServerSideProps({ query }) {
-  const { time, table_dimensions } = query
-  // todo: remove
-  console.log(time);
-  return {
-    props: {
-      time: time ?? '24h',
-      table_dimension: table_dimensions ?? null,
-    },
-  }
-}
+// export async function getServerSideProps({ query }) {
+//   const { time, table_dimensions } = query
+//   // todo: remove
+//   console.log(time);
+//   return {
+//     props: {
+//       time: time ?? '24h',
+//       table_dimension: table_dimensions ?? null,
+//     },
+//   }
+// }
