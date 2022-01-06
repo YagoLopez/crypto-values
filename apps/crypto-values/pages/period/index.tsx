@@ -84,7 +84,7 @@ export default function Period({
   logTableToConsole(table, table_dimension)
 
   const onChangePeriod = (e: SelectChangeEvent<typeof time>) =>
-    void router.push(`/period/${e.target.value}`)
+    void router.push(`/period?time=${e.target.value}`)
 
   const onClickSelectPeriodBtn = () => setIsOpenSelectPeriodDialog(true)
 
@@ -221,12 +221,13 @@ export default function Period({
 }
 
 export async function getServerSideProps({ query }) {
-  const { time } = query
+  const { time, table_dimensions } = query
+  // todo: remove
   console.log('time', time)
   return {
     props: {
-      time,
-      table_dimension: 6,
+      time: time ?? '24h',
+      table_dimension: table_dimensions ?? null,
     },
   }
 }
