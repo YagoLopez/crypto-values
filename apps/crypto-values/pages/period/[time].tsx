@@ -27,7 +27,7 @@
 
 import { SyntheticEvent, useState } from 'react'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
-import { IRepository, useRepository } from '@crypto-values/react-query-crud'
+import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable/GridTable'
@@ -52,19 +52,16 @@ import { useIsFetching } from 'react-query'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
+import styles from './Period.module.css'
 
 interface IPeriodPage {
   time: string
   table_dimension: number
-  currenciesRepository: IRepository<ICurrency, unknown>
 }
 
-export default function Period({
-  time,
-  table_dimension,
-  currenciesRepository = new CurrenciesRepository(),
-}: IPeriodPage) {
+export default function Period({ time, table_dimension }: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(time)
   const table = createRatiosMatrix(
@@ -125,10 +122,10 @@ export default function Period({
 
   return (
     <>
-      <div className="maincontainer">
+      <div className={styles.maincontainer}>
         <div>
           <Button
-            className="selectbtn"
+            className={styles.selectbtn}
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -141,7 +138,11 @@ export default function Period({
               value={startDate}
               onChange={onChangeStartDate}
               renderInput={(params) => (
-                <TextField size="small" className="inputdate" {...params} />
+                <TextField
+                  size="small"
+                  className={styles.inputdate}
+                  {...params}
+                />
               )}
             />
             <DatePicker
@@ -149,7 +150,11 @@ export default function Period({
               value={endDate}
               onChange={onChangeEndDate}
               renderInput={(params) => (
-                <TextField size="small" className="inputdate" {...params} />
+                <TextField
+                  size="small"
+                  className={styles.inputdate}
+                  {...params}
+                />
               )}
             />
           </LocalizationProvider>
@@ -204,7 +209,7 @@ export default function Period({
         </Dialog>
       </div>
 
-      <div className="tablecontainer">
+      <div className={styles.tablecontainer}>
         <GridTable tableData={table} />
       </div>
     </>
