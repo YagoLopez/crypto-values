@@ -52,6 +52,7 @@ import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
+import styles from './Period.module.css'
 
 // interface IPeriodPage {
 //   time: string
@@ -131,10 +132,10 @@ export default function Page() {
 
   return (
     <>
-      <div className="maincontainer">
+      <div className={styles.maincontainer}>
         <div>
           <Button
-            className="selectbtn"
+            className={styles.selectbtn}
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -147,7 +148,11 @@ export default function Page() {
               value={startDate}
               onChange={onChangeStartDate}
               renderInput={(params) => (
-                <TextField size="small" className="inputdate" {...params} />
+                <TextField
+                  size="small"
+                  className={styles.inputdate}
+                  {...params}
+                />
               )}
             />
             <DatePicker
@@ -155,7 +160,11 @@ export default function Page() {
               value={endDate}
               onChange={onChangeEndDate}
               renderInput={(params) => (
-                <TextField size="small" className="inputdate" {...params} />
+                <TextField
+                  size="small"
+                  className={styles.inputdate}
+                  {...params}
+                />
               )}
             />
           </LocalizationProvider>
@@ -210,7 +219,7 @@ export default function Page() {
         </Dialog>
       </div>
 
-      <div className="tablecontainer">
+      <div className={styles.tablecontainer}>
         <GridTable tableData={table} />
       </div>
     </>

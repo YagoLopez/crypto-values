@@ -122,10 +122,10 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
 
   return (
     <>
-      <div className={styles.maincontainer}>
+      <div className={styles.mainContainer}>
         <div>
           <Button
-            className={styles.selectbtn}
+            className={styles.selectBtn}
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -140,7 +140,7 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
               renderInput={(params) => (
                 <TextField
                   size="small"
-                  className={styles.inputdate}
+                  className={styles.inputDate}
                   {...params}
                 />
               )}
@@ -152,7 +152,7 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
               renderInput={(params) => (
                 <TextField
                   size="small"
-                  className={styles.inputdate}
+                  className={styles.inputDate}
                   {...params}
                 />
               )}
@@ -209,7 +209,7 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
         </Dialog>
       </div>
 
-      <div className={styles.tablecontainer}>
+      <div className={styles.tableContainer}>
         <GridTable tableData={table} />
       </div>
     </>
