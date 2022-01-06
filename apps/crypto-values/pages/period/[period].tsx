@@ -41,7 +41,6 @@ import InputLabel from '@mui/material/InputLabel'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { MoreTime } from '@mui/icons-material'
 import TextField from '@mui/material/TextField'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
@@ -58,12 +57,15 @@ import AvTimerIcon from '@mui/icons-material/AvTimer'
 interface IPeriodPage {
   period: string
   table_dimension: number
-  currenciesRepository?: IRepository<ICurrency, unknown>
+  currenciesRepository: IRepository<ICurrency, unknown>
 }
 
-export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
+export default function PeriodPage({
+  period,
+  table_dimension,
+  currenciesRepository = new CurrenciesRepository(),
+}: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(period)
   const table = createRatiosMatrix(
@@ -124,7 +126,6 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
 
   return (
     <>
-
       <div className={styles.maincontainer}>
         <div>
           <Button
@@ -212,7 +213,6 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
         </Dialog>
       </div>
 
-
       <div className={styles.tablecontainer}>
         <GridTable tableData={table} />
       </div>
@@ -220,12 +220,12 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
   )
 }
 
-// export async function getServerSideProps({ query }) {
-//   const { period, table_dimension } = query
-//   return {
-//     props: {
-//       period,
-//       table_dimension: table_dimension ?? null,
-//     },
-//   }
-// }
+export async function getServerSideProps({ query }) {
+  const { period } = query
+  return {
+    props: {
+      period,
+      table_dimension: 6,
+    },
+  }
+}
