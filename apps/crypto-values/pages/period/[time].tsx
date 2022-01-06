@@ -60,7 +60,7 @@ interface IPeriodPage {
   currenciesRepository: IRepository<ICurrency, unknown>
 }
 
-export default function PeriodPage({
+export default function Period({
   time,
   table_dimension,
   currenciesRepository = new CurrenciesRepository(),
