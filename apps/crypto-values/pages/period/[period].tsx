@@ -100,7 +100,7 @@ export default function PeriodPage({
 
   const onChangeStartDate = (newDateValue: string) => setStartDate(newDateValue)
 
-  const onChangeEndDate = (newDateValue) => {
+  const onChangeEndDate = (newDateValue: string) => {
     setEndDate(newDateValue)
     const startTimestamp = getTimestampFromDate(`${startDate}`)
     const endTimestamp = getTimestampFromDate(`${newDateValue}`)
@@ -112,7 +112,7 @@ export default function PeriodPage({
   const onToggleRefetchInterval = () =>
     refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
 
-  const getRTtextStyle = (isRefetchActive: boolean) => {
+  const getSwitchtextStyle = (isRefetchActive: boolean) => {
     if (isBackgroundFetching) {
       return { background: 'cyan' }
     }
@@ -176,7 +176,7 @@ export default function PeriodPage({
               />
             }
             label={
-              <div style={getRTtextStyle(isRefetchActive)}>Real Time Data</div>
+              <div style={getSwitchtextStyle(isRefetchActive)}>Real Time Data</div>
             }
           />
         </div>
