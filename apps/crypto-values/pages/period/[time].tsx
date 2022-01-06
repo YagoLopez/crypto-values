@@ -49,7 +49,6 @@ import { getTimestampFromDate } from '../../utils/dates'
 import Switch from '@mui/material/Switch'
 import { FormControlLabel } from '@mui/material'
 import { useIsFetching } from 'react-query'
-import styles from './period.module.css'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
@@ -126,10 +125,10 @@ export default function Period({
 
   return (
     <>
-      <div className={styles.maincontainer}>
+      <div className="maincontainer">
         <div>
           <Button
-            className={styles.selectbtn}
+            className="selectbtn"
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -142,11 +141,7 @@ export default function Period({
               value={startDate}
               onChange={onChangeStartDate}
               renderInput={(params) => (
-                <TextField
-                  size="small"
-                  className={styles.inputdate}
-                  {...params}
-                />
+                <TextField size="small" className="inputdate" {...params} />
               )}
             />
             <DatePicker
@@ -154,11 +149,7 @@ export default function Period({
               value={endDate}
               onChange={onChangeEndDate}
               renderInput={(params) => (
-                <TextField
-                  size="small"
-                  className={styles.inputdate}
-                  {...params}
-                />
+                <TextField size="small" className="inputdate" {...params} />
               )}
             />
           </LocalizationProvider>
@@ -213,7 +204,7 @@ export default function Period({
         </Dialog>
       </div>
 
-      <div className={styles.tablecontainer}>
+      <div className="tablecontainer">
         <GridTable tableData={table} />
       </div>
     </>

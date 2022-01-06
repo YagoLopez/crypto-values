@@ -116,7 +116,7 @@ export default function GridTable({ tableData }) {
         )}
       </AutoSizer>
       <Button
-        className={styles.selectbtn}
+        className={styles.resetbtn}
         variant="contained"
         color="primary"
         onClick={onResetScroll}
