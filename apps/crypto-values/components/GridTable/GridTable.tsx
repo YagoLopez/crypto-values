@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { AutoSizer, MultiGrid } from 'react-virtualized'
 import styles from './gridtable.module.css'
 
@@ -46,16 +46,22 @@ export const getCellStyle = (value: number): Record<string, string> => {
 
 export default function GridTable({ tableData }) {
   const dimension = tableData?.length
-  const [state, setStateValues] = useState({
+  const [state] = useState({
     fixedColumnCount: 1,
     fixedRowCount: 1,
     scrollToColumn: 0,
     scrollToRow: 0,
   })
+  const gridRef = useRef(null)
 
   const onResetScroll = () => {
-    // todo: review
-    return null
+    gridRef.current.setState((prevState) => {
+      return {
+        ...prevState,
+        scrollLeft: 0,
+        scrollTop: 0,
+      }
+    })
   }
 
   const _cellRenderer = ({ columnIndex: j, key, rowIndex: i, style }) => (
@@ -87,6 +93,7 @@ export default function GridTable({ tableData }) {
       <AutoSizer disableHeight>
         {({ width }) => (
           <MultiGrid
+            ref={gridRef}
             {...state}
             cellRenderer={_cellRenderer}
             columnWidth={75}
