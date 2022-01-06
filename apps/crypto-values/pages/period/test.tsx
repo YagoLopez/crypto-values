@@ -124,7 +124,6 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
 
   return (
     <>
-      {/*
       <div className={styles.maincontainer}>
         <div>
           <Button
@@ -211,7 +210,6 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
           </DialogActions>
         </Dialog>
       </div>
-*/}
 
       <div className={styles.tablecontainer}>
         <GridTable tableData={table} />
@@ -220,12 +218,12 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
   )
 }
 
-// export async function getServerSideProps({ query }) {
-//   const { period, table_dimension } = query
-//   return {
-//     props: {
-//       period,
-//       table_dimension: table_dimension ?? null,
-//     },
-//   }
-// }
+export async function getServerSideProps({ query }) {
+  const { period, table_dimension } = query
+  return {
+    props: {
+      period,
+      table_dimension: table_dimension ?? null,
+    },
+  }
+}

@@ -124,7 +124,7 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
 
   return (
     <>
-      {/*
+
       <div className={styles.maincontainer}>
         <div>
           <Button
@@ -211,7 +211,7 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
           </DialogActions>
         </Dialog>
       </div>
-*/}
+
 
       <div className={styles.tablecontainer}>
         <GridTable tableData={table} />
