@@ -30,6 +30,7 @@ import { IRepository, useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable/GridTable'
+import { MockCurrenciesRepository } from '../../models/currency/repositories/MockCurrenciesRepository'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -51,24 +52,18 @@ import { useIsFetching } from 'react-query'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
-import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
-import styles from './Period.module.css'
+import { styles } from './styles'
 
-// interface IPeriodPage {
-//   time: string
-//   table_dimension: number
-//   currenciesRepository?: IRepository<ICurrency, unknown>
-// }
+interface IPeriodPage {
+  currenciesRepository?: IRepository<ICurrency, unknown>
+}
 
-// interface IPeriodPage {
-//   currenciesRepository?: IRepository<ICurrency, unknown>
-// }
-
-export default function Page() {
+export default function Period({
+  currenciesRepository = new MockCurrenciesRepository(),
+}: IPeriodPage) {
   const router = useRouter()
   const { time, table_dimension } = router.query
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const {
     data: currenciesDataList,
@@ -132,10 +127,10 @@ export default function Page() {
 
   return (
     <>
-      <div className={styles.maincontainer}>
+      <div style={styles.mainContainer}>
         <div>
           <Button
-            className={styles.selectbtn}
+            style={styles.selectBtn}
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -148,11 +143,7 @@ export default function Page() {
               value={startDate}
               onChange={onChangeStartDate}
               renderInput={(params) => (
-                <TextField
-                  size="small"
-                  className={styles.inputdate}
-                  {...params}
-                />
+                <TextField size="small" style={styles.inputDate} {...params} />
               )}
             />
             <DatePicker
@@ -160,11 +151,7 @@ export default function Page() {
               value={endDate}
               onChange={onChangeEndDate}
               renderInput={(params) => (
-                <TextField
-                  size="small"
-                  className={styles.inputdate}
-                  {...params}
-                />
+                <TextField size="small" style={styles.inputDate} {...params} />
               )}
             />
           </LocalizationProvider>
@@ -219,21 +206,9 @@ export default function Page() {
         </Dialog>
       </div>
 
-      <div className={styles.tablecontainer}>
+      <div style={styles.tableContainer}>
         <GridTable tableData={table} />
       </div>
     </>
   )
 }
-
-// export async function getServerSideProps({ query }) {
-//   const { time, table_dimensions } = query
-//   // todo: remove
-//   console.log(time);
-//   return {
-//     props: {
-//       time: time ?? '24h',
-//       table_dimension: table_dimensions ?? null,
-//     },
-//   }
-// }

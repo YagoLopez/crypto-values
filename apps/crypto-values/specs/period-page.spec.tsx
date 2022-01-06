@@ -1,8 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import Period from '../pages/period/[time]'
+// todo: review
+// import Period from '../pages/period/[time]'
+import Period from '../pages/mock-data/[time]'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
+jest.mock('next/router', () => require('next-router-mock'))
 
 describe('Test Period Page', () => {
   console.log = jest.fn()
@@ -11,24 +14,7 @@ describe('Test Period Page', () => {
   it('should render ok with table dimension equals to 6', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>
-        <Period
-          time={'24h'}
-          table_dimension={6}
-          currenciesRepository={new MockCurrenciesRepository()}
-        />
-      </QueryClientProvider>
-    )
-    expect(baseElement).toBeTruthy()
-  })
-
-  it('should render ok with table dimension equals to undefined', () => {
-    const { baseElement } = render(
-      <QueryClientProvider client={new QueryClient()}>
-        <Period
-          time={'24h'}
-          table_dimension={undefined}
-          currenciesRepository={new MockCurrenciesRepository()}
-        />
+        <Period currenciesRepository={new MockCurrenciesRepository()} />
       </QueryClientProvider>
     )
     expect(baseElement).toBeTruthy()
@@ -38,11 +24,7 @@ describe('Test Period Page', () => {
     try {
       render(
         <QueryClientProvider client={new QueryClient()}>
-          <Period
-            time={'24h'}
-            table_dimension={undefined}
-            currenciesRepository={null}
-          />
+          <Period currenciesRepository={null} />
         </QueryClientProvider>
       )
       expect(true).toBe(false)
