@@ -211,12 +211,14 @@ export default function Page({
   )
 }
 
-// export async function getServerSideProps({ query }) {
-//   const { time, table_dimensions } = query
-//   return {
-//     props: {
-//       time: time ?? '24h',
-//       table_dimension: table_dimensions ?? null,
-//     },
-//   }
-// }
+export async function getServerSideProps({ query }) {
+  const { time, table_dimensions } = query
+  // todo: remove
+  console.log(time);
+  return {
+    props: {
+      time: time ?? '24h',
+      table_dimension: table_dimensions ?? null,
+    },
+  }
+}
