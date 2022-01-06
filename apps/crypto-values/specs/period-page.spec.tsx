@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import PeriodPage from '../pages/period/[period]'
+import PeriodPage from '../pages/period/[time]'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
 
@@ -12,7 +12,7 @@ describe('Test Period Page', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>
         <PeriodPage
-          period={'24h'}
+          time={'24h'}
           table_dimension={6}
           currenciesRepository={new MockCurrenciesRepository()}
         />
@@ -25,7 +25,7 @@ describe('Test Period Page', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>
         <PeriodPage
-          period={'24h'}
+          time={'24h'}
           table_dimension={undefined}
           currenciesRepository={new MockCurrenciesRepository()}
         />
@@ -39,7 +39,7 @@ describe('Test Period Page', () => {
       render(
         <QueryClientProvider client={new QueryClient()}>
           <PeriodPage
-            period={'24h'}
+            time={'24h'}
             table_dimension={undefined}
             currenciesRepository={null}
           />

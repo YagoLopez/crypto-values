@@ -55,19 +55,19 @@ import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 
 interface IPeriodPage {
-  period: string
+  time: string
   table_dimension: number
   currenciesRepository: IRepository<ICurrency, unknown>
 }
 
 export default function PeriodPage({
-  period,
+  time,
   table_dimension,
   currenciesRepository = new CurrenciesRepository(),
 }: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
-  const { data: currenciesDataList, isLoading, error } = useGetList(period)
+  const { data: currenciesDataList, isLoading, error } = useGetList(time)
   const table = createRatiosMatrix(
     currenciesDataList as ICurrency[],
     +table_dimension
@@ -83,7 +83,7 @@ export default function PeriodPage({
 
   logTableToConsole(table, table_dimension)
 
-  const onChangePeriod = (e: SelectChangeEvent<typeof period>) =>
+  const onChangePeriod = (e: SelectChangeEvent<typeof time>) =>
     void router.push(`/period/${e.target.value}`)
 
   const onClickSelectPeriodBtn = () => setIsOpenSelectPeriodDialog(true)
@@ -191,12 +191,12 @@ export default function PeriodPage({
           <DialogContent>
             <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel htmlFor="period">Period</InputLabel>
+                <InputLabel htmlFor="time">Period</InputLabel>
                 <Select
                   native
-                  value={period}
+                  value={time}
                   onChange={onChangePeriod}
-                  input={<OutlinedInput label="Period" id="period" />}
+                  input={<OutlinedInput label="Period" id="time" />}
                 >
                   <option aria-label="None" value="" />
                   <option value={'1h'}>1 hour</option>
@@ -221,10 +221,11 @@ export default function PeriodPage({
 }
 
 export async function getServerSideProps({ query }) {
-  const { period } = query
+  const { time } = query
+  console.log('time', time)
   return {
     props: {
-      period,
+      time,
       table_dimension: 6,
     },
   }
