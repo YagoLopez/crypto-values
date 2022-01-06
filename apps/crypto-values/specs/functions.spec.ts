@@ -5,11 +5,13 @@ import {
 } from '../utils/functions'
 import { MOCK_DATA } from '../utils/mock-data'
 import { getCellStyle } from '../components/GridTable/GridTable'
-// import MOCK_JSON from '../pages/api/mock-data/db.json'
 
 const { data: currenciesList } = MOCK_DATA
 
 describe('Test utility fns', () => {
+  console.log = jest.fn()
+  console.error = jest.fn()
+
   describe('Test createEmptyMatrix()', () => {
     it('Dimension 0', () => {
       expect(createEmptyMatrix(0)).toEqual([])

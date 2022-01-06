@@ -58,15 +58,12 @@ import AvTimerIcon from '@mui/icons-material/AvTimer'
 interface IPeriodPage {
   period: string
   table_dimension: number
-  currenciesRepository: IRepository<ICurrency, unknown>
+  currenciesRepository?: IRepository<ICurrency, unknown>
 }
 
-export default function PeriodPage({
-  period,
-  table_dimension,
-  currenciesRepository = new CurrenciesRepository(),
-}: IPeriodPage) {
+export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(period)
   const table = createRatiosMatrix(
@@ -127,6 +124,7 @@ export default function PeriodPage({
 
   return (
     <>
+{/*
       <div className={styles.maincontainer}>
         <div>
           <Button
@@ -213,6 +211,7 @@ export default function PeriodPage({
           </DialogActions>
         </Dialog>
       </div>
+*/}
 
       <div className={styles.tablecontainer}>
         <GridTable tableData={table} />

@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
 
 describe('Test Period Page', () => {
+  console.log = jest.fn()
+  console.error = jest.fn()
+
   it('should render ok with table dimension equals to 6', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>

@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
 
 describe('Test CustomPeriod Page', () => {
+  console.log = jest.fn()
+  console.error = jest.fn()
+
   it('should render successfully', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>
