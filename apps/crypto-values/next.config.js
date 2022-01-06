@@ -8,15 +8,15 @@ const nextConfig = {
   nx: {
     svgr: false,
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/period/24h',
-  //       permanent: true,
-  //     },
-  //   ]
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/period/24h',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = withNx(nextConfig)

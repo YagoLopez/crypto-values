@@ -26,7 +26,6 @@
 // todo: try branch with nextjs/pwa
 
 import { SyntheticEvent, useState } from 'react'
-import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { IRepository, useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
@@ -53,6 +52,7 @@ import styles from './period.module.css'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
+import { MockCurrenciesRepository } from '../../models/currency/repositories/MockCurrenciesRepository'
 
 interface IPeriodPage {
   time: string
@@ -60,10 +60,10 @@ interface IPeriodPage {
   currenciesRepository: IRepository<ICurrency, unknown>
 }
 
-export default function Period({
+export default function Page({
   time,
   table_dimension,
-  currenciesRepository = new CurrenciesRepository(),
+  currenciesRepository = new MockCurrenciesRepository(),
 }: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
@@ -84,7 +84,7 @@ export default function Period({
   logTableToConsole(table, table_dimension)
 
   const onChangePeriod = (e: SelectChangeEvent<typeof time>) =>
-    void router.push(`/period?time=${e.target.value}`)
+    void router.push(`/period/${e.target.value}`)
 
   const onClickSelectPeriodBtn = () => setIsOpenSelectPeriodDialog(true)
 
@@ -222,8 +222,6 @@ export default function Period({
 
 export async function getServerSideProps({ query }) {
   const { time, table_dimensions } = query
-  // todo: remove
-  console.log('time', time)
   return {
     props: {
       time: time ?? '24h',

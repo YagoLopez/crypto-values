@@ -41,7 +41,6 @@ import InputLabel from '@mui/material/InputLabel'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { MoreTime } from '@mui/icons-material'
 import TextField from '@mui/material/TextField'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
@@ -56,16 +55,19 @@ import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 
 interface IPeriodPage {
-  period: string
+  time: string
   table_dimension: number
-  currenciesRepository?: IRepository<ICurrency, unknown>
+  currenciesRepository: IRepository<ICurrency, unknown>
 }
 
-export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
+export default function Period({
+  time,
+  table_dimension,
+  currenciesRepository = new CurrenciesRepository(),
+}: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
-  const { data: currenciesDataList, isLoading, error } = useGetList(period)
+  const { data: currenciesDataList, isLoading, error } = useGetList(time)
   const table = createRatiosMatrix(
     currenciesDataList as ICurrency[],
     +table_dimension
@@ -81,7 +83,7 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
 
   logTableToConsole(table, table_dimension)
 
-  const onChangePeriod = (e: SelectChangeEvent<typeof period>) =>
+  const onChangePeriod = (e: SelectChangeEvent<typeof time>) =>
     void router.push(`/period/${e.target.value}`)
 
   const onClickSelectPeriodBtn = () => setIsOpenSelectPeriodDialog(true)
@@ -189,12 +191,12 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
           <DialogContent>
             <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel htmlFor="period">Period</InputLabel>
+                <InputLabel htmlFor="time">Period</InputLabel>
                 <Select
                   native
-                  value={period}
+                  value={time}
                   onChange={onChangePeriod}
-                  input={<OutlinedInput label="Period" id="period" />}
+                  input={<OutlinedInput label="Period" id="time" />}
                 >
                   <option aria-label="None" value="" />
                   <option value={'1h'}>1 hour</option>
@@ -219,11 +221,11 @@ export default function PeriodPage({ period, table_dimension }: IPeriodPage) {
 }
 
 export async function getServerSideProps({ query }) {
-  const { period, table_dimension } = query
+  const { time, table_dimensions } = query
   return {
     props: {
-      period,
-      table_dimension: table_dimension ?? null,
+      time: time ?? '24h',
+      table_dimension: table_dimensions ?? null,
     },
   }
 }
