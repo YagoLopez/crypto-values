@@ -52,7 +52,31 @@ import { useIsFetching } from 'react-query'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
-import { styles } from './styles'
+
+// Material UI does not allow applying styles as usual in Nextjs
+// https://mui.com/customization/how-to-customize/
+const selectBtn = {
+  height: '36px',
+  width: '150px',
+  marginLeft: '5px',
+  marginRight: '5px',
+  marginTop: '15px',
+}
+
+const tableContainer = {
+  margin: '0.1em',
+}
+
+const mainContainer = {
+  textAlign: 'center' as const,
+}
+
+const inputDate = {
+  width: '140px',
+  marginLeft: '5px',
+  marginRight: '5px',
+  marginTop: '15px',
+}
 
 interface IPeriodPage {
   currenciesRepository?: IRepository<ICurrency, unknown>
@@ -127,10 +151,10 @@ export default function Period({
 
   return (
     <>
-      <div style={styles.mainContainer}>
+      <div style={mainContainer}>
         <div>
           <Button
-            style={styles.selectBtn}
+            style={selectBtn}
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -143,7 +167,7 @@ export default function Period({
               value={startDate}
               onChange={onChangeStartDate}
               renderInput={(params) => (
-                <TextField size="small" style={styles.inputDate} {...params} />
+                <TextField size="small" style={inputDate} {...params} />
               )}
             />
             <DatePicker
@@ -151,7 +175,7 @@ export default function Period({
               value={endDate}
               onChange={onChangeEndDate}
               renderInput={(params) => (
-                <TextField size="small" style={styles.inputDate} {...params} />
+                <TextField size="small" style={inputDate} {...params} />
               )}
             />
           </LocalizationProvider>
@@ -206,7 +230,7 @@ export default function Period({
         </Dialog>
       </div>
 
-      <div style={styles.tableContainer}>
+      <div style={tableContainer}>
         <GridTable tableData={table} />
       </div>
     </>
