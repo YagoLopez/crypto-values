@@ -1,0 +1,22 @@
+.tablecontainer {
+  margin: 0.1em;
+}
+
+.maincontainer {
+  text-align: center;
+}
+
+.selectbtn {
+  height: 36px;
+  width: 150px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 15px;
+}
+
+.inputdate {
+  width: 140px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 15px;
+}

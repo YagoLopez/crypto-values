@@ -51,7 +51,7 @@ import { useIsFetching } from 'react-query'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
-import { MockCurrenciesRepository } from '../../models/currency/repositories/MockCurrenciesRepository'
+import { CurrenciesRepository } from "../../models/currency/repositories/CurrenciesRepository";
 
 interface IPeriodPage {
   time: string
@@ -64,7 +64,7 @@ export default function Page({
   table_dimension = undefined,
 }: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const currenciesRepository = new MockCurrenciesRepository()
+  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(time)
   const table = createRatiosMatrix(
