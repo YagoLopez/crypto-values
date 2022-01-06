@@ -61,11 +61,11 @@ interface IPeriodPage {
 }
 
 export default function Page({
-  time,
-  table_dimension,
-  currenciesRepository = new MockCurrenciesRepository(),
+  time = '24h',
+  table_dimension = undefined,
 }: IPeriodPage) {
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
+  const currenciesRepository = new MockCurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
   const { data: currenciesDataList, isLoading, error } = useGetList(time)
   const table = createRatiosMatrix(
@@ -220,12 +220,12 @@ export default function Page({
   )
 }
 
-export async function getServerSideProps({ query }) {
-  const { time, table_dimensions } = query
-  return {
-    props: {
-      time: time ?? '24h',
-      table_dimension: table_dimensions ?? null,
-    },
-  }
-}
+// export async function getServerSideProps({ query }) {
+//   const { time, table_dimensions } = query
+//   return {
+//     props: {
+//       time: time ?? '24h',
+//       table_dimension: table_dimensions ?? null,
+//     },
+//   }
+// }
