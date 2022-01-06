@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { AutoSizer, MultiGrid } from 'react-virtualized'
 import styles from './gridtable.module.css'
+import Button from '@mui/material/Button'
+import SyncIcon from '@mui/icons-material/Sync'
 
 const TABLE_STYLE = {
   border: '1px solid #ddd',
@@ -46,13 +48,13 @@ export const getCellStyle = (value: number): Record<string, string> => {
 
 export default function GridTable({ tableData }) {
   const dimension = tableData?.length
+  const gridRef = useRef(null)
   const [state] = useState({
     fixedColumnCount: 1,
     fixedRowCount: 1,
     scrollToColumn: 0,
     scrollToRow: 0,
   })
-  const gridRef = useRef(null)
 
   const onResetScroll = () => {
     gridRef.current.setState((prevState) => {
@@ -83,7 +85,6 @@ export default function GridTable({ tableData }) {
           <div className={styles.ch}>{tableData[i][j].ch}</div>
         </div>
       )}
-
       {i !== 0 && j !== 0 && <div>{tableData[i][j]}</div>}
     </div>
   )
@@ -114,7 +115,15 @@ export default function GridTable({ tableData }) {
           />
         )}
       </AutoSizer>
-      <button onClick={onResetScroll}>Reset Scroll Bars</button>
+      <Button
+        className={styles.selectbtn}
+        variant="contained"
+        color="primary"
+        onClick={onResetScroll}
+        startIcon={<SyncIcon />}
+      >
+        Reset Scroll Bars
+      </Button>
     </div>
   )
 }

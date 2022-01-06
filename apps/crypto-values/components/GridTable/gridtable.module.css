@@ -13,3 +13,8 @@
 .ch {
   font-size: x-small;
 }
+
+.selectbtn {
+  height: 36px;
+  margin: 15px;
+}

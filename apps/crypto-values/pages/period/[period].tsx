@@ -1,4 +1,3 @@
-// todo: fix reset scrollbars
 // todo: pass lighthouse audit
 // todo: fix diagonal 1 problem
 // todo: use useCallback for user events
@@ -54,6 +53,7 @@ import { useIsFetching } from 'react-query'
 import styles from './period.module.css'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
+import AvTimerIcon from '@mui/icons-material/AvTimer'
 
 interface IPeriodPage {
   period: string
@@ -131,10 +131,9 @@ export default function PeriodPage({
         <div>
           <Button
             className={styles.selectbtn}
-            variant="contained"
-            color="secondary"
+            variant="outlined"
             onClick={onClickSelectPeriodBtn}
-            startIcon={<MoreTime />}
+            startIcon={<AvTimerIcon />}
           >
             Select Period
           </Button>
@@ -176,7 +175,9 @@ export default function PeriodPage({
               />
             }
             label={
-              <div style={getSwitchtextStyle(isRefetchActive)}>Real Time Data</div>
+              <div style={getSwitchtextStyle(isRefetchActive)}>
+                Real Time Data
+              </div>
             }
           />
         </div>
