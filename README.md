@@ -70,7 +70,7 @@ Run `npm run` to see a list of available scripts.
 - Abstraction layer functionality is grouped in a ad hoc library I created called `react-query-crud` based in [react-query](https://react-query.tanstack.com/). This case only reads data but usually DAL executes CRUD operations
 - [ReactQuery](https://react-query.tanstack.com/) provides good support for real-time data, fetching data from endpoints in time intervals. Also data is always up to date since each time the browser receives the focus new data is refetched. This is a ReactQuery feature.
 - There are two api endpoints defined as Nextjs Servless Functions
-  - [/api/crypto-currencies](/api/crypto-currencies) acts as proxy to the coin360.com remote api
-  - [/api/mock-crypto-currencies](/api/mock-crypto-currencies) returns mock data from a JSON file
+  - [https://crypto-values-yagolopez.vercel.app/api/crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/crypto-currencies) acts as proxy to the coin360.com remote api
+  - [https://crypto-values-yagolopez.vercel.app/api/mock-crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/mock-crypto-currencies) returns mock data from a JSON file
 
 ![](crypto-values.png)
