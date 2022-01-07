@@ -1,5 +1,3 @@
-// todo: fix diagonal problem
-
 import { SyntheticEvent, useState } from 'react'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'

@@ -57,9 +57,8 @@ export const createRatiosMatrix = (
         }
       }
       if (isSubmatrixRatios(i, j)) {
-        ratiosMatrix[i][j] = round2Decimals(
-          currencies[j]?.ch / currencies[i]?.ch
-        )
+        ratiosMatrix[i][j] =
+          i == j ? '-' : round2Decimals(currencies[j]?.ch / currencies[i]?.ch)
       }
     }
   }
