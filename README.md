@@ -73,7 +73,4 @@ Run `npm run` to see a list of available scripts.
   - [/api/crypto-currencies](/api/crypto-currencies) acts as proxy to the coin360.com remote api
   - [/api/mock-crypto-currencies](/api/mock-crypto-currencies) returns mock data from a JSON file
 
-![](C:\Users\yagol\Documents\projects\crypto-values\crypto-values.png)
-
-
-
+![](crypto-values.png)
