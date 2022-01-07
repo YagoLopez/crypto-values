@@ -26,11 +26,11 @@
 // todo: try branch with nextjs/pwa
 
 import { SyntheticEvent, useState } from 'react'
-import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable/GridTable'
+import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -52,18 +52,45 @@ import { useIsFetching } from 'react-query'
 import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
-import styles from './Period.module.css'
+import { IPageProps } from '../../models/IPageProps'
 
-interface IPeriodPage {
-  time: string
-  table_dimension: number
+// Material UI does not allow applying styles as usual in Nextjs
+// https://mui.com/customization/how-to-customize/
+const selectBtn = {
+  height: '36px',
+  width: '150px',
+  marginLeft: '5px',
+  marginRight: '5px',
+  marginTop: '15px',
 }
 
-export default function Period({ time, table_dimension }: IPeriodPage) {
+const tableContainer = {
+  margin: '0.1em',
+}
+
+const mainContainer = {
+  textAlign: 'center' as const,
+}
+
+const inputDate = {
+  width: '140px',
+  marginLeft: '5px',
+  marginRight: '5px',
+  marginTop: '15px',
+}
+
+export default function PeriodPage({
+  currenciesRepository = new CurrenciesRepository(),
+}: IPageProps) {
+  const router = useRouter()
+  const { time, table_dimension } = router.query
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
-  const currenciesRepository = new CurrenciesRepository()
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
-  const { data: currenciesDataList, isLoading, error } = useGetList(time)
+  const {
+    data: currenciesDataList,
+    isLoading,
+    error,
+  } = useGetList(time as string)
   const table = createRatiosMatrix(
     currenciesDataList as ICurrency[],
     +table_dimension
@@ -73,11 +100,10 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
     useState<boolean>(false)
   const [startDate, setStartDate] = useState<string>(null)
   const [endDate, setEndDate] = useState<string>(null)
-  const router = useRouter()
   const isBackgroundFetching = useIsFetching()
   const isRefetchActive = refetchInterval !== 0
 
-  logTableToConsole(table, table_dimension)
+  logTableToConsole(table, +table_dimension)
 
   const onChangePeriod = (e: SelectChangeEvent<typeof time>) =>
     void router.push(`/period/${e.target.value}`)
@@ -122,10 +148,10 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
 
   return (
     <>
-      <div className={styles.mainContainer}>
+      <div style={mainContainer}>
         <div>
           <Button
-            className={styles.selectBtn}
+            style={selectBtn}
             variant="outlined"
             onClick={onClickSelectPeriodBtn}
             startIcon={<AvTimerIcon />}
@@ -138,11 +164,7 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
               value={startDate}
               onChange={onChangeStartDate}
               renderInput={(params) => (
-                <TextField
-                  size="small"
-                  className={styles.inputDate}
-                  {...params}
-                />
+                <TextField size="small" style={inputDate} {...params} />
               )}
             />
             <DatePicker
@@ -150,11 +172,7 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
               value={endDate}
               onChange={onChangeEndDate}
               renderInput={(params) => (
-                <TextField
-                  size="small"
-                  className={styles.inputDate}
-                  {...params}
-                />
+                <TextField size="small" style={inputDate} {...params} />
               )}
             />
           </LocalizationProvider>
@@ -209,19 +227,9 @@ export default function Period({ time, table_dimension }: IPeriodPage) {
         </Dialog>
       </div>
 
-      <div className={styles.tableContainer}>
+      <div style={tableContainer}>
         <GridTable tableData={table} />
       </div>
     </>
   )
-}
-
-export async function getServerSideProps({ query }) {
-  const { time, table_dimensions } = query
-  return {
-    props: {
-      time: time ?? '24h',
-      table_dimension: table_dimensions ?? null,
-    },
-  }
 }

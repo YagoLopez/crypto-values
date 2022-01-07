@@ -20,7 +20,6 @@ export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
     const currentDate = new Date()
     const updatesFrom = getTimestampFromDate(currentDate.toDateString())
     const queryString = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`
-    console.log('getList->queryString', queryString)
     const { data } = await this.axiosClient.get<IResponse & Error>(queryString)
     return data.data
   }

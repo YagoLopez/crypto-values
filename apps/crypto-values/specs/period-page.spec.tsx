@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 // todo: review
-// import Period from '../pages/period/[time]'
+// import PeriodPage from '../pages/period/[time]'
 import Period from '../pages/mock-data/[time]'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
