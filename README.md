@@ -51,7 +51,7 @@ Run `npm run` to see a list of available scripts.
   - ESLint
   - Prettier
 - [React Virtualized](https://github.com/bvaughn/react-virtualized) Component for rendering huge lists
-- [Material UI](https://react-query.tanstack.com/) component library
+- [Material UI](https://mui.com/) component library
 - Testing
   - Jest and React Testing Library
   - E2E: Cypress
