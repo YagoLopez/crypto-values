@@ -61,13 +61,15 @@ Run `npm run` to see a list of available scripts.
 ## Architecture
 
 - Use of a Data Abstraction Layer (DAL)
-- Decoupling of frontend from backend: the purpose is to use a common interface with different implementatios for real data, mock data or even graphql. So changing the way of getting data from data source should not affect front end code
-- Use of Repository Pattern
-- Use of Singleton Pattern to avoid creating new instances of repositories each re-render
-- The app uses OOP. Domain entities are models like `ICurrency`, for example
+- Decoupling of frontend from backend: the purpose is to use a common interface with different implementatios for real data, mock data or even graphql. So changing the way of getting data should not affect front end code
+- The app uses some OOP principles and patterns
+  - Domain concepts are modeled as entities like `ICurrency`, for example
+  - Use of Repository Pattern
+  - Use of Singleton Pattern to avoid creating new instances of repositories each re-render
+
 - Abstraction layer functionality is grouped in a ad hoc library I created called `react-query-crud` based in [react-query](https://react-query.tanstack.com/). This case only reads data but usually DAL executes CRUD operations
-- [ReactQuery](https://react-query.tanstack.com/) provides good support for real-time data fetching pooling data from endpoints given a time interval. Also synchs data each time the browser window loses and receives the focus fetching remote data
-- There are two api endpoints defined as Nextjs servless functions
+- [ReactQuery](https://react-query.tanstack.com/) provides good support for real-time data, fetching data from endpoints in time intervals. Also data is always up to date since each time the browser receives the focus new data is refetched. This is a ReactQuery feature.
+- There are two api endpoints defined as Nextjs Servless Functions
   - [/api/crypto-currencies](/api/crypto-currencies) acts as proxy to the coin360.com remote api
   - [/api/mock-crypto-currencies](/api/mock-crypto-currencies) returns mock data from a JSON file
 
