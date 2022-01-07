@@ -50,25 +50,26 @@ Run `npm run` to see a list of available scripts.
 - Formatting and Static Code Analysis:
   - ESLint
   - Prettier
-
 - [React Virtualized](https://github.com/bvaughn/react-virtualized) Component for rendering huge lists
 - [Material UI](https://react-query.tanstack.com/) component library
 - Testing
   - Jest and React Testing Library
   - E2E: Cypress
+- Asynchronous Server State Management: using [React Query](https://react-query.tanstack.com/) library
+  - It provides a cache system to manage **server state** (async requests)
+  - Also it has a pooling system to implement **real-time** requests
+  - And a feature to keep UI data updated making requests automatically when browser window recover focus
 
 
 ## Architecture
 
-- Use of a Data Abstraction Layer (DAL)
-- Decoupling of frontend from backend: the purpose is to use a common interface with different implementatios for real data, mock data or even graphql. So changing the way of getting data should not affect front end code
-- The app uses some OOP principles and patterns
-  - Domain concepts are modeled as entities like `ICurrency`, for example
-  - Use of Repository Pattern
-  - Use of Singleton Pattern to avoid creating new instances of repositories each re-render
-
-- Abstraction layer functionality is grouped in a ad hoc library I created called `react-query-crud` based in [react-query](https://react-query.tanstack.com/). This case only reads data but usually DAL executes CRUD operations
-- [ReactQuery](https://react-query.tanstack.com/) provides good support for real-time data, fetching data from endpoints in time intervals. Also data is always up to date since each time the browser receives the focus new data is refetched. This is a ReactQuery feature.
+- **Use of a Data Abstraction Layer** (DAL)
+- **Decoupling of frontend from backend**: the purpose is to use a common interface with different implementations for real data, mock data or even Graphql. So changing the way of getting data should not affect front end code
+- The app uses some **OOP principles and patterns**
+  - Domain entities are models like `ICurrency`, for example
+  - Use of *Repository Pattern*
+  - Use of *Singleton Pattern* to avoid creating new instances of repositories each re-render
+- Abstraction layer functionality is grouped in a ad hoc library I created called `react-query-crud` (based in React Query). In this case it only reads data but usually DAL executes CRUD operations
 - There are two api endpoints defined as Nextjs Servless Functions
   - [https://crypto-values-yagolopez.vercel.app/api/crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/crypto-currencies) acts as proxy to the coin360.com remote api
   - [https://crypto-values-yagolopez.vercel.app/api/mock-crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/mock-crypto-currencies) returns mock data from a JSON file
