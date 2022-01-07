@@ -1,29 +1,4 @@
-// todo: pass lighthouse audit
-// todo: fix diagonal 1 problem
-// todo: use useCallback for user events
-// todo: preconnect to coin360.com domain
-// todo: write docs
-// DOCS
-// react query as async server state manager
-// - Data Abstraction Layer using Repository Pattern
-// - Singleton Pattern for repositories to avoid creating new instances in each rerender
-// Quality control:
-// - Linting
-// - Prettier (Code Formatting)
-// - Unit tests
-// - E2E tests
-// - TypeScript
-// - Lighthouse audit
-// - On browser window focus data is refetches thanks to react-query
-// todo: possible improvements: implement service worker for progressive web application
-// todo: improvements: if the app is bigger it would be advisable to use a state manager library like Redux
-// todo: improvements use storybooks for components
-// todo: possible improvements: improve performance using dynamic imports with some mui components to improve performance
-// todo: possible improvements: allow user to choose reference currency
-// endpoint1 /api/crypto-currencies
-// endpoint2 /api/mock-crypto-currencies
-// run in sandbox
-// todo: try branch with nextjs/pwa
+// todo: fix diagonal problem
 
 import { SyntheticEvent, useState } from 'react'
 import { useRepository } from '@crypto-values/react-query-crud'
@@ -168,6 +143,7 @@ export default function PeriodPage({
               )}
             />
             <DatePicker
+              disabled={!startDate}
               label="End Date"
               value={endDate}
               onChange={onChangeEndDate}

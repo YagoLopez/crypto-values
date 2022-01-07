@@ -1,10 +1,10 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import './styles.css'
 import { useRouter } from 'next/router'
 import CssBaseline from '@mui/material/CssBaseline'
 import TopAppBar from '../components/TopAppBar/TopAppBar'
+import './styles.css'
 
 export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -13,6 +13,7 @@ export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Crypto-values, by Yago López</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content="Crypto currencies comparator" />
         <link rel="icon" type="image/svg+xml" href="/favicon.png" />
       </Head>
       <main className="app">

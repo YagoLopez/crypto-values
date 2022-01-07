@@ -20,6 +20,11 @@ const STYLE_FIRST_COLUMN = {
   backgroundColor: '#f7f7f7',
 }
 
+const resetbtn = {
+  height: '36px',
+  margin: '15px',
+}
+
 export const getCellStyle = (value: number): Record<string, string> => {
   let color, backgroundColor, opacity
   const rgbRed = '255, 0, 0'
@@ -116,7 +121,7 @@ export default function GridTable({ tableData }) {
         )}
       </AutoSizer>
       <Button
-        className={styles.resetbtn}
+        style={resetbtn}
         variant="contained"
         color="primary"
         onClick={onResetScroll}

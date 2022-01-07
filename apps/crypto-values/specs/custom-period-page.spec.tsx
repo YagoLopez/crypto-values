@@ -3,19 +3,21 @@ import { render } from '@testing-library/react'
 import CustomPeriodPage from '../pages/custom-period/index'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MockCurrenciesRepository } from '../models/currency/repositories/MockCurrenciesRepository'
+jest.mock('next/router', () => require('next-router-mock'))
 
 describe('Test CustomPeriod Page', () => {
   console.log = jest.fn()
   console.error = jest.fn()
 
+  /**
+   * Since FE is decoupled from BE we're able to pass a mock repository to the page component
+   * that returns mock data coming from a json file for testing purposes
+   */
   it('should render successfully', () => {
     const { baseElement } = render(
       <QueryClientProvider client={new QueryClient()}>
         <CustomPeriodPage
           currenciesRepository={new MockCurrenciesRepository()}
-          start_date={1610443814}
-          end_date={1624613414}
-          table_dimension={undefined}
         />
       </QueryClientProvider>
     )
@@ -26,12 +28,7 @@ describe('Test CustomPeriod Page', () => {
     try {
       render(
         <QueryClientProvider client={new QueryClient()}>
-          <CustomPeriodPage
-            currenciesRepository={null}
-            start_date={1610443814}
-            end_date={1624613414}
-            table_dimension={undefined}
-          />
+          <CustomPeriodPage currenciesRepository={null} />
         </QueryClientProvider>
       )
       expect(true).toBe(false)

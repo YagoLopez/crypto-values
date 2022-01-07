@@ -15,7 +15,6 @@ export default async function handler(
     } else {
       url = `${baseUrl}?${queryString}`
     }
-    console.log(url)
     result = await axios.get(url)
     res.status(200).json(result.data)
   } catch (e) {
