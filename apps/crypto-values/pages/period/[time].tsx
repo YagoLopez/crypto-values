@@ -92,12 +92,12 @@ export default function PeriodPage({
     }
   }
 
-  const onChangeStartDate = (newDateValue: string) => setStartDate(newDateValue)
+  const onChangeStartDate = (newDate: string) => setStartDate(newDate)
 
-  const onChangeEndDate = (newDateValue: string) => {
-    setEndDate(newDateValue)
+  const onChangeEndDate = (newDate: string) => {
+    setEndDate(newDate)
     const startTimestamp = getTimestampFromDate(`${startDate}`)
-    const endTimestamp = getTimestampFromDate(`${newDateValue}`)
+    const endTimestamp = getTimestampFromDate(`${newDate}`)
     void router.push(
       `/custom-period?start_date=${startTimestamp}&end_date=${endTimestamp}`
     )
