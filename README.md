@@ -10,6 +10,12 @@ This project was generated using [Nx](https://nx.dev).
 
 https://crypto-values-yagolopez.vercel.app/
 
+## Install
+
+Clone the repository
+
+Run `npm install `to install dependencies
+
 ## Development server
 
 Run `nx serve crypto-values` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
