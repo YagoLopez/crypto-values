@@ -7,6 +7,24 @@ import { MOCK_DATA } from '../utils/mock-data'
 import { getCellStyle } from '../components/GridTable/GridTable'
 
 const { data: currenciesList } = MOCK_DATA
+const EXPECTED_MATRIX = [
+  [
+    '-',
+    { ch: 4.64, s: 'BTC' },
+    { ch: 3.26, s: 'ETH' },
+    { ch: -0.77, s: 'XRP' },
+    { ch: 3.8, s: 'BCH' },
+    { ch: 4.32, s: 'LTC' },
+  ],
+  [{ ch: 4.64, s: 'BTC' }, '-', 0.7, -0.17, 0.82, 0.93],
+  [{ ch: 3.26, s: 'ETH' }, 1.42, '-', -0.24, 1.17, 1.33],
+  [{ ch: -0.77, s: 'XRP' }, -6.03, -4.23, '-', -4.94, -5.61],
+  [{ ch: 3.8, s: 'BCH' }, 1.22, 0.86, -0.2, '-', 1.14],
+  [{ ch: 4.32, s: 'LTC' }, 1.07, 0.75, -0.18, 0.88, '-'],
+]
+const BACKGROUND_COLOR_GREEN = 'rgb(144, 238, 144, 0.1)'
+const BACKGROUND_COLOR_RED = 'rgb(255, 0, 0, 0.1)'
+const TEXT_SHADOW = '2px 2px 4px grey'
 
 describe('Test utility fns', () => {
   console.log = jest.fn()
@@ -30,41 +48,13 @@ describe('Test utility fns', () => {
     it('Without "table_dimension" parameter', () => {
       const ratiosMatrix = createRatiosMatrix(currenciesList)
       console.log(ratiosMatrix)
-      expect(ratiosMatrix).toEqual([
-        [
-          '-',
-          { ch: 4.64, s: 'BTC' },
-          { ch: 3.26, s: 'ETH' },
-          { ch: -0.77, s: 'XRP' },
-          { ch: 3.8, s: 'BCH' },
-          { ch: 4.32, s: 'LTC' },
-        ],
-        [{ ch: 4.64, s: 'BTC' }, '-', 0.7, -0.17, 0.82, 0.93],
-        [{ ch: 3.26, s: 'ETH' }, 1.42, '-', -0.24, 1.17, 1.33],
-        [{ ch: -0.77, s: 'XRP' }, -6.03, -4.23, '-', -4.94, -5.61],
-        [{ ch: 3.8, s: 'BCH' }, 1.22, 0.86, -0.2, '-', 1.14],
-        [{ ch: 4.32, s: 'LTC' }, 1.07, 0.75, -0.18, 0.88, '-'],
-      ])
+      expect(ratiosMatrix).toEqual(EXPECTED_MATRIX)
     })
 
     it('With "table_dimension" parameter"', () => {
       const ratiosMatrix = createRatiosMatrix(currenciesList, 6)
       console.log(ratiosMatrix)
-      expect(ratiosMatrix).toEqual([
-        [
-          '-',
-          { ch: 4.64, s: 'BTC' },
-          { ch: 3.26, s: 'ETH' },
-          { ch: -0.77, s: 'XRP' },
-          { ch: 3.8, s: 'BCH' },
-          { ch: 4.32, s: 'LTC' },
-        ],
-        [{ ch: 4.64, s: 'BTC' }, '-', 0.7, -0.17, 0.82, 0.93],
-        [{ ch: 3.26, s: 'ETH' }, 1.42, '-', -0.24, 1.17, 1.33],
-        [{ ch: -0.77, s: 'XRP' }, -6.03, -4.23, '-', -4.94, -5.61],
-        [{ ch: 3.8, s: 'BCH' }, 1.22, 0.86, -0.2, '-', 1.14],
-        [{ ch: 4.32, s: 'LTC' }, 1.07, 0.75, -0.18, 0.88, '-'],
-      ])
+      expect(ratiosMatrix).toEqual(EXPECTED_MATRIX)
     })
   })
 
@@ -124,58 +114,58 @@ describe('Test utility fns', () => {
     ])
   })
 
-  describe('Test getStyleCell() fn', () => {
+  describe('Test getCellStyle() fn', () => {
     it('Should return correct table cell style for -0.17 value ', () => {
       const result = getCellStyle(-0.17)
       expect(result).toEqual({
         backgroundColor: 'rgb(255, 0, 0, 0.17)',
         color: 'brown',
-        textShadow: '2px 2px 4px grey',
+        textShadow: TEXT_SHADOW,
       })
     })
 
     it('Should return correct table cell style for -0.01 value ', () => {
       const result = getCellStyle(-0.01)
       expect(result).toEqual({
-        backgroundColor: 'rgb(255, 0, 0, 0.1)',
+        backgroundColor: BACKGROUND_COLOR_RED,
         color: 'brown',
-        textShadow: '2px 2px 4px grey',
+        textShadow: TEXT_SHADOW,
       })
     })
 
     it('Should return correct table cell style for -0.09 value ', () => {
       const result = getCellStyle(-0.09)
       expect(result).toEqual({
-        backgroundColor: 'rgb(255, 0, 0, 0.1)',
+        backgroundColor: BACKGROUND_COLOR_RED,
         color: 'brown',
-        textShadow: '2px 2px 4px grey',
+        textShadow: TEXT_SHADOW,
       })
     })
 
     it('Should return correct table cell style for 0.01 value ', () => {
       const result = getCellStyle(0.01)
       expect(result).toEqual({
-        backgroundColor: 'rgb(144, 238, 144, 0.1)',
+        backgroundColor: BACKGROUND_COLOR_GREEN,
         color: '#38b438',
-        textShadow: '2px 2px 4px grey',
+        textShadow: TEXT_SHADOW,
       })
     })
 
     it('Should return correct table cell style for 0.09 value ', () => {
       const result = getCellStyle(0.09)
       expect(result).toEqual({
-        backgroundColor: 'rgb(144, 238, 144, 0.1)',
+        backgroundColor: BACKGROUND_COLOR_GREEN,
         color: '#38b438',
-        textShadow: '2px 2px 4px grey',
+        textShadow: TEXT_SHADOW,
       })
     })
 
     it('Should return correct table cell style for 0.04 value ', () => {
       const result = getCellStyle(0.04)
       expect(result).toEqual({
-        backgroundColor: 'rgb(144, 238, 144, 0.1)',
+        backgroundColor: BACKGROUND_COLOR_GREEN,
         color: '#38b438',
-        textShadow: '2px 2px 4px grey',
+        textShadow: TEXT_SHADOW,
       })
     })
   })
