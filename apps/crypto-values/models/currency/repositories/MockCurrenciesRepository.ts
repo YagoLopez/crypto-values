@@ -11,19 +11,12 @@ export class MockCurrenciesRepository
   readonly baseURL = '/api/mock-crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
-  getList = async (
-    period: 'string',
-    currency: string
-  ): Promise<ICurrency[]> => {
+  getList = async (): Promise<ICurrency[]> => {
     const { data } = await this.axiosClient.get<IResponse & Error>(null)
     return data.data
   }
 
-  getListCustomPeriod = async (
-    start: number,
-    end: number,
-    currency: string
-  ): Promise<ICurrency[]> => {
+  getListCustomPeriod = async (): Promise<ICurrency[]> => {
     const { data } = await this.axiosClient.get<IResponse & Error>(null)
     return data.data
   }
