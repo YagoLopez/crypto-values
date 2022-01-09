@@ -11,14 +11,6 @@ export const createEmptyMatrix = (dimension: number): unknown[] => {
   return matrix
 }
 
-export const addCurrencyNamesToRatiosMatrix = (currenciesList: ICurrency[]) => {
-  const dimension = currenciesList?.length
-  const matrix = []
-  for (let i = 0; i < dimension; i++) {
-    matrix.push([])
-  }
-}
-
 const isFirstCell = (i: number, j: number): boolean => i === 0 && j === 0
 
 const isFirstRow = (i: number, j: number): boolean => i === 0 && j > 0

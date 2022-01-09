@@ -8,15 +8,12 @@ import {
 } from '@crypto-values/react-query-crud'
 
 @Singleton
-export class CurrenciesRepository implements IRepository<ICurrency, unknown> {
+export class CurrenciesRepository implements IRepository<ICurrency, IResponse> {
   readonly name = 'crypto-currencies'
   readonly baseURL = '/api/crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
-  getList = async (
-    period: 'string',
-    currency: string
-  ): Promise<ICurrency[]> => {
+  getList = async (period: string, currency: string): Promise<ICurrency[]> => {
     const currentDate = new Date()
     const updatesFrom = getTimestampFromDate(currentDate.toDateString())
     const queryString = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`

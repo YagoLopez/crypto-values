@@ -56,14 +56,10 @@ export default function PeriodPage({
   currenciesRepository = new CurrenciesRepository(),
 }: IPageProps) {
   const router = useRouter()
-  const { time, table_dimension } = router.query
+  const { time, table_dimension } = router.query as Record<string, string>
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
-  const {
-    data: currenciesDataList,
-    isLoading,
-    error,
-  } = useGetList(time as string)
+  const { data: currenciesDataList, isLoading, error } = useGetList(time)
   const table = createRatiosMatrix(
     currenciesDataList as ICurrency[],
     +table_dimension
@@ -72,7 +68,6 @@ export default function PeriodPage({
   const [isOpenSelectPeriodDialog, setIsOpenSelectPeriodDialog] =
     useState<boolean>(false)
   const [startDate, setStartDate] = useState<string>(null)
-  const [endDate, setEndDate] = useState<string>(null)
   const isBackgroundFetching = useIsFetching()
   const isRefetchActive = refetchInterval !== 0
 
@@ -95,7 +90,6 @@ export default function PeriodPage({
   const onChangeStartDate = (newDate: string) => setStartDate(newDate)
 
   const onChangeEndDate = (newDate: string) => {
-    setEndDate(newDate)
     const startTimestamp = getTimestampFromDate(`${startDate}`)
     const endTimestamp = getTimestampFromDate(`${newDate}`)
     void router.push(
@@ -143,7 +137,7 @@ export default function PeriodPage({
             <DatePicker
               disabled={!startDate}
               label="End Date"
-              value={endDate}
+              value={null}
               onChange={onChangeEndDate}
               renderInput={(params) => (
                 <TextField size="small" style={inputDate} {...params} />

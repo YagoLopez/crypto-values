@@ -18,7 +18,7 @@ export default function TopAppBar() {
         <Toolbar>
           {isCustomPeriodRoute && (
             <IconButton
-              className={styles.backicon}
+              sx={{ color: 'white' }}
               aria-label="back"
               onClick={onClickBack}
             >

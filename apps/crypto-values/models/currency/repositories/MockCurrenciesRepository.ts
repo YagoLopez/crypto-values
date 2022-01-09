@@ -5,9 +5,9 @@ import { IResponse } from '@crypto-values/react-query-crud'
 
 @Singleton
 export class MockCurrenciesRepository
-  implements IRepository<ICurrency, unknown>
+  implements IRepository<ICurrency, IResponse>
 {
-  readonly name = 'crypto-currencies-mock'
+  readonly name = 'mock-crypto-currencies'
   readonly baseURL = '/api/mock-crypto-currencies'
   readonly axiosClient = axios.create({ baseURL: this.baseURL })
 
