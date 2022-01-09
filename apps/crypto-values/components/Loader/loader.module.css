@@ -10,8 +10,8 @@
     margin: 5px;
     font-size: x-large;
     color: deepskyblue;
-    -webkit-animation: rotateCenter 2s ease-in-out infinite ;
-    animation: rotateCenter 2s ease-in-out infinite ;
+    -webkit-animation: rotateCenter 1s ease-in-out infinite ;
+    animation: rotateCenter 1s ease-in-out infinite ;
 }
 
 @-webkit-keyframes rotateCenter {
