@@ -26,6 +26,7 @@ import Loader from '../../components/Loader/Loader'
 import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 import { IPageProps } from '../../models/IPageProps'
+import AppError from '../../components/AppError/AppError'
 
 // Material UI does not allow applying styles as usual in Nextjs
 // https://mui.com/customization/how-to-customize/
@@ -111,7 +112,7 @@ export default function PeriodPage({
 
   if (isLoading) return <Loader />
 
-  if (error) return <>{`An error has occurred: ${(error as Error).message}`}</>
+  if (error) return <AppError error={error} />
 
   return (
     <>

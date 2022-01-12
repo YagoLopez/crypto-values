@@ -12,9 +12,9 @@ https://crypto-values-yagolopez.vercel.app/
 
 ## Install
 
-Clone the repository
+Clone or download the repository
 
-Run `npm install `to install dependencies
+Go to project directory and run `npm install` to install dependencies
 
 ## Development server
 
@@ -63,8 +63,9 @@ Run `npm run` to see a list of available scripts.
   - E2E: Cypress
 - Asynchronous Server State Management: using [React Query](https://react-query.tanstack.com/) library
   - It provides a cache system to manage **server state** (async requests)
-  - Also it has a pooling system to implement **real-time** requests
-  - And a feature to keep UI data updated making requests automatically when browser window recover focus
+  - It has a system to implement pseudo **real-time** requests
+  - It keeps UI data updated making requests automatically when browser window recover focus
+  - Failure protection: If a request fails, React Query will try three times more before throwing an error
 
 
 ## Architecture
@@ -75,7 +76,7 @@ Run `npm run` to see a list of available scripts.
   - Domain entities are models like `ICurrency`, for example
   - Use of *Repository Pattern*
   - Use of *Singleton Pattern* to avoid creating new instances of repositories each re-render
-- Abstraction layer functionality is grouped in a ad hoc library I created called `react-query-crud` (based in React Query). In this case it only reads data but usually DAL executes CRUD operations
+- Abstraction layer functionality is grouped in a library I created ad hoc called `react-query-crud` (based in React Query). In this case it only reads data but usually DAL executes CRUD operations
 - There are two api endpoints defined as Nextjs Servless Functions
   - [/api/crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/crypto-currencies) acts as proxy to the coin360.com remote api
   - [/api/mock-crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/mock-crypto-currencies) returns mock data from a JSON file

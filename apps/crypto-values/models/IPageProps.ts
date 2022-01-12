@@ -1,6 +1,6 @@
-import { IRepository } from '@crypto-values/react-query-crud'
+import { IRepository, IResponse } from '@crypto-values/react-query-crud'
 import { ICurrency } from './currency/ICurrency'
 
 export interface IPageProps {
-  currenciesRepository?: IRepository<ICurrency, unknown>
+  currenciesRepository: IRepository<ICurrency, IResponse>
 }

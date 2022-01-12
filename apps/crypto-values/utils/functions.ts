@@ -24,11 +24,11 @@ export const filterInvalidCurrencies = (currencies: ICurrency[]): ICurrency[] =>
   currencies.filter((currency: ICurrency) => currency.ch !== 0)
 
 export const createRatiosMatrix = (
-  currenciesDataList: ICurrency[] | Error,
+  currenciesDataList: ICurrency[],
   table_dimension: number = undefined
 ): unknown[] => {
   if (!currenciesDataList) return
-  const currencies = filterInvalidCurrencies(currenciesDataList as ICurrency[])
+  const currencies = filterInvalidCurrencies(currenciesDataList)
   currencies.unshift(null)
   const dimension = table_dimension ? table_dimension : currencies?.length
   const ratiosMatrix = createEmptyMatrix(dimension)
@@ -67,6 +67,4 @@ export const createRatiosMatrix = (
 export const logTableToConsole = (
   table: unknown[],
   tableDimension: number
-): void => {
-  tableDimension && console.table(table)
-}
+): void => tableDimension && console.table(table)

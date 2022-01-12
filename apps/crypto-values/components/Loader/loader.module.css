@@ -9,7 +9,7 @@
 .rotateCenter {
     margin: 5px;
     font-size: x-large;
-    color: deepskyblue;
+    color: #1976d2;
     -webkit-animation: rotateCenter 1s ease-in-out infinite ;
     animation: rotateCenter 1s ease-in-out infinite ;
 }
