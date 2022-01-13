@@ -3,6 +3,7 @@ import { AutoSizer, MultiGrid } from 'react-virtualized'
 import styles from './gridtable.module.css'
 import Button from '@mui/material/Button'
 import SyncIcon from '@mui/icons-material/Sync'
+import { ICellStyle } from './ICellStyle'
 
 const TABLE_STYLE = {
   border: '1px solid #ddd',
@@ -25,7 +26,7 @@ const resetbtn = {
   margin: '15px',
 }
 
-export const getCellStyle = (value: number): Record<string, string> => {
+export const getCellStyle = (value: number): ICellStyle => {
   let color, backgroundColor, opacity
   const rgbRed = '255, 0, 0'
   const rgbGreen = '144, 238, 144'

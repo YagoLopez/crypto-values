@@ -30,9 +30,9 @@ Run `nx test crypto-values` to execute the unit tests via [Jest](https://jestjs.
 
 ## Running end-to-end tests
 
-Run `nx run crypto-values-e2e:e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Run `nx run crypto-values-e2e:e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io) in headless mode
 
-Run `npm run cypress` to open Cypress UI and run tests (Server running in http://localhost:4200 is needed).
+Run `nx run crypto-values-e2e:e2e --watch` to open Cypress UI and run tests in interactive mode
 
 ## Running the linter
 
@@ -81,4 +81,4 @@ Run `npm run` to see a list of available scripts.
   - [/api/crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/crypto-currencies) acts as proxy to the coin360.com remote api
   - [/api/mock-crypto-currencies](https://crypto-values-yagolopez.vercel.app/api/mock-crypto-currencies) returns mock data from a JSON file
 
-![](crypto-values.png)
+![Architeture](crypto-values.png)

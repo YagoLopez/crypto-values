@@ -9,7 +9,7 @@ import { getCellStyle } from '../components/GridTable/GridTable'
 const { data: currenciesList } = MOCK_DATA
 const EXPECTED_MATRIX = [
   [
-    '-',
+    '',
     { ch: 4.64, s: 'BTC' },
     { ch: 3.26, s: 'ETH' },
     { ch: -0.77, s: 'XRP' },

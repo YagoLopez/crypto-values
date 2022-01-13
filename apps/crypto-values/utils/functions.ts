@@ -32,7 +32,7 @@ export const createRatiosMatrix = (
   currencies.unshift(null)
   const dimension = table_dimension ? table_dimension : currencies?.length
   const ratiosMatrix = createEmptyMatrix(dimension)
-  ratiosMatrix[0][0] = '-'
+  ratiosMatrix[0][0] = ''
 
   for (let i = 0; i < dimension; i++) {
     for (let j = 0; j < dimension; j++) {

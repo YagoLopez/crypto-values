@@ -27,6 +27,7 @@ import { ICurrency } from '../../models/currency/ICurrency'
 import AvTimerIcon from '@mui/icons-material/AvTimer'
 import { IPageProps } from '../../models/IPageProps'
 import AppError from '../../components/AppError/AppError'
+import { Period } from '../../models/Period'
 
 // Material UI does not allow applying styles as usual in Nextjs
 // https://mui.com/customization/how-to-customize/
@@ -60,7 +61,11 @@ export default function PeriodPage({
   const { time, table_dimension } = router.query as Record<string, string>
   const [refetchInterval, setRefetchInterval] = useState<number>(0)
   const { useGetList } = useRepository(currenciesRepository, refetchInterval)
-  const { data: currenciesDataList, isLoading, error } = useGetList(time)
+  const {
+    data: currenciesDataList,
+    isLoading,
+    error,
+  } = useGetList(time as Period)
   const table = createRatiosMatrix(
     currenciesDataList as ICurrency[],
     +table_dimension

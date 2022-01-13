@@ -6,6 +6,7 @@ import {
   IResponse,
   Singleton,
 } from '@crypto-values/react-query-crud'
+import { Period } from '../../Period'
 
 @Singleton
 export class CurrenciesRepository implements IRepository<ICurrency, IResponse> {
@@ -18,7 +19,7 @@ export class CurrenciesRepository implements IRepository<ICurrency, IResponse> {
     return data.data
   }
 
-  getList = async (period: string, currency: string): Promise<ICurrency[]> => {
+  getList = async (period: Period, currency: string): Promise<ICurrency[]> => {
     const currentDate = new Date()
     const updatesFrom = getTimestampFromDate(currentDate.toDateString())
     const queryString = `?currency=${currency}&updates_from=${updatesFrom}&period=${period}&no_charts=true`

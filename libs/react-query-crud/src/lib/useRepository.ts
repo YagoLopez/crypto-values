@@ -1,5 +1,6 @@
 import { IRepository } from './IRepository'
 import { useQuery } from 'react-query'
+import { Period } from '../../../../apps/crypto-values/models/Period'
 
 export const useRepository = <T, TError>(
   repository: IRepository<T, TError>,
@@ -11,7 +12,7 @@ export const useRepository = <T, TError>(
     refetchIntervalInBackground: true,
   }
 
-  const useGetList = (period = '24h', currency = 'USD') =>
+  const useGetList = (period: Period = '24h', currency = 'USD') =>
     useQuery(
       [repository.name, period, currency],
       () => repository.getList(period, currency),

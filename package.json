@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "cypress": "echo 'Opening Cypress. Please wait...' && npx cypress open"
+    "cypress": "echo Opening Cypress. Please wait... && nx run crypto-values-e2e:e2e --watch"
   },
   "private": true,
   "dependencies": {
