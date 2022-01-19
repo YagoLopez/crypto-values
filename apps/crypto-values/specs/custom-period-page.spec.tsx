@@ -25,16 +25,17 @@ describe('Test CustomPeriod Page', () => {
   })
 
   it('should throw if repository is null', () => {
+    let error
     try {
       render(
         <QueryClientProvider client={new QueryClient()}>
           <CustomPeriodPage currenciesRepository={null} />
         </QueryClientProvider>
       )
-      expect(true).toBe(false)
     } catch (e) {
       console.log('TESTING FORCED EXCEPTION')
-      expect(e.message).toBe("Cannot read property 'name' of null")
+      error = e
     }
+    expect(error).toBeTruthy()
   })
 })
