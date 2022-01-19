@@ -12,6 +12,7 @@ export default function CryptoValuesApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={new QueryClient()}>
       <Head>
         <title>Crypto-values, by Yago López</title>
+        <meta charSet="UTF-8"/>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content="Crypto currencies comparator" />
         <link rel="icon" type="image/svg+xml" href="/favicon.png" />

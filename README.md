@@ -4,7 +4,7 @@
 
 This project was generated using [Nx](https://nx.dev).
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p style="text-align: center;"><img alt="Nx logo" src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
 ## Demo
 
@@ -18,25 +18,25 @@ Go to project directory and run `npm install` to install dependencies
 
 ## Development server
 
-Run `nx serve crypto-values` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `npx nx serve crypto-values` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `nx build crypto-values` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npx nx build crypto-values` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
-Run `nx test crypto-values` to execute the unit tests via [Jest](https://jestjs.io).
+Run `npx nx test crypto-values` to execute the unit tests via [Jest](https://jestjs.io).
 
 ## Running end-to-end tests
 
-Run `nx run crypto-values-e2e:e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io) in headless mode
+Run `npx nx run crypto-values-e2e:e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io) in headless mode
 
-Run `nx run crypto-values-e2e:e2e --watch` to open Cypress UI and run tests in interactive mode
+Run `npx nx run crypto-values-e2e:e2e --watch` to open Cypress UI and run tests in interactive mode
 
 ## Running the linter
 
-Run `nx run crypto-values:lint` to execute the linter.
+Run `npx nx run crypto-values:lint` to execute the linter.
 
 ## Understand the monorepo workspace
 
@@ -45,7 +45,7 @@ This monorepo contains two projects:
 - An **app** called `crypto-values` 
 - A **library** used by the app called `react-query-crud`
 
-Run `nx dep-graph` to see a diagram of the dependencies of the project.
+Run `npx nx dep-graph` to see a diagram of the dependencies of the project.
 
 ## Tech Stack
 

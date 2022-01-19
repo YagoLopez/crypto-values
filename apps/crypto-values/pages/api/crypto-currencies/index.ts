@@ -16,6 +16,7 @@ export default async function handler(
       url = `${baseUrl}?${queryString}`
     }
     result = await axios.get(url)
+    res.setHeader('Content-Type',  'text/html; charset=UTF-8')
     res.status(200).json(result.data)
   } catch (e) {
     res.status(500).json(e)
