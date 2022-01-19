@@ -47,8 +47,6 @@ This monorepo contains two projects:
 
 Run `nx dep-graph` to see a diagram of the dependencies of the project.
 
-Run `npm run` to see a list of available scripts.
-
 ## Tech Stack
 
 - NextJS
