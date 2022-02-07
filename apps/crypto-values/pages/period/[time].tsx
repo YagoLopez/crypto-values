@@ -31,8 +31,6 @@ import { IPageProps } from '../../models/IPageProps'
 import AppError from '../../components/AppError/AppError'
 import { Period } from '../../models/Period'
 
-// Material UI does not allow applying styles as usual in Nextjs
-// https://mui.com/customization/how-to-customize/
 const selectBtn = {
   height: '36px',
   width: '150px',
