@@ -1,3 +1,5 @@
+// todo: show comparison dates in custom-period route
+
 import { SyntheticEvent, useState } from 'react'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
@@ -103,8 +105,10 @@ export default function PeriodPage({
     )
   }
 
-  const onToggleRefetchInterval = () =>
-    refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
+  const onToggleRefetchInterval = () => {
+    if (refetchInterval === 0) setTimeout(() => alert(`Refetch interval is 10 seconds`), 0)
+    return refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
+  }
 
   const getSwitchtextStyle = (isRefetchActive: boolean) => {
     if (isBackgroundFetching) {

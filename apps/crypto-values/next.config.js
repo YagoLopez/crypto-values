@@ -12,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/period/24h',
+        destination: '/period/1h',
         permanent: true,
       },
     ]
