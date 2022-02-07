@@ -74,7 +74,7 @@ export default function PeriodPage({
   const [isOpenSelectPeriodDialog, setIsOpenSelectPeriodDialog] =
     useState<boolean>(false)
   const [startDate, setStartDate] = useState<string>(null)
-  const isBackgroundFetching = useIsFetching()
+  const isFetching = useIsFetching()
   const isRefetchActive = refetchInterval !== 0
 
   logTableToConsole(table, +table_dimension)
@@ -93,11 +93,11 @@ export default function PeriodPage({
     }
   }
 
-  const onChangeStartDate = (newDate: string) => setStartDate(newDate)
+  const onChangeStartDate = (startDate: string) => setStartDate(startDate)
 
-  const onChangeEndDate = (newDate: string) => {
+  const onChangeEndDate = (endDate: string) => {
     const startTimestamp = getTimestampFromDate(`${startDate}`)
-    const endTimestamp = getTimestampFromDate(`${newDate}`)
+    const endTimestamp = getTimestampFromDate(`${endDate}`)
     void router.push(
       `/custom-period?start_date=${startTimestamp}&end_date=${endTimestamp}`
     )
@@ -108,8 +108,8 @@ export default function PeriodPage({
     return refetchInterval === 0 ? setRefetchInterval(10000) : setRefetchInterval(0)
   }
 
-  const getSwitchtextStyle = (isRefetchActive: boolean) => {
-    if (isBackgroundFetching) {
+  const getSwitchTextStyle = (isRefetchActive: boolean) => {
+    if (isFetching) {
       return { background: 'cyan' }
     }
     if (isRefetchActive) {
@@ -164,7 +164,7 @@ export default function PeriodPage({
               />
             }
             label={
-              <div style={getSwitchtextStyle(isRefetchActive)}>
+              <div style={getSwitchTextStyle(isRefetchActive)}>
                 Real Time Data
               </div>
             }
