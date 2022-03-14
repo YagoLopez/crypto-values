@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
+import { MockCurrenciesRepository } from '../../models/currency/repositories/MockCurrenciesRepository'
 import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import GridTable from '../../components/GridTable/GridTable'
@@ -13,7 +13,7 @@ const tableContainer = {
 }
 
 export default function CustomPeriodPage({
-  currenciesRepository = new CurrenciesRepository(),
+  currenciesRepository = new MockCurrenciesRepository(),
 }: IPageProps) {
   const router = useRouter()
   const { start_date, end_date, table_dimension } = router.query

@@ -1,3 +1,5 @@
+// NOTE: the app is using mock data since real endpoints are returning errors atm
+
 // todo: show comparison dates in custom-period route
 
 import { SyntheticEvent, useState } from 'react'
@@ -5,7 +7,7 @@ import { useRepository } from '@crypto-values/react-query-crud'
 import { createRatiosMatrix, logTableToConsole } from '../../utils/functions'
 import { useRouter } from 'next/router'
 import GridTable from '../../components/GridTable/GridTable'
-import { CurrenciesRepository } from '../../models/currency/repositories/CurrenciesRepository'
+import { MockCurrenciesRepository } from '../../models/currency/repositories/MockCurrenciesRepository'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -55,7 +57,7 @@ const inputDate = {
 }
 
 export default function PeriodPage({
-  currenciesRepository = new CurrenciesRepository(),
+  currenciesRepository = new MockCurrenciesRepository(),
 }: IPageProps) {
   const router = useRouter()
   const { time, table_dimension } = router.query as Record<string, string>
@@ -124,7 +126,8 @@ export default function PeriodPage({
   return (
     <>
       <div style={mainContainer}>
-        <div>
+        <div style={{margin: '2em'}}>
+{/*
           <Button
             style={selectBtn}
             variant="outlined"
@@ -133,6 +136,7 @@ export default function PeriodPage({
           >
             Select Period
           </Button>
+*/}
           <LocalizationProvider dateAdapter={DateFnsAdapter}>
             <DatePicker
               label="Start Date"
@@ -154,6 +158,7 @@ export default function PeriodPage({
           </LocalizationProvider>
         </div>
 
+{/*
         <div>
           <FormControlLabel
             control={
@@ -170,6 +175,7 @@ export default function PeriodPage({
             }
           />
         </div>
+*/}
 
         <Dialog
           disableEscapeKeyDown
